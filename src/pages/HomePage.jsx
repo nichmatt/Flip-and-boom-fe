@@ -1,14 +1,14 @@
 import Button from "../components/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { tes } from "../stores/actions/actionCreator";
+import { tes } from "../actionCreators";
 
 export default function HomePage() {
-	const dispatc = useDispatch();
+	const dispatch = useDispatch();
 	const { loading } = useSelector((state) => state.user);
 
 	const tesButton = (e) => {
 		e.preventDefault();
-		dispatc(tes(!loading));
+		dispatch(tes(!loading));
 	};
 
 	return (
