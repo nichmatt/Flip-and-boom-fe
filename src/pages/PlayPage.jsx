@@ -1,3 +1,7 @@
 export default function PlayPage() {
-	return <></>;
+	return (
+		<>
+			<h1>tes</h1>
+		</>
+	);
 }
