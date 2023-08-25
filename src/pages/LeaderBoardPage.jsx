@@ -67,7 +67,6 @@ export default function LeaderBoardPage() {
             <p
               style={{
                 fontSize: "14px",
-                color: "#2a2550",
                 fontWeight: "600",
                 fontStyle: "italic",
                 color: "#fff",
@@ -99,6 +98,7 @@ export default function LeaderBoardPage() {
             </p>
           </div>
         </div>
+
         <div
           className=" min-h-[80vh] w-[63vw] mt-[1vw] ml-[30vw]"
           style={{
@@ -109,7 +109,7 @@ export default function LeaderBoardPage() {
         >
           <table className="w-[90%] mx-auto my-[40px] ">
             <thead>
-              <tr className="text-white font-normal border-b">
+              <tr className="text-white font-normal border-b mb-[200px]">
                 <th className="pb-3">RANK</th>
                 <th className="pb-3">NAME</th>
                 <th className="pb-3">GAME MODE</th>
@@ -117,11 +117,19 @@ export default function LeaderBoardPage() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="mt-[80px]">1</td>
-                <td>Jhon Doe</td>
-                <td>IMPOSSIBLE</td>
-                <td>1900</td>
+              <tr className="hover:bg-[rgba(2,255,247,0.5)]  duration-300 ">
+                <td className="py-5 border-b border-[#20203E] text-slate-50 ">
+                  1.
+                </td>
+                <td className="py-5 border-b border-[#20203E] text-slate-50 ">
+                  Jhon Doe
+                </td>
+                <td className="py-5 border-b border-[#20203E] text-slate-50 ">
+                  IMPOSSIBLE
+                </td>
+                <td className="py-5 border-b border-[#20203E] text-slate-50 ">
+                  1900
+                </td>
               </tr>
             </tbody>
           </table>
