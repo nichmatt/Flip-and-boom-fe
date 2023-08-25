@@ -17,7 +17,7 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="w-screen h-screen bg-[#251E34] flex mw-[100vw] ml-[17vw]">
+      <div className="w-full flex mw-[100vw] ml-[17vw]">
         <div className="flex-1 w-full pt-36 justify-center items-center">
           <div className="flex justify-center items-center relative h-full">
             <div className="p-10 absolute rotate-[-15deg] left-[21%] top-[5%] hover:z-20 hover:scale-100 hover:left-[20%] transition-all delay-75 ease-in-out hover:drop-shadow-md">
