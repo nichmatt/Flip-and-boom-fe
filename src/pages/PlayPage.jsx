@@ -19,7 +19,7 @@ export default function PlayPage() {
 	const resetChosenCard = () => setChosenCard([]);
 
 	const handleClick = (e) => {
-		handleUserCardClick(e, turn, setHp, setTurn, chosenCard, setChosenCard);
+		handleUserCardClick(e, turn, setHp, setTurn, chosenCard, setChosenCard, hp);
 	};
 
 	useEffect(() => {
@@ -63,7 +63,10 @@ export default function PlayPage() {
 
 	return (
 		<>
-			<div className="min-h-screen">
+			<div className="min-h-screen" style={{
+					background:
+						"linear-gradient(180deg, #251D3A 0%, #323569 99.99%, rgba(37, 29, 58, 0.00) 100%)",
+				}}>
 				<div className="flex justify-between">
 					<div>HP: {hp}</div>
 					<div>Enemy HP: {enemyHp}</div>

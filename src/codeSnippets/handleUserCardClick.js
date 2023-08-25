@@ -4,7 +4,8 @@ export const handleUserCardClick = (
 	setHp,
 	setTurn,
 	chosenCard,
-	setChosenCard
+	setChosenCard,
+  hp
 ) => {
 	e.stopPropagation();
 
