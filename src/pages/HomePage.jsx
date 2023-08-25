@@ -2,7 +2,10 @@ import Button from "../components/Button";
 import SIdeBar from "../components/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import { tes } from "../actionCreators";
+
 import CardHomePage from "../components/CardHomePage";
+import NavigationBar from "../components/Navigation";
+
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -33,6 +36,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
       </div>
     </>
   );
