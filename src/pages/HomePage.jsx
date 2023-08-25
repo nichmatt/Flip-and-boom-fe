@@ -1,4 +1,5 @@
 import Button from "../components/Button";
+import SIdeBar from "../components/SideBar";
 import { useDispatch, useSelector } from "react-redux";
 import { tes } from "../actionCreators";
 
@@ -13,10 +14,8 @@ export default function HomePage() {
 
 	return (
 		<>
-			<h1 className="text-4xl">Hello world</h1>
-			<Button callback={tesButton} />
-			<div>
-				Loading is <span>{loading ? "true" : "false"}</span>
+			<div className="w-screen h-screen bg-[#251E34]">
+				<SIdeBar />
 			</div>
 		</>
 	);
