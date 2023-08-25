@@ -3,7 +3,7 @@ export default function NavigationBar() {
     <>
       <section
         id="NavigationBar-Section"
-        className="h-[80px] bg-[#2a2550] w-[100vw] mw-[100vw] font-basefont font-semibold tracking-tight"
+        className="h-[80px] bg-[#2a2550] w-[100vw] mw-[100vw] font-basefont font-semibold tracking-tight z-10"
         style={{ position: "fixed ", top: "0" }}
       >
         <div className="h-[25px] bg-[#ffb800]">
@@ -23,9 +23,10 @@ export default function NavigationBar() {
             className="fa-solid fa-money-bill-1-wave text-[#ffb800] py-[4px] "
             style={{ textShadow: "0.5px 0.1px 5px" }}
           ></i>
+          <p className="pl-[10px] text-[#ffb800] italic">:</p>
           <p
             style={{ textShadow: "1px 1px 10px" }}
-            className="px-[30px] text-[#ffb800] italic"
+            className="pr-[30px] pl-[10px] text-[#ffb800] italic"
           >
             1.000
           </p>
