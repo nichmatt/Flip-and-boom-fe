@@ -1,3 +1,3 @@
-import { tes } from "./tes";
+import { setGameMode } from "./gameMode";
 
-export { tes };
+export { setGameMode };

@@ -1,1 +1,2 @@
-export const TES_TES = "changeLoading"
+// game mode action type
+export const GAME_MODE_SET = "changeGameMode";

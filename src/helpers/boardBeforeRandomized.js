@@ -1,3 +1,4 @@
+// add things that needed for each card here
 export const boardBeforeRandomized = [
 	{ value: 1, shown: true },
 	{ value: 1, shown: true },

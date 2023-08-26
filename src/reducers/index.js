@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
-import userReducer from "./userReducer";
+
+import gameModeReducer from "./gameModeReducer";
 
 const rootReducer = combineReducers({
-	user: userReducer,
+	gameModeReducer,
 });
 
 export default rootReducer;

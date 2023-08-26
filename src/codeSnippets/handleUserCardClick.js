@@ -5,7 +5,7 @@ export const handleUserCardClick = (
 	setTurn,
 	chosenCard,
 	setChosenCard,
-  hp
+	hp
 ) => {
 	e.stopPropagation();
 
@@ -29,5 +29,5 @@ export const handleUserCardClick = (
 
 	newArr.push([value, index]);
 
-  setChosenCard(newArr);
+	setChosenCard(newArr);
 };

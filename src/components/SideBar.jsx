@@ -16,7 +16,7 @@ export default function SIdeBar() {
             className="font-basefont italic font-semibold"
             style={{ fontSize: "20px", color: "#2a2550" }}
           >
-            <li className="my-[25px]" onMouseOver="this.style.color='#0F0'">
+            <li className="my-[25px]">
               <NavLink>PLAY</NavLink>
             </li>
             <li className="my-[25px]">

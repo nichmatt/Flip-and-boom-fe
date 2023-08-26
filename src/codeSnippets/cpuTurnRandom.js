@@ -1,32 +1,23 @@
-import { randomNumber, pause } from "../helpers";
+import { randomNumber, pause, removeCardFromBoard } from "../helpers";
 
-export const cpuTurn = async (
+export const cpuTurnRandom = async ({
 	board,
 	setEnemyHp,
 	enemyHp,
 	setTurn,
 	setHp,
 	hp,
-	setBoard
-) => {
+	setBoard,
+	boardShownTrueOnly,
+}) => {
 	try {
 		const enemyCards = [];
-
-		const boardCopy = structuredClone(board);
-
-		boardCopy.forEach((el, index) => {
-			el.index = index;
-		});
-
-		const boardShownTrueOnly = boardCopy.filter((el) => el.shown);
 
 		const firstRandomNum = randomNumber(boardShownTrueOnly);
 
 		await pause(1500);
 
 		const firstRandomCard = boardShownTrueOnly?.splice(firstRandomNum, 1);
-
-		console.log(firstRandomCard[0].value);
 
 		if (firstRandomCard[0].value == "bomb") {
 			setEnemyHp(enemyHp - 2);
@@ -57,20 +48,16 @@ export const cpuTurn = async (
 		console.log(enemyCards);
 
 		if (enemyCards[0][0] == enemyCards[1][0]) {
-			setHp(hp - +enemyCards[0][0]);
+			const damageDealtToUser = +enemyCards[0][0];
 
-			const clonedBoard = structuredClone(board);
+			hp - damageDealtToUser < 0 ? setHp(0) : setHp(hp - damageDealtToUser);
 
-			enemyCards.forEach((el) => {
-				clonedBoard[+el[1]].shown = false;
-			});
+			removeCardFromBoard(board, setBoard, enemyCards);
+		} else {
+			await pause(2000);
 
-			setBoard(clonedBoard);
+			setTurn("user");
 		}
-
-		await new Promise((res) => setTimeout(res, 2000));
-
-		setTurn("user");
 	} catch (err) {
 		throw err;
 	}
