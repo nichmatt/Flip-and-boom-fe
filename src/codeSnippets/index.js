@@ -1,4 +1,13 @@
 import { handleUserCardClick } from "./handleUserCardClick";
-import { cpuTurn } from "./cpuTurn";
+import { cpuTurnRandom } from "./cpuTurnRandom";
+import { cpuTurnAccurate } from "./cpuTurnAccurate";
+import { afterFlip2Card } from "./afterFlip2Card";
+import { createdLifecycle } from "./createdLifecycle";
 
-export { handleUserCardClick, cpuTurn };
+export {
+	handleUserCardClick,
+	cpuTurnRandom,
+	cpuTurnAccurate,
+	afterFlip2Card,
+	createdLifecycle,
+};

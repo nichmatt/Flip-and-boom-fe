@@ -1,78 +1,130 @@
+// npm packages
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
+// components
 import CardInPlay from "../components/CardInPlay";
+import GameResult from "../components/GameResult";
 
-import { boardBeforeRandomized, randomNumber } from "../helpers";
+// code snippets to shorten the code in PlayPage
+import {
+	handleUserCardClick,
+	cpuTurnRandom,
+	cpuTurnAccurate,
+	afterFlip2Card,
+	createdLifecycle,
+} from "../codeSnippets";
 
-import { handleUserCardClick, cpuTurn } from "../codeSnippets";
-
+// export default jsx
 export default function PlayPage() {
-	const boardAfterRandomized = [];
+	// redux
+	const { gameMode } = useSelector((state) => state.gameModeReducer);
 
+	// collection of useState
 	const [board, setBoard] = useState([]);
-	const [hp, setHp] = useState(20);
-	const [enemyHp, setEnemyHp] = useState(20);
-
+	const [boardShownTrueOnly, setBoardShownTrueOnly] = useState([]);
+	const [hp, setHp] = useState(25);
+	const [enemyHp, setEnemyHp] = useState(25);
 	const [chosenCard, setChosenCard] = useState([]);
 	const [turn, setTurn] = useState("user");
+	const [totalTurn, setTotalTurn] = useState(0);
+	const [showGameResult, setShowGameResult] = useState(false);
 
+	// collection of functions
 	const resetChosenCard = () => setChosenCard([]);
 
 	const handleClick = (e) => {
 		handleUserCardClick(e, turn, setHp, setTurn, chosenCard, setChosenCard, hp);
 	};
 
+	// collection of function parameters
+	const cpuTurnRandomParameters = {
+		board,
+		setEnemyHp,
+		enemyHp,
+		setTurn,
+		setHp,
+		hp,
+		setBoard,
+		boardShownTrueOnly,
+	};
+
+	const cpuTurnAccurateParameters = { ...cpuTurnRandomParameters };
+
+	// created lifecycle
 	useEffect(() => {
-		while (boardBeforeRandomized?.length) {
-			const randomNum = randomNumber(boardBeforeRandomized);
-
-			const getOneRandomCard = boardBeforeRandomized?.splice(randomNum, 1);
-
-			boardAfterRandomized.push(getOneRandomCard[0]);
-		}
-
-		setBoard(boardAfterRandomized);
+		createdLifecycle(setBoard);
 	}, []);
 
+	// watcher for board useState
 	useEffect(() => {
-		if (chosenCard.length == 2) {
-			if (chosenCard[0][0] == chosenCard[1][0]) {
-				setEnemyHp(enemyHp - +chosenCard[0][0]);
+		setBoardShownTrueOnly(board.filter((el) => el.shown));
+	}, [board]);
 
-				const clonedBoard = structuredClone(board);
+  // watcher for boardShownTrueOnly useState
+	useEffect(() => {
+		boardShownTrueOnly.length < 30 && boardShownTrueOnly.length > 0 && turn == "user" ? setTurn("cpu") : setTurn("user");
+	}, [boardShownTrueOnly]);
 
-				chosenCard.forEach((el) => {
-					clonedBoard[+el[1]].shown = false;
-				});
-
-				setBoard(clonedBoard);
-			}
-
-			resetChosenCard();
-
-			setTurn("cpu");
-		}
+	// watcher for chosenCard useState
+	useEffect(() => {
+		chosenCard.length == 2 &&
+			afterFlip2Card(
+				chosenCard,
+				enemyHp,
+				setEnemyHp,
+				board,
+				setBoard,
+				resetChosenCard,
+				setTurn,
+				setShowGameResult,
+				setBoardShownTrueOnly
+			);
 	}, [chosenCard]);
 
+	// watcher for turn useState
 	useEffect(() => {
 		console.log(turn);
+		setTotalTurn(totalTurn + 1);
 		if (turn == "cpu") {
-			cpuTurn(board, setEnemyHp, enemyHp, setTurn, setHp, hp, setBoard);
+			switch (gameMode) {
+				case "easy":
+					cpuTurnRandom(cpuTurnRandomParameters);
+					break;
+
+				default:
+					cpuTurnAccurate(cpuTurnAccurateParameters);
+					break;
+			}
 		}
 	}, [turn]);
 
+	// watcher for enemyHp useState
+	useEffect(() => {
+		enemyHp <= 0 || (hp <= 0 && setShowGameResult(true));
+	}, [enemyHp, hp]);
+
+	// component that is being returned
 	return (
 		<>
-			<div className="min-h-screen" style={{
+			<div
+				className="min-h-screen h-full w-full"
+				style={{
 					background:
 						"linear-gradient(180deg, #251D3A 0%, #323569 99.99%, rgba(37, 29, 58, 0.00) 100%)",
-				}}>
-				<div className="flex justify-between">
+				}}
+			>
+				{/* show game result after one of the hp reach 0 */}
+				{showGameResult && <GameResult hp={hp} totalTurn={totalTurn} />}
+
+				{/* health bar for player and enemy */}
+				<div className="flex justify-between bg-white text-3xl">
 					<div>HP: {hp}</div>
 					<div>Enemy HP: {enemyHp}</div>
 				</div>
 
-				<div className="grid grid-cols-10 gap-y-5">
+				{/* card playing arena */}
+				<div className="grid grid-cols-10 gap-y-5 mt-10 ">
 					{board.map((card, index) => {
 						return (
 							<CardInPlay

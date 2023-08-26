@@ -5,8 +5,6 @@ export default function LeaderBoardPage() {
         className="min-h-[100vh] w-[100vw] "
         style={{
           marginTop: "30px",
-          background:
-            "linear-gradient(180deg, #251D3A 0%, #323569 99.99%, rgba(37, 29, 58, 0.00) 100%)",
         }}
       >
         <div style={{ display: "flex" }}>
