@@ -6,7 +6,7 @@ export default function ShopPage() {
     <>
       <section
         id="Shop-Section"
-        className="mt-[80px] break-before-page flex flex-col"
+        className="mt-[25px] break-before-page flex flex-col"
       >
         <div className="ml-[30vw] flex">
           <div
@@ -22,10 +22,9 @@ export default function ShopPage() {
             <p
               style={{
                 fontSize: "14px",
-                color: "#2a2550",
+                color: "#fff",
                 fontWeight: "600",
                 fontStyle: "italic",
-                // color: "#fff",
               }}
             >
               CHARACTERS
@@ -44,10 +43,9 @@ export default function ShopPage() {
             <p
               style={{
                 fontSize: "14px",
-                color: "#2a2550",
                 fontWeight: "600",
                 fontStyle: "italic",
-                // color: "#fff",
+                color: "#fff",
               }}
             >
               CARDS
@@ -56,8 +54,58 @@ export default function ShopPage() {
         </div>
         <div
           id="column-shop"
-          className="mt-[2vw] w-[57vw] ml-[30vw] flex flex-wrap"
+          className="mt-[2vw] w-[57vw] ml-[32vw] flex flex-wrap"
         >
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+          />
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+          />
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+          />
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+          />
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+          />
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+          />
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+          />
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+          />
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+          />
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+          />
           <CardShop
             imgUrl={MrKingCard}
             itemName="mrKing"

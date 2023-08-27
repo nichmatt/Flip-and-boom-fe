@@ -5,7 +5,7 @@ export default function CardShop({ imgUrl, itemName, itemCategory }) {
     console.log(imgUrl);
   }, []);
   return (
-    <section className="w-[250px] h-[325px] bg-[rgba(0,0,0,0.3)] rounded-[5px]">
+    <section className="w-[250px] h-[325px] bg-[rgba(0,0,0,0.3)] rounded-[5px] m-[10px] hover:bg-[rgba(231,231,231,0.3)] duration-300 hover:scale-[1.05]">
       <img
         src={imgUrl}
         alt="item-image"
@@ -15,9 +15,9 @@ export default function CardShop({ imgUrl, itemName, itemCategory }) {
         {itemName}
       </p>
       <div id="price" className="flex justify-center ">
-        <p className="text-center text-white italic font-semibold text-xs ml-[20px] mr-[5px]  bg-[rgba(0,0,0,0.3)] px-[15px] py-[6.5px] my">
+        <div className="text-center text-white italic font-semibold text-xs ml-[20px] mr-[5px]  bg-[rgba(0,0,0,0.3)] px-[15px] flex items-center">
           {itemCategory}
-        </p>
+        </div>
         <p className="text-white px-[5px]">|</p>
         <i
           className="fa-solid fa-money-bill-1-wave text-[#ffb800] pt-[8px] ml-[5px] "

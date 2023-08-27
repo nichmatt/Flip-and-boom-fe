@@ -98,7 +98,7 @@ export default function LeaderBoardPage() {
         </div>
 
         <div
-          className=" min-h-[80vh] w-[63vw] mt-[1vw] ml-[30vw]"
+          className="w-[63vw] mt-[1vw] ml-[30vw]"
           style={{
             border: "7px solid #20203E",
             borderRadius: "20px",
