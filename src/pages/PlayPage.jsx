@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 // components
-import CardInPlay from "../components/CardInPlay";
 import GameResult from "../components/GameResult";
+import PlayPageHeader from "../components/PlayPageHeader";
+import PlayPageArena from "../components/PlayPageArena";
 
 // code snippets to shorten the code in PlayPage
 import {
@@ -22,8 +23,8 @@ export default function PlayPage() {
 
 	// collection of useState
 	const [board, setBoard] = useState([]);
-	const [hp, setHp] = useState(25);
-	const [enemyHp, setEnemyHp] = useState(25);
+	const [hp, setHp] = useState(1000);
+	const [enemyHp, setEnemyHp] = useState(1000);
 	const [chosenCard, setChosenCard] = useState([]);
 	const [turn, setTurn] = useState("user");
 	const [totalTurn, setTotalTurn] = useState(0);
@@ -33,7 +34,17 @@ export default function PlayPage() {
 	const resetChosenCard = () => setChosenCard([]);
 
 	const handleClick = (e) => {
-		handleUserCardClick(e, turn, setHp, setTurn, chosenCard, setChosenCard, hp, board, setBoard);
+		handleUserCardClick(
+			e,
+			turn,
+			setHp,
+			setTurn,
+			chosenCard,
+			setChosenCard,
+			hp,
+			board,
+			setBoard
+		);
 	};
 
 	// collection of function parameters
@@ -65,7 +76,7 @@ export default function PlayPage() {
 				setBoard,
 				resetChosenCard,
 				setTurn,
-				setShowGameResult,
+				setShowGameResult
 			);
 	}, [chosenCard]);
 
@@ -107,28 +118,13 @@ export default function PlayPage() {
 				{showGameResult && <GameResult hp={hp} totalTurn={totalTurn} />}
 
 				{/* health bar for player and enemy */}
-				<div className="flex justify-between bg-white text-3xl h-28">
-					<div>HP: {hp}</div>
-					<div>Enemy HP: {enemyHp}</div>
-				</div>
+				<PlayPageHeader hp={hp} enemyHp={enemyHp} />
 
 				{/* card playing arena */}
-				<div className="grid grid-cols-10 gap-y-5 bg-red-100">
-					{board.map((card, index) => {
-						return (
-							<CardInPlay
-								key={index}
-								card={card.value}
-								shown={card.shown}
-								flip={card.flip}
-								index={index}
-								handleClick={handleClick}
-							/>
-						);
-					})}
-				</div>
+				<PlayPageArena board={board} handleClick={handleClick} />
 
-        <div className="flex flex-col"></div>
+				{/* footer arena */}
+				<div className="flex flex-col"></div>
 			</div>
 		</>
 	);
