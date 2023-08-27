@@ -11,30 +11,67 @@ export default function SIdeBar() {
             className="mt-[100px] w-[220px] mx-auto"
           />
         </div>
-        <div className="m-[auto] px-[30px] mx-[auto] text-center">
-          <ul
-            className="font-basefont italic font-semibold"
-            style={{ fontSize: "20px", color: "#2a2550" }}
+        <div className="flex flex-col  m-[auto] px-[20px] mx-[auto] items-center">
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "w-full bg-[#2a2550] text-center my-[5px] py-[5px] font-semibold italic text-xl text-[#ffb800] rounded-3xl x-[2vw]"
+                : "w-full hover:bg-[#ffb800] text-center py-[5px] my-[5px] font-bold italic text-xl text-[#2a2550] duration-300"
+            }
+            to="/home"
           >
-            <li className="my-[25px]">
-              <NavLink>PLAY</NavLink>
-            </li>
-            <li className="my-[25px]">
-              <NavLink>SHOP</NavLink>
-            </li>
-            <li className="my-[25px]">
-              <NavLink>PROFILE</NavLink>
-            </li>
-            <li className="my-[25px]">
-              <NavLink>LEADERBOARDS</NavLink>
-            </li>
-            <li className="my-[25px]">
-              <NavLink>NEWS</NavLink>
-            </li>
-            <li className="my-[60px]">
-              <NavLink>LOGOUT</NavLink>
-            </li>
-          </ul>
+            PLAY
+          </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "w-full bg-[#2a2550] text-center my-[5px] py-[5px] font-semibold italic text-xl text-[#ffb800] rounded-3xl x-[2vw]"
+                : "w-full hover:bg-[#ffb800] text-center py-[5px] my-[5px] font-bold italic text-xl text-[#2a2550] duration-300"
+            }
+            to="/shop"
+          >
+            SHOP
+          </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "w-full bg-[#2a2550] text-center my-[5px] py-[5px] font-semibold italic text-xl text-[#ffb800] rounded-3xl x-[2vw]"
+                : "w-full hover:bg-[#ffb800] text-center py-[5px] my-[5px] font-bold italic text-xl text-[#2a2550] duration-300"
+            }
+            to="/profile"
+          >
+            PROFILE
+          </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "w-full bg-[#2a2550] text-center my-[5px] py-[5px] font-semibold italic text-xl text-[#ffb800] rounded-3xl x-[2vw]"
+                : "w-full hover:bg-[#ffb800] text-center py-[5px] my-[5px] font-bold italic text-xl text-[#2a2550] duration-300"
+            }
+            to="/leaderboard"
+          >
+            LEADERBOARD
+          </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "w-full bg-[#2a2550] text-center my-[5px] py-[5px] font-semibold italic text-xl text-[#ffb800] rounded-3xl x-[2vw]"
+                : "w-full hover:bg-[#ffb800] text-center py-[5px] my-[5px] font-bold italic text-xl text-[#2a2550] duration-300"
+            }
+            to="/news"
+          >
+            NEWS
+          </NavLink>
         </div>
       </div>
     </>
