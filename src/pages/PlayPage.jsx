@@ -22,7 +22,6 @@ export default function PlayPage() {
 
 	// collection of useState
 	const [board, setBoard] = useState([]);
-	const [boardShownTrueOnly, setBoardShownTrueOnly] = useState([]);
 	const [hp, setHp] = useState(25);
 	const [enemyHp, setEnemyHp] = useState(25);
 	const [chosenCard, setChosenCard] = useState([]);
@@ -34,7 +33,7 @@ export default function PlayPage() {
 	const resetChosenCard = () => setChosenCard([]);
 
 	const handleClick = (e) => {
-		handleUserCardClick(e, turn, setHp, setTurn, chosenCard, setChosenCard, hp);
+		handleUserCardClick(e, turn, setHp, setTurn, chosenCard, setChosenCard, hp, board, setBoard);
 	};
 
 	// collection of function parameters
@@ -46,7 +45,6 @@ export default function PlayPage() {
 		setHp,
 		hp,
 		setBoard,
-		boardShownTrueOnly,
 	};
 
 	const cpuTurnAccurateParameters = { ...cpuTurnRandomParameters };
@@ -55,16 +53,6 @@ export default function PlayPage() {
 	useEffect(() => {
 		createdLifecycle(setBoard);
 	}, []);
-
-	// watcher for board useState
-	useEffect(() => {
-		setBoardShownTrueOnly(board.filter((el) => el.shown));
-	}, [board]);
-
-  // watcher for boardShownTrueOnly useState
-	useEffect(() => {
-		boardShownTrueOnly.length < 30 && boardShownTrueOnly.length > 0 && turn == "user" ? setTurn("cpu") : setTurn("user");
-	}, [boardShownTrueOnly]);
 
 	// watcher for chosenCard useState
 	useEffect(() => {
@@ -78,7 +66,6 @@ export default function PlayPage() {
 				resetChosenCard,
 				setTurn,
 				setShowGameResult,
-				setBoardShownTrueOnly
 			);
 	}, [chosenCard]);
 
@@ -101,14 +88,16 @@ export default function PlayPage() {
 
 	// watcher for enemyHp useState
 	useEffect(() => {
-		enemyHp <= 0 || (hp <= 0 && setShowGameResult(true));
+		if (enemyHp <= 0 || hp <= 0) {
+			setShowGameResult(true);
+		}
 	}, [enemyHp, hp]);
 
 	// component that is being returned
 	return (
 		<>
 			<div
-				className="min-h-screen h-full w-full"
+				className="min-h-screen h-full w-full flex flex-col"
 				style={{
 					background:
 						"linear-gradient(180deg, #251D3A 0%, #323569 99.99%, rgba(37, 29, 58, 0.00) 100%)",
@@ -118,25 +107,28 @@ export default function PlayPage() {
 				{showGameResult && <GameResult hp={hp} totalTurn={totalTurn} />}
 
 				{/* health bar for player and enemy */}
-				<div className="flex justify-between bg-white text-3xl">
+				<div className="flex justify-between bg-white text-3xl h-28">
 					<div>HP: {hp}</div>
 					<div>Enemy HP: {enemyHp}</div>
 				</div>
 
 				{/* card playing arena */}
-				<div className="grid grid-cols-10 gap-y-5 mt-10 ">
+				<div className="grid grid-cols-10 gap-y-5 bg-red-100">
 					{board.map((card, index) => {
 						return (
 							<CardInPlay
 								key={index}
 								card={card.value}
 								shown={card.shown}
+								flip={card.flip}
 								index={index}
 								handleClick={handleClick}
 							/>
 						);
 					})}
 				</div>
+
+        <div className="flex flex-col"></div>
 			</div>
 		</>
 	);

@@ -1,22 +1,34 @@
-export const handleUserCardClick = (
+import { flipClose, flipOpen, pause } from "../helpers";
+
+export const handleUserCardClick = async (
 	e,
 	turn,
 	setHp,
 	setTurn,
 	chosenCard,
 	setChosenCard,
-	hp
+	hp,
+	board,
+	setBoard
 ) => {
 	e.stopPropagation();
 
-	if (turn == "cpu") return;
+	if (turn != "user") return;
 
 	const value = e.currentTarget.attributes.value.value;
 
 	const index = e.currentTarget.attributes.index.value;
 
+	flipOpen(board, setBoard, index);
+
 	if (value == "bomb") {
 		setHp(hp - 2);
+
+    setTurn("wait")
+
+		await pause(2000);
+
+		flipClose(board, setBoard);
 
 		setTurn("cpu");
 

@@ -1,4 +1,4 @@
-import { randomNumber, pause, removeCardFromBoard } from "../helpers";
+import { randomNumber, pause, removeCardFromBoard, flipOpen, flipClose } from "../helpers";
 
 export const cpuTurnRandom = async ({
 	board,
@@ -8,10 +8,13 @@ export const cpuTurnRandom = async ({
 	setHp,
 	hp,
 	setBoard,
-	boardShownTrueOnly,
 }) => {
 	try {
 		const enemyCards = [];
+
+    const boardShownTrueOnly = structuredClone(board).filter((el) => el.shown)
+
+    console.log(boardShownTrueOnly.length, "<<length boardtrueonly");
 
 		const firstRandomNum = randomNumber(boardShownTrueOnly);
 
@@ -19,8 +22,14 @@ export const cpuTurnRandom = async ({
 
 		const firstRandomCard = boardShownTrueOnly?.splice(firstRandomNum, 1);
 
+    const newBoard = flipOpen(board, setBoard, firstRandomCard[0].index)
+
 		if (firstRandomCard[0].value == "bomb") {
 			setEnemyHp(enemyHp - 2);
+
+      await pause(2000)
+
+      flipClose(board, setBoard)
 
 			setTurn("user");
 
@@ -35,8 +44,14 @@ export const cpuTurnRandom = async ({
 
 		const secondRandomCard = boardShownTrueOnly?.splice(secondRandomNum, 1);
 
+    flipOpen(newBoard, setBoard, secondRandomCard[0].index)
+
 		if (secondRandomCard[0].value == "bomb") {
 			setEnemyHp(enemyHp - 2);
+
+			await pause(2000);
+
+      flipClose(board, setBoard)
 
 			setTurn("user");
 
@@ -45,19 +60,21 @@ export const cpuTurnRandom = async ({
 
 		enemyCards.push([secondRandomCard[0].value, secondRandomCard[0].index]);
 
-		console.log(enemyCards);
-
 		if (enemyCards[0][0] == enemyCards[1][0]) {
 			const damageDealtToUser = +enemyCards[0][0];
 
 			hp - damageDealtToUser < 0 ? setHp(0) : setHp(hp - damageDealtToUser);
 
-			removeCardFromBoard(board, setBoard, enemyCards);
-		} else {
-			await pause(2000);
+      await pause(2000);
 
-			setTurn("user");
+			removeCardFromBoard(board, setBoard, enemyCards);
 		}
+
+		await pause(2000);
+
+    flipClose(board, setBoard)
+
+		setTurn("user");
 	} catch (err) {
 		throw err;
 	}
