@@ -1,6 +1,6 @@
-import { removeCardFromBoard } from "../helpers";
+import { removeCardFromBoard, pause, flipClose } from "../helpers";
 
-export const afterFlip2Card = (
+export const afterFlip2Card = async (
 	chosenCard,
 	enemyHp,
 	setEnemyHp,
@@ -9,6 +9,8 @@ export const afterFlip2Card = (
 	resetChosenCard,
 	setTurn
 ) => {
+	setTurn("wait");
+
 	if (chosenCard[0][0] == chosenCard[1][0]) {
 		const damageDealtToEnemy = +chosenCard[0][0];
 
@@ -20,10 +22,18 @@ export const afterFlip2Card = (
 			return;
 		}
 
+		await pause(2000);
+
 		removeCardFromBoard(board, setBoard, chosenCard);
 	} else {
-		setTurn("cpu");
+		await pause(2000);
+
+		flipClose(board, setBoard);
 	}
+
+	await pause(2000);
+
+	setTurn("cpu");
 
 	resetChosenCard();
 };
