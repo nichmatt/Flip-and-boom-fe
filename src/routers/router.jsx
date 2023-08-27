@@ -6,6 +6,7 @@ import PlayPage from "../pages/PlayPage";
 import BaseLayout from "../layout/BaseLayout";
 import ShopPage from "../pages/ShopPage";
 import LeaderBoardPage from "../pages/LeaderBoardPage";
+import ProfilePage from "../pages/ProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/shop",
         element: <ShopPage />,
+      },
+      {
+        path: "/profile",
+        element: <ProfilePage />,
       },
     ],
   },
