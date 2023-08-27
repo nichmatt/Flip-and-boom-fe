@@ -4,7 +4,7 @@ import HomePage from "../pages/HomePage";
 
 import PlayPage from "../pages/PlayPage";
 import BaseLayout from "../layout/BaseLayout";
-import ShopPage from "../pages/LeaderBoardPage";
+import ShopPage from "../pages/ShopPage";
 import LeaderBoardPage from "../pages/LeaderBoardPage";
 
 const router = createBrowserRouter([
@@ -17,8 +17,12 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/Leaderboard",
+        path: "/leaderboard",
         element: <LeaderBoardPage />,
+      },
+      {
+        path: "/shop",
+        element: <ShopPage />,
       },
     ],
   },
