@@ -22,7 +22,7 @@ export const handleUserCardClick = async (
 	flipOpen(board, setBoard, index);
 
 	if (value == "bomb") {
-		setHp(hp - 2);
+		setHp(hp - 75);
 
     setTurn("wait")
 

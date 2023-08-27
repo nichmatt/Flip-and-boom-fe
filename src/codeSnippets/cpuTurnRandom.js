@@ -1,4 +1,10 @@
-import { randomNumber, pause, removeCardFromBoard, flipOpen, flipClose } from "../helpers";
+import {
+	randomNumber,
+	pause,
+	removeCardFromBoard,
+	flipOpen,
+	flipClose,
+} from "../helpers";
 
 export const cpuTurnRandom = async ({
 	board,
@@ -12,9 +18,9 @@ export const cpuTurnRandom = async ({
 	try {
 		const enemyCards = [];
 
-    const boardShownTrueOnly = structuredClone(board).filter((el) => el.shown)
+		const boardShownTrueOnly = structuredClone(board).filter((el) => el.shown);
 
-    console.log(boardShownTrueOnly.length, "<<length boardtrueonly");
+		console.log(boardShownTrueOnly.length, "<<length boardtrueonly");
 
 		const firstRandomNum = randomNumber(boardShownTrueOnly);
 
@@ -22,14 +28,14 @@ export const cpuTurnRandom = async ({
 
 		const firstRandomCard = boardShownTrueOnly?.splice(firstRandomNum, 1);
 
-    const newBoard = flipOpen(board, setBoard, firstRandomCard[0].index)
+		const newBoard = flipOpen(board, setBoard, firstRandomCard[0].index);
 
 		if (firstRandomCard[0].value == "bomb") {
-			setEnemyHp(enemyHp - 2);
+			setEnemyHp(enemyHp - 75);
 
-      await pause(2000)
+			await pause(2000);
 
-      flipClose(board, setBoard)
+			flipClose(board, setBoard);
 
 			setTurn("user");
 
@@ -44,14 +50,14 @@ export const cpuTurnRandom = async ({
 
 		const secondRandomCard = boardShownTrueOnly?.splice(secondRandomNum, 1);
 
-    flipOpen(newBoard, setBoard, secondRandomCard[0].index)
+		flipOpen(newBoard, setBoard, secondRandomCard[0].index);
 
 		if (secondRandomCard[0].value == "bomb") {
-			setEnemyHp(enemyHp - 2);
+			setEnemyHp(enemyHp - 75);
 
 			await pause(2000);
 
-      flipClose(board, setBoard)
+			flipClose(board, setBoard);
 
 			setTurn("user");
 
@@ -65,14 +71,14 @@ export const cpuTurnRandom = async ({
 
 			hp - damageDealtToUser < 0 ? setHp(0) : setHp(hp - damageDealtToUser);
 
-      await pause(2000);
+			await pause(2000);
 
 			removeCardFromBoard(board, setBoard, enemyCards);
+		} else {
+			await pause(2000);
+
+			flipClose(board, setBoard);
 		}
-
-		await pause(2000);
-
-    flipClose(board, setBoard)
 
 		setTurn("user");
 	} catch (err) {

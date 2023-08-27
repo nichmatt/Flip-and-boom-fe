@@ -1,11 +1,13 @@
-import skin from "/assets/card/orange-card.png"
+import { useSelector } from "react-redux";
 
 export default function CardInPlay({ handleClick, card, index, shown, flip }) {
+	const { selectedSkin } = useSelector((state) => state.selectedReducer);
+
 	if (shown) {
 		return (
 			<div
 				onClick={handleClick}
-				className="w-[5.675rem] h-32 bg-transparent"
+				className="w-[6.35rem] h-36 bg-transparent"
 				value={card}
 				index={index}
 				style={{ perspective: "1000px" }}
@@ -19,19 +21,17 @@ export default function CardInPlay({ handleClick, card, index, shown, flip }) {
 					}
 				>
 					<div
-						className="flip-card-front bg-[#bbb] text-black absolute w-full h-full flex flex-col justify-center items-center"
+						className="flip-card-front text-black absolute w-full h-full flex flex-col justify-center items-center"
 						style={{
 							backfaceVisibility: "hidden",
 							WebkitBackfaceVisibility: "hidden",
 							MozBackfaceVisibility: "hidden",
 						}}
 					>
-						{card}
-
-						<h1>belakang</h1>
+						<img src={selectedSkin == 'basic' ? null : null} />
 					</div>
 					<div
-						className="flip-card-back bg-[dodgerblue] text-white absolute w-full h-full flex justify-center items-center"
+						className="flip-card-back text-white absolute w-full h-full flex justify-center items-center"
 						style={{
 							transform: "rotateY(180deg)",
 							backfaceVisibility: "hidden",
