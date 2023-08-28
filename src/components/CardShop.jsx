@@ -1,11 +1,22 @@
 import { useEffect } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGetTokenMidtrans } from "../actionCreators/payment";
 export default function CardShop({ imgUrl, itemName, itemCategory }) {
+  const dispatch = useDispatch();
+
+  const handleClickCard = (e) => {
+    dispatch(fetchGetTokenMidtrans(16000));
+  };
+
+  const { token } = useSelector(state => state.paymentReducer)
   useEffect(() => {
-    console.log(imgUrl);
-  }, []);
+    // console.log(token);
+  }, [token]);
   return (
-    <section className="w-[250px] h-[325px] bg-[rgba(0,0,0,0.3)] rounded-[5px] m-[10px] hover:bg-[rgba(231,231,231,0.3)] duration-300 hover:scale-[1.05]">
+    <section
+      className="w-[250px] h-[325px] bg-[rgba(0,0,0,0.3)] rounded-[5px] m-[10px] hover:bg-[rgba(231,231,231,0.3)] duration-300 hover:scale-[1.05]"
+      onClick={handleClickCard}
+    >
       <img
         src={imgUrl}
         alt="item-image"

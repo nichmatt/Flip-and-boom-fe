@@ -1,7 +1,66 @@
+import { useEffect } from "react";
 import CardShop from "../components/CardShop";
 import MrKingCard from "/assets/character/mr-king.png";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSuccesPayment } from "../actionCreators/payment";
 
 export default function ShopPage() {
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.paymentReducer);
+  const handlePay = (tokenMidtrans) => {
+    window.snap.pay(tokenMidtrans, {
+      onSuccess: function (result) {
+        console.log("success");
+        console.log(result);
+        const {
+          gross_amount,
+          order_id,
+          status_code,
+          // transaction_id,
+          // transaction_time,
+        } = result;
+
+        // validasi berdasarkan groos amount untuk ingame balance
+        let topupBalance = "";
+        switch (gross_amount) {
+          case "16.000.00":
+            topupBalance = 16;
+            break;
+          case "31.000.00":
+            topupBalance = 32;
+            break;
+          case "61.000.00":
+            topupBalance = 64;
+            break;
+        }
+        let newAmount = gross_amount.slice(0, gross_amount.indexOf('.00'))
+        const payloadDispatch = {
+          amount: newAmount,
+          topupBalance: topupBalance,
+          status: status_code === 200 ? "success" : "cancel",
+          orderId: order_id,
+        };
+        dispatch(fetchSuccesPayment(payloadDispatch));
+      },
+      onPending: function (result) {
+        console.log("pending");
+        console.log(result);
+      },
+      onError: function (result) {
+        console.log("error");
+        console.log(result);
+      },
+      onClose: function () {
+        console.log("customer closed the popup without finishing the payment");
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (token) {
+      handlePay(token);
+    }
+  }, [token]);
   return (
     <>
       <section
