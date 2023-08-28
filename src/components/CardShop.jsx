@@ -6,15 +6,15 @@ export default function CardShop({
   itemCategory,
   itemPrice,
 }) {
-  useEffect(() => {
-    console.log(imgUrl);
-  }, []);
+  // useEffect(() => {
+  //   console.log(imgUrl);
+  // }, []);
   return (
     <section className="w-[250px] h-[325px] bg-[rgba(0,0,0,0.3)] rounded-[5px] m-[10px] hover:bg-[rgba(231,231,231,0.3)] duration-300 hover:scale-[1.05]">
       <img
         src={imgUrl}
         alt="item-image"
-        className="w-[80%] m-auto p-[10px] pt-[30px]"
+        className="max-w-[75%] m-auto p-[10px] pt-[30px] max-h-[200px] "
       />
       <p className="text-white font-semibold italic text-center text-xl mb-[2vh]">
         {itemName}
