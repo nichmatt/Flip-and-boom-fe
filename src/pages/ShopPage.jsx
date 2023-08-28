@@ -2,33 +2,14 @@ import { useEffect } from "react";
 import CardShop from "../components/CardShop";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSuccesPayment } from "../actionCreators/payment";
-
-  function handleCharacter() {
-    const character = datas.filter((type) => {
-      return type.type === "char";
-    });
-    dispatch(actionFilterShopData(character));
-  }
-
-  function handleSkin() {
-    const skin = datas.filter((type) => {
-      return type.type === "skin";
-    });
-    dispatch(actionFilterShopData(skin));
-  }
-
-  function showAll() {
-    dispatch(actionFilterShopData([]));
-  }
-
-  useEffect(() => {
-    dispatch(fetchShopData());
-    // console.log(datas);
-  }, []);
+import { fetchShopData } from "../actionCreators";
+import { actionFilterShopData } from "../actionCreators/fetchShop";
 
 export default function ShopPage() {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.paymentReducer);
+
+  const { datas, filter } = useSelector((state) => state.fetchShopReducer);
   const handlePay = (tokenMidtrans) => {
     window.snap.pay(tokenMidtrans, {
       onSuccess: function (result) {
@@ -55,7 +36,7 @@ export default function ShopPage() {
             topupBalance = 64;
             break;
         }
-        let newAmount = gross_amount.slice(0, gross_amount.indexOf('.00'))
+        let newAmount = gross_amount.slice(0, gross_amount.indexOf(".00"));
         const payloadDispatch = {
           amount: newAmount,
           topupBalance: topupBalance,
@@ -83,6 +64,30 @@ export default function ShopPage() {
       handlePay(token);
     }
   }, [token]);
+
+  useEffect(() => {
+    dispatch(fetchShopData());
+    // console.log(datas);
+  }, []);
+
+  function handleCharacter() {
+    const character = datas?.filter((type) => {
+      // console.log("lu masuk ga sih");
+      return type.type === "char";
+    });
+    dispatch(actionFilterShopData(character));
+  }
+
+  function handleSkin() {
+    const skin = datas.filter((type) => {
+      return type.type === "skin";
+    });
+    dispatch(actionFilterShopData(skin));
+  }
+
+  function showAll() {
+    dispatch(actionFilterShopData([]));
+  }
 
   return (
     <>
