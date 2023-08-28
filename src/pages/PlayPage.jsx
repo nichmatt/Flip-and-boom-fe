@@ -73,12 +73,12 @@ export default function PlayPage() {
 		setHp,
 		hp,
 		setBoard,
+		aiMemory,
+		setAiMemory,
 	};
 
 	const cpuTurnAccurateParameters = {
 		...cpuTurnRandomParameters,
-		aiMemory,
-		setAiMemory,
 	};
 
 	// created lifecycle
@@ -123,7 +123,7 @@ export default function PlayPage() {
 	useEffect(() => {
 		if (enemyHp <= 0 || hp <= 0) {
 			(async () => {
-				await pause(2000);
+				await pause();
 				setShowGameResult(true);
 			})();
 		}

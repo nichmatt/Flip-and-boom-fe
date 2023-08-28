@@ -1,2 +1,2 @@
-export const pause = (duration) =>
+export const pause = (duration = 1000) =>
 	new Promise((res) => setTimeout(res, duration));

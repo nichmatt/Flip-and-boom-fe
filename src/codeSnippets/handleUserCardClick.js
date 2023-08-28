@@ -52,7 +52,7 @@ export const handleUserCardClick = async (
 
 		setTurn("wait");
 
-		await pause(2000);
+		await pause();
 
 		flipClose(board, setBoard);
 
