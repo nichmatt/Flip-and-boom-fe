@@ -1,8 +1,23 @@
 import { NavLink } from "react-router-dom";
 import Login from "../components/Login";
 import NewsCard from "../components/NewsCard";
+import Register from "../components/Register";
+import { useEffect, useState } from "react";
 
 export default function LandingPage() {
+  const [status, setStatus] = useState("login");
+
+  function statusSetter() {
+    if (status === "login") {
+      setStatus("register");
+    } else {
+      setStatus("login");
+    }
+  }
+
+  useEffect(() => {
+    console.log(status);
+  }, [status]);
   return (
     <section
       id="LandingPage-section"
@@ -11,7 +26,7 @@ export default function LandingPage() {
           "linear-gradient(180deg, #251D3A 0%, #323569 99.99%, rgba(37,29,58,0.00) 100%)",
       }}
     >
-      <div className="flex bg-[url(/assets/LandingPage/bgLandingpage.png)] bg-cover ">
+      <div className="flex bg-[url(/assets/LandingPage/bgLandingpage.png)] bg-cover h-[100vh] relative bg-opacity-10 border-b-[3px] border-[rgba(0,0,0,0.7)] ">
         <div className="w-[50vw] h-[100vh] flex">
           <div>
             {/* <img
@@ -21,10 +36,45 @@ export default function LandingPage() {
             /> */}
           </div>
         </div>
-        <div className="flex flex-col flex-wrap items-center justify-center pl-[20px]">
-          <Login />
+        {/* <div
+          className="w-32 h-32 bg-transparent"
+          style={{ perspective: "1000px" }}
+        > */}
+        <div
+          className="relative w-full h-full duration-[1234ms]"
+          style={
+            status == "register"
+              ? {
+                  transformStyle: "preserve-3d",
+                  transform: "rotateY(180deg)",
+                }
+              : { transformStyle: "preserve-3d" }
+          }
+        >
+          <div
+            className="flex flex-col flex-wrap items-center justify-center pl-[20px] absolute w-full h-full"
+            style={{
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              MozBackfaceVisibility: "hidden",
+            }}
+          >
+            <Login statusSetter={statusSetter} />
+          </div>
+          <div
+            className="flex flex-col flex-wrap items-center justify-center pl-[20px] absolute w-full h-full"
+            style={{
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              MozBackfaceVisibility: "hidden",
+              transform: "rotateY(180deg)",
+            }}
+          >
+            <Register statusSetter={statusSetter} />
+          </div>
         </div>
       </div>
+      {/* </div> */}
 
       {/* OVERVIEW PART */}
       <div className="px-[20vw] pt-[15vh] mt-[15vh] mb-[15vh] bg-[rgba(0,0,0,0.3)]">

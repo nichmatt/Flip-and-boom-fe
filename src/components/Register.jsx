@@ -1,16 +1,23 @@
 import { NavLink } from "react-router-dom";
-export default function Login({ statusSetter }) {
+export default function Register({ statusSetter }) {
   return (
     <>
       <div
-        className=" flex-col text-white h-[495px]  px-[80px] pb-[90px] flex text-[1.25rem] items-center backdrop-blur-[2px] bg-[rgba(239,239,239,0.8)] rounded-[20px]"
+        className=" flex-col text-white  px-[80px] pb-[90px] flex text-[1.25rem] items-center backdrop-blur-[2px] bg-[rgba(239,239,239,0.8)] rounded-[20px]"
         style={{
           boxShadow:
             "35px 35px 68px 0px rgba(145, 192, 255, 0.5), inset -3px -3px 16px 0px rgba(145, 192, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);",
         }}
       >
-        <div className="w-[200px] py-[25px]">
+        <div className="w-[200px]">
           <img src="/assets/logo/logo-03-shadow-01.png" alt="logo" />
+        </div>
+        <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px]">
+          <input
+            type="text"
+            placeholder="Username"
+            className="bg-transparent focus:outline-none"
+          />
         </div>
         <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
           <input
@@ -19,7 +26,6 @@ export default function Login({ statusSetter }) {
             className="bg-transparent focus:outline-none"
           />
         </div>
-
         <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
           <input
             type="Password"
@@ -31,7 +37,7 @@ export default function Login({ statusSetter }) {
           className="py-[5px] text-[12px] w-full text-blue-500"
           onClick={() => statusSetter()}
         >
-          Don't have account yet? Join Us Now!
+          Already have account? Play now!
         </NavLink>
         <div className="w-[90px] cursor-[url(/assets/logo/lighter.svg),_pointer]">
           <img
