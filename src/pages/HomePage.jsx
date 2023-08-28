@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import CardHomePage from "../components/CardHomePage";
 
 export default function HomePage() {
@@ -11,7 +12,7 @@ export default function HomePage() {
                 urlCard={"../../public/assets/card/orange-card.png"}
                 urlChar={"../../public/assets/character/default.png"}
                 gameMode={"EAZY"}
-                colorMode={"orange"}
+                colorMode={"#F98800"}
               />
             </div>
             <div className="absolute rotate-[-8deg] left-[32vw] hover:left-[30vw] top-[7vh] hover:z-20 hover:scale-100  transition-all delay-75 ease-in-out">
@@ -20,24 +21,24 @@ export default function HomePage() {
                 urlChar={
                   "../../public/assets/character/smoldering-detonation.png"
                 }
-                gameMode={"EAZY"}
-                colorMode={"orange"}
+                gameMode={"MEDIUM"}
+                colorMode={"#145AC9"}
               />
             </div>
             <div className="absolute rotate-[8deg] left-[44vw] hover:left-[46vw]  top-[7vh] hover:scale-105 hover:z-20 transition-all delay-75 ease-in-out">
               <CardHomePage
                 urlCard={"../../public/assets/card/magenta-card.png"}
                 urlChar={"../../public/assets/character/mrs-party.png"}
-                gameMode={"EAZY"}
-                colorMode={"orange"}
+                gameMode={"HARD"}
+                colorMode={"#D100FC"}
               />
             </div>
             <div className="absolute rotate-[18deg] left-[56vw] top-[14vh] hover:scale-105 hover:left-[60vw] transition-all delay-75 ease-in-out">
               <CardHomePage
                 urlCard={"../../public/assets/card/purple-card.png"}
                 urlChar={"../../public/assets/character/mr-king.png"}
-                gameMode={"EAZY"}
-                colorMode={"orange"}
+                gameMode={"IMPOSSIBLE"}
+                colorMode={"#6306C6"}
               />
             </div>
           </div>

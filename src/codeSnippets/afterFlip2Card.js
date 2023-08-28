@@ -38,16 +38,16 @@ export const afterFlip2Card = async (
 			return;
 		}
 
-		await pause(2000);
+		await pause();
 
 		removeCardFromBoard(board, setBoard, chosenCard);
 	} else {
-		await pause(2000);
+		await pause();
 
 		flipClose(board, setBoard);
 	}
 
-	await pause(2000);
+	await pause();
 
 	setTurn("cpu");
 

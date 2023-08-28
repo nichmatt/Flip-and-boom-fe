@@ -1,12 +1,15 @@
 import { useEffect } from "react";
 import CardShop from "../components/CardShop";
-import MrKingCard from "/assets/character/mr-king.png";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSuccesPayment } from "../actionCreators/payment";
+import { fetchShopData } from "../actionCreators";
+import { actionFilterShopData } from "../actionCreators/fetchShop";
 
 export default function ShopPage() {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.paymentReducer);
+
+  const { datas, filter } = useSelector((state) => state.fetchShopReducer);
   const handlePay = (tokenMidtrans) => {
     window.snap.pay(tokenMidtrans, {
       onSuccess: function (result) {
@@ -33,7 +36,7 @@ export default function ShopPage() {
             topupBalance = 64;
             break;
         }
-        let newAmount = gross_amount.slice(0, gross_amount.indexOf('.00'))
+        let newAmount = gross_amount.slice(0, gross_amount.indexOf(".00"));
         const payloadDispatch = {
           amount: newAmount,
           topupBalance: topupBalance,
@@ -61,6 +64,31 @@ export default function ShopPage() {
       handlePay(token);
     }
   }, [token]);
+
+  useEffect(() => {
+    dispatch(fetchShopData());
+    // console.log(datas);
+  }, []);
+
+  function handleCharacter() {
+    const character = datas?.filter((type) => {
+      // console.log("lu masuk ga sih");
+      return type.type === "char";
+    });
+    dispatch(actionFilterShopData(character));
+  }
+
+  function handleSkin() {
+    const skin = datas.filter((type) => {
+      return type.type === "skin";
+    });
+    dispatch(actionFilterShopData(skin));
+  }
+
+  function showAll() {
+    dispatch(actionFilterShopData([]));
+  }
+
   return (
     <>
       <section
@@ -77,6 +105,7 @@ export default function ShopPage() {
               justifyContent: "center",
               cursor: "pointer",
             }}
+            onClick={handleCharacter}
           >
             <p
               style={{
@@ -98,6 +127,7 @@ export default function ShopPage() {
               justifyContent: "center",
               cursor: "pointer",
             }}
+            onClick={handleSkin}
           >
             <p
               style={{
@@ -108,6 +138,28 @@ export default function ShopPage() {
               }}
             >
               CARDS
+            </p>
+          </div>
+          <div
+            className="h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            style={{
+              borderRadius: "5px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+            }}
+            onClick={showAll}
+          >
+            <p
+              style={{
+                fontSize: "14px",
+                fontWeight: "600",
+                fontStyle: "italic",
+                color: "#fff",
+              }}
+            >
+              ALL
             </p>
           </div>
         </div>
@@ -133,59 +185,29 @@ export default function ShopPage() {
             itemCategory="VOUCHER"
             itemPrice="IDR 61.000"
           />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-            itemPrice="300"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-            itemPrice="300"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-            itemPrice="300"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-            itemPrice="300"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-            itemPrice="300"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-            itemPrice="300"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-            itemPrice="300"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-            itemPrice="300"
-          />
+          {filter.length
+            ? filter.map((item) => {
+                return (
+                  <CardShop
+                    key={item.id}
+                    imgUrl={`/assets/shops/${item.name}.png`}
+                    itemName={item.name}
+                    itemCategory={item.type}
+                    itemPrice={`${item.price}`}
+                  />
+                );
+              })
+            : datas.map((item) => {
+                return (
+                  <CardShop
+                    key={item.id}
+                    imgUrl={`/assets/shops/${item.name}.png`}
+                    itemName={item.name}
+                    itemCategory={item.type}
+                    itemPrice={`${item.price}`}
+                  />
+                );
+              })}
         </div>
       </section>
     </>
