@@ -1,3 +1,4 @@
+import LoadingScreen from "../components/LoadingScreen";
 import NavigationBar from "../components/Navigation";
 import SIdeBar from "../components/SideBar";
 import { Outlet } from "react-router-dom";
@@ -15,6 +16,7 @@ export default function BaseLayout() {
       >
         <SIdeBar />
         <Outlet />
+        {/* <LoadingScreen /> */}
         {/* <div className="overflow-y-auto"></div> */}
       </div>
     </>
