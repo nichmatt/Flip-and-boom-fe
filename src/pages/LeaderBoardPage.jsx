@@ -21,7 +21,7 @@ export default function LeaderBoardPage() {
             <p
               style={{
                 fontSize: "14px",
-                color: "#2a2550",
+
                 fontWeight: "600",
                 fontStyle: "italic",
                 color: "#fff",
@@ -43,7 +43,7 @@ export default function LeaderBoardPage() {
             <p
               style={{
                 fontSize: "14px",
-                color: "#2a2550",
+
                 fontWeight: "600",
                 fontStyle: "italic",
                 color: "#fff",
@@ -86,7 +86,7 @@ export default function LeaderBoardPage() {
             <p
               style={{
                 fontSize: "14px",
-                color: "#2a2550",
+
                 fontWeight: "600",
                 fontStyle: "italic",
                 color: "#fff",
