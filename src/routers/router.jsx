@@ -10,6 +10,7 @@ import LeaderBoardPage from "../pages/LeaderBoardPage";
 import ProfilePage from "../pages/ProfilePage";
 import InventoryPage from "../pages/InventoryPage";
 import NewsPage from "../pages/NewsPage";
+import LandingPage from "../pages/LandingPage";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       },
       { path: "/play", element: <PlayPage /> },
     ],
+  },
+  {
+    path: "/",
+    element: <LandingPage />,
   },
 ]);
 
