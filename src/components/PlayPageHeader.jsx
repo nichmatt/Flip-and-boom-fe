@@ -22,10 +22,13 @@ export default function PlayPageHeader({ hp, enemyHp }) {
 				</div>
 				<div className="h-6 w-[25rem] bg-black rounded-2xl border">
 					<div
-						className={`h-full bg-[${
-							hp > 500 ? "#2EFF0C" : hp > 250 ? "#FFAC0C" : "#ff0c0c"
-						}] rounded-2xl duration-1000`}
-						style={{ width: `${hp / 10}%` }}
+						className="h-full rounded-2xl duration-1000"
+						style={{
+							width: `${hp / 10}%`,
+							backgroundColor: `${
+								hp > 500 ? "#2EFF0C" : hp > 250 ? "#FFAC0C" : "#ff0c0c"
+							}`,
+						}}
 					></div>
 				</div>
 			</div>
@@ -39,10 +42,17 @@ export default function PlayPageHeader({ hp, enemyHp }) {
 				</div>
 				<div className="h-6 w-[25rem] bg-black rounded-2xl border">
 					<div
-						className={`h-full bg-[${
-							enemyHp > 500 ? "#2EFF0C" : enemyHp > 250 ? "#FFAC0C" : "#ff0c0c"
-						}] rounded-2xl duration-1000`}
-						style={{ width: `${enemyHp / 10}%` }}
+						className="h-full rounded-2xl duration-1000"
+						style={{
+							width: `${enemyHp / 10}%`,
+							backgroundColor: `${
+								enemyHp > 500
+									? "#2EFF0C"
+									: enemyHp > 250
+									? "#FFAC0C"
+									: "#ff0c0c"
+							}`,
+						}}
 					></div>
 				</div>
 			</div>

@@ -116,9 +116,58 @@ export default function ShopPage() {
           className="mt-[2vw] w-[57vw] ml-[32vw] flex flex-wrap"
         >
           <CardShop
+            imgUrl="/assets/voucher/16.png"
+            itemName="16 Points"
+            itemCategory="VOUCHER"
+            itemPrice="IDR 16.000"
+          />
+          <CardShop
+            imgUrl="/assets/voucher/32.png"
+            itemName="32 Points"
+            itemCategory="VOUCHER"
+            itemPrice="IDR 31.000"
+          />
+          <CardShop
+            imgUrl="/assets/voucher/64.png"
+            itemName="64 Points"
+            itemCategory="VOUCHER"
+            itemPrice="IDR 61.000"
+          />
+          <CardShop
             imgUrl={MrKingCard}
             itemName="mrKing"
             itemCategory="CHARACTER"
+            itemPrice="300"
+          />
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+            itemPrice="300"
+          />
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+            itemPrice="300"
+          />
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+            itemPrice="300"
+          />
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+            itemPrice="300"
+          />
+          <CardShop
+            imgUrl={MrKingCard}
+            itemName="mrKing"
+            itemCategory="CHARACTER"
+            itemPrice="300"
           />
           <CardShop
             imgUrl={MrKingCard}
@@ -129,46 +178,13 @@ export default function ShopPage() {
             imgUrl={MrKingCard}
             itemName="mrKing"
             itemCategory="CHARACTER"
+            itemPrice="300"
           />
           <CardShop
             imgUrl={MrKingCard}
             itemName="mrKing"
             itemCategory="CHARACTER"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardShop
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
+            itemPrice="300"
           />
         </div>
       </section>

@@ -7,12 +7,28 @@ export const afterFlip2Card = async (
 	board,
 	setBoard,
 	resetChosenCard,
-	setTurn
+	setTurn,
+	aiMemory,
+	setAiMemory
 ) => {
 	setTurn("wait");
 
 	if (chosenCard[0][0] == chosenCard[1][0]) {
 		const damageDealtToEnemy = +chosenCard[0][0];
+
+		const clonedAiMemory = structuredClone(aiMemory);
+
+		for (let i = 0; i < clonedAiMemory[damageDealtToEnemy]?.length; i++) {
+			if (
+				clonedAiMemory[damageDealtToEnemy][i] == chosenCard[0][1] ||
+				clonedAiMemory[damageDealtToEnemy][i] == chosenCard[1][1]
+			) {
+				clonedAiMemory[damageDealtToEnemy].splice(i, 1);
+				i--;
+			}
+		}
+
+		setAiMemory(clonedAiMemory);
 
 		enemyHp - damageDealtToEnemy < 0
 			? setEnemyHp(0)

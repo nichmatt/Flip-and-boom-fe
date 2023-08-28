@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGetTokenMidtrans } from "../actionCreators/payment";
-export default function CardShop({ imgUrl, itemName, itemCategory }) {
+export default function CardShop({ imgUrl, itemName, itemCategory, itemPrice, }) {
   const dispatch = useDispatch();
 
   const handleClickCard = (e) => {
@@ -9,6 +9,7 @@ export default function CardShop({ imgUrl, itemName, itemCategory }) {
   };
 
   const { token } = useSelector(state => state.paymentReducer)
+
   useEffect(() => {
     // console.log(token);
   }, [token]);
@@ -30,15 +31,18 @@ export default function CardShop({ imgUrl, itemName, itemCategory }) {
           {itemCategory}
         </div>
         <p className="text-white px-[5px]">|</p>
-        <i
-          className="fa-solid fa-money-bill-1-wave text-[#ffb800] pt-[8px] ml-[5px] "
-          style={{ textShadow: "0.5px 0.1px 5px" }}
-        ></i>
+        {itemPrice?.substring(0, 3) !== "IDR" && (
+          <i
+            className="fa-solid fa-money-bill-1-wave text-[#ffb800] pt-[8px] ml-[5px] "
+            style={{ textShadow: "0.5px 0.1px 5px" }}
+          ></i>
+        )}
+
         <p
           style={{ textShadow: "1px 1px 10px" }}
-          className="pr-[30px] pl-[10px] py-[3px] text-[#ffb800] italic font-semibold"
+          className="pr-[30px] pl-[10px] py-[3px] text-[#ffb800] italic font-semibold text-[0.8rem]"
         >
-          300
+          {itemPrice}
         </p>
       </div>
     </section>

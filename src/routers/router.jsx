@@ -9,6 +9,7 @@ import ShopPage from "../pages/ShopPage";
 import LeaderBoardPage from "../pages/LeaderBoardPage";
 import ProfilePage from "../pages/ProfilePage";
 import InventoryPage from "../pages/InventoryPage";
+import NewsPage from "../pages/NewsPage";
 
 const router = createBrowserRouter([
   {
@@ -38,8 +39,12 @@ const router = createBrowserRouter([
             element: <InventoryPage />,
           },
           {
-            path: "/profile/inventorys",
-            element: <ProfilePage />,
+            path: "/profile/inventory",
+            element: <InventoryPage />,
+          },
+          {
+            path: "/news",
+            element: <NewsPage />,
           },
         ],
       },
