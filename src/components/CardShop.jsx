@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 
-export default function CardShop({ imgUrl, itemName, itemCategory }) {
+export default function CardShop({
+  imgUrl,
+  itemName,
+  itemCategory,
+  itemPrice,
+}) {
   useEffect(() => {
     console.log(imgUrl);
   }, []);
@@ -19,15 +24,18 @@ export default function CardShop({ imgUrl, itemName, itemCategory }) {
           {itemCategory}
         </div>
         <p className="text-white px-[5px]">|</p>
-        <i
-          className="fa-solid fa-money-bill-1-wave text-[#ffb800] pt-[8px] ml-[5px] "
-          style={{ textShadow: "0.5px 0.1px 5px" }}
-        ></i>
+        {itemPrice?.substring(0, 3) !== "IDR" && (
+          <i
+            className="fa-solid fa-money-bill-1-wave text-[#ffb800] pt-[8px] ml-[5px] "
+            style={{ textShadow: "0.5px 0.1px 5px" }}
+          ></i>
+        )}
+
         <p
           style={{ textShadow: "1px 1px 10px" }}
-          className="pr-[30px] pl-[10px] py-[3px] text-[#ffb800] italic font-semibold"
+          className="pr-[30px] pl-[10px] py-[3px] text-[#ffb800] italic font-semibold text-[0.8rem]"
         >
-          300
+          {itemPrice}
         </p>
       </div>
     </section>
