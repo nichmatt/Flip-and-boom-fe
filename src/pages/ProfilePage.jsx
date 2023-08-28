@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 export default function ProfilePage() {
   return (
     <section
@@ -17,7 +19,8 @@ export default function ProfilePage() {
             cursor: "pointer",
           }}
         >
-          <p
+          <NavLink
+            to="/profile"
             style={{
               fontSize: "14px",
               fontWeight: "600",
@@ -26,7 +29,7 @@ export default function ProfilePage() {
             }}
           >
             PROFILE
-          </p>
+          </NavLink>
         </div>
         <div
           className="h-[50px] w-[120px] mt-[6vw]  ml-2  bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
@@ -38,7 +41,8 @@ export default function ProfilePage() {
             cursor: "pointer",
           }}
         >
-          <p
+          <NavLink
+            to="/profile/inventory"
             style={{
               fontSize: "14px",
               fontWeight: "600",
@@ -47,7 +51,7 @@ export default function ProfilePage() {
             }}
           >
             INVENTORY
-          </p>
+          </NavLink>
         </div>
       </div>
 
@@ -128,32 +132,6 @@ export default function ProfilePage() {
               </div>
             </div>
           </div>
-          {/* <div className="flex bg-[rgba(7,7,7,0.2)] p-[15px] mt-[10px]">
-            <div>
-              <div className="text-white text-[10px] text-center italic font-semibold">
-                SELECTED SKIN
-              </div>
-              <div className="w-[90px] p-[15px] m-[5px] flex items-center justify-center rounded-[3px] ">
-                <img
-                  className=""
-                  src="../../public/assets/character/mr-king.png"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div>
-              <div className="text-white text-[10px] text-center italic font-semibold">
-                SELECTED CARD
-              </div>
-              <div className=" w-[90px] p-[15px] m-[5px] flex items-center justify-center rounded-[3px]">
-                <img
-                  className=""
-                  src="../../public/assets/character/mr-king.png"
-                  alt=""
-                />
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </section>

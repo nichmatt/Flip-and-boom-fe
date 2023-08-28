@@ -1,6 +1,7 @@
 import CardInventory from "../components/CardInventory.jsx";
 import MrKingCard from "/assets/character/mr-king.png";
 import Card from "/assets/card/blue-card.png";
+import { NavLink } from "react-router-dom";
 
 export default function ShopPage() {
   return (
@@ -20,7 +21,8 @@ export default function ShopPage() {
               cursor: "pointer",
             }}
           >
-            <p
+            <NavLink
+              to="/profile"
               style={{
                 fontSize: "14px",
                 color: "#fff",
@@ -28,8 +30,8 @@ export default function ShopPage() {
                 fontStyle: "italic",
               }}
             >
-              CHARACTERS
-            </p>
+              PROFILE
+            </NavLink>
           </div>
           <div
             className="h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
@@ -41,7 +43,8 @@ export default function ShopPage() {
               cursor: "pointer",
             }}
           >
-            <p
+            <NavLink
+              to="/profile/inventory"
               style={{
                 fontSize: "14px",
                 fontWeight: "600",
@@ -49,8 +52,8 @@ export default function ShopPage() {
                 color: "#fff",
               }}
             >
-              CARDS
-            </p>
+              INVENTORY
+            </NavLink>
           </div>
         </div>
         <div
