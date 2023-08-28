@@ -16,9 +16,12 @@ import {
 	createdLifecycle,
 } from "../codeSnippets";
 
+// helpers
+import { pause } from "../helpers";
+
 // export default jsx
 export default function PlayPage() {
-	// redux
+	// state from redux
 	const { gameMode } = useSelector((state) => state.gameModeReducer);
 
 	// collection of useState
@@ -29,6 +32,17 @@ export default function PlayPage() {
 	const [turn, setTurn] = useState("user");
 	const [totalTurn, setTotalTurn] = useState(0);
 	const [showGameResult, setShowGameResult] = useState(false);
+	const [aiMemory, setAiMemory] = useState({
+		250: [],
+		220: [],
+		210: [],
+		200: [],
+		175: [],
+		150: [],
+		125: [],
+		100: [],
+		bomb: [],
+	});
 
 	// collection of functions
 	const resetChosenCard = () => setChosenCard([]);
@@ -41,9 +55,12 @@ export default function PlayPage() {
 			setTurn,
 			chosenCard,
 			setChosenCard,
+			resetChosenCard,
 			hp,
 			board,
-			setBoard
+			setBoard,
+			aiMemory,
+			setAiMemory
 		);
 	};
 
@@ -58,7 +75,11 @@ export default function PlayPage() {
 		setBoard,
 	};
 
-	const cpuTurnAccurateParameters = { ...cpuTurnRandomParameters };
+	const cpuTurnAccurateParameters = {
+		...cpuTurnRandomParameters,
+		aiMemory,
+		setAiMemory,
+	};
 
 	// created lifecycle
 	useEffect(() => {
@@ -76,13 +97,14 @@ export default function PlayPage() {
 				setBoard,
 				resetChosenCard,
 				setTurn,
-				setShowGameResult
+				aiMemory,
+				setAiMemory
 			);
 	}, [chosenCard]);
 
 	// watcher for turn useState
 	useEffect(() => {
-		console.log(turn);
+		console.log(`TURN : ${turn}`);
 		setTotalTurn(totalTurn + 1);
 		if (turn == "cpu") {
 			switch (gameMode) {
@@ -100,7 +122,10 @@ export default function PlayPage() {
 	// watcher for enemyHp useState
 	useEffect(() => {
 		if (enemyHp <= 0 || hp <= 0) {
-			setShowGameResult(true);
+			(async () => {
+				await pause(2000);
+				setShowGameResult(true);
+			})();
 		}
 	}, [enemyHp, hp]);
 

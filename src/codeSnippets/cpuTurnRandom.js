@@ -25,14 +25,16 @@ export const cpuTurnRandom = async ({
 
 	const firstRandomCard = boardShownTrueOnly?.splice(firstRandomNum, 1);
 
+  console.log("KARTU PERTAMA CPU");
+
 	const newBoard = await flipOpen(board, setBoard, firstRandomCard[0].index);
 
 	if (firstRandomCard[0].value == "bomb") {
-		setEnemyHp(enemyHp - 75);
+    enemyHp - 75 <= 0 ? setEnemyHp(0) : setEnemyHp(enemyHp - 75);
+
+    if (enemyHp - 75 <= 0) return;
 
 		await pause(2000);
-
-		if (enemyHp - 75 <= 0) return;
 
 		flipClose(board, setBoard);
 
@@ -49,10 +51,14 @@ export const cpuTurnRandom = async ({
 
 	const secondRandomCard = boardShownTrueOnly?.splice(secondRandomNum, 1);
 
+  console.log("KARTU KEDUA CPU");
+
 	flipOpen(newBoard, setBoard, secondRandomCard[0].index);
 
 	if (secondRandomCard[0].value == "bomb") {
-		setEnemyHp(enemyHp - 75);
+		enemyHp - 75 <= 0 ? setEnemyHp(0) : setEnemyHp(enemyHp - 75);
+
+    if (enemyHp - 75 <= 0) return;
 
 		await pause(2000);
 
@@ -68,7 +74,9 @@ export const cpuTurnRandom = async ({
 	if (enemyCards[0][0] == enemyCards[1][0]) {
 		const damageDealtToUser = +enemyCards[0][0];
 
-		hp - damageDealtToUser < 0 ? setHp(0) : setHp(hp - damageDealtToUser);
+		hp - damageDealtToUser <= 0 ? setHp(0) : setHp(hp - damageDealtToUser);
+
+    if (hp - damageDealtToUser <= 0) return;
 
 		await pause(2000);
 

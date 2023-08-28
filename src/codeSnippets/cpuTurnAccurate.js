@@ -1,6 +1,6 @@
 import { randomNumber, pause, removeCardFromBoard } from "../helpers";
 
-export const cpuTurnAccurate = ({
+export const cpuTurnAccurate = async ({
 	board,
 	setEnemyHp,
 	enemyHp,
@@ -8,7 +8,16 @@ export const cpuTurnAccurate = ({
 	setHp,
 	hp,
 	setBoard,
-  boardShownTrueOnly
+	aiMemory,
+	setAiMemory,
 }) => {
+	console.log(aiMemory);
 
+  
+
+	setTurn("wait");
+
+	await pause(2000);
+
+	setTurn("user");
 };
