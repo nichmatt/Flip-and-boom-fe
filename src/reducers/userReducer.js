@@ -1,4 +1,4 @@
-import { FETCHUSERPROFILE, LOADINGSTATE } from "../actionType";
+import { FETCHUSERPROFILE, LOADINGSTATE, SETINVENTORIES } from "../actionType";
 
 const initilaState = {
     loading: false,
@@ -16,6 +16,11 @@ function userReducer(state = initilaState, action) {
             return {
                 ...state,
                 loading: action.payload
+            }
+        case SETINVENTORIES:
+            return {
+                ...state,
+                inventories: action.payload
             }
         default:
             return state
