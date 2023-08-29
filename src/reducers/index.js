@@ -7,6 +7,7 @@ import getLeaderboardReducer from "./getLeaderboardReducer";
 import userReducer from "./userReducer";
 import newsReducer from "./newReducer";
 import settingReducer from "./settingReducer";
+import messageReducer from "./messageReducer";
 
 const rootReducer = combineReducers({
 
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   userReducer,
   newsReducer,
   settingReducer,
+  messageReducer
 });
 
 export default rootReducer;

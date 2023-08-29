@@ -5,10 +5,12 @@ import Register from "../components/Register";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchNews } from "../actionCreators/news";
+import ErrorModal from "../components/ErrorModal";
 
 export default function LandingPage() {
   const [status, setStatus] = useState("login");
   const { news } = useSelector((state) => state.newsReducer);
+  const { error } = useSelector((state) => state.messageReducer);
   const dispatch = useDispatch();
 
   function statusSetter() {
@@ -34,6 +36,8 @@ export default function LandingPage() {
           "linear-gradient(180deg, #251D3A 0%, #323569 99.99%, rgba(37,29,58,0.00) 100%)",
       }}
     >
+      {error ? <ErrorModal message={error} /> : ""}
+
       <div className="flex bg-[url(/assets/LandingPage/bgLandingpage.png)] bg-cover h-[100vh] relative bg-opacity-10 border-b-[3px] border-[rgba(0,0,0,0.7)] ">
         <div className="w-[50vw] h-[100vh] flex">
           <div></div>

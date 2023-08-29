@@ -4,16 +4,18 @@ import SIdeBar from "../components/SideBar";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile, setMusicSetting } from "../actionCreators";
-import { useEffect  } from "react";
+import { useEffect } from "react";
+import ErrorModal from "../components/ErrorModal";
 
 export default function BaseLayout() {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.userReducer);
   const { music } = useSelector((state) => state.settingReducer);
+  const { error } = useSelector((state) => state.messageReducer);
 
   useEffect(() => {
     dispatch(fetchUserProfile());
-    dispatch(setMusicSetting(true))
+    dispatch(setMusicSetting(true));
   }, []);
 
   return (
@@ -29,6 +31,8 @@ export default function BaseLayout() {
         <SIdeBar />
         <Outlet />
         {loading ? <LoadingScreen /> : ""}
+        {error ? (<ErrorModal message={error} />) : ''}
+        
         {music ? (
           <audio loop autoPlay src="/assets/audio/lobby_BGM.mp3">
             <source src="/assets/audio/lobby_BGM.mp3" type="audio/mp3"></source>
@@ -41,5 +45,4 @@ export default function BaseLayout() {
       </div>
     </>
   );
-
 }

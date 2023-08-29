@@ -1,6 +1,7 @@
 import axios from "axios";
 import { fetchUserProfile, setLoading } from "./fetchUserProfile";
 import { API_URL } from "../config";
+import { setErrorMessage } from "./messageModal";
 
 export const getTokenMidtrans = (payload) => {
     return {
@@ -12,6 +13,7 @@ export const getTokenMidtrans = (payload) => {
 export function fetchGetTokenMidtrans(amount) {
     return async (dispatch) => {
         try {
+            dispatch(setLoading(true))
             const { data } = await axios.post('http://localhost:3000/user/token-midtrans', { amount }, {
                 headers: {
                     access_token: localStorage.getItem('access_token')
@@ -21,6 +23,8 @@ export function fetchGetTokenMidtrans(amount) {
             dispatch(getTokenMidtrans(data.token))
         } catch (error) {
             console.log(error);
+        } finally {
+            dispatch(setLoading(false))
         }
     }
 }
@@ -29,6 +33,7 @@ export function fetchGetTokenMidtrans(amount) {
 export function fetchSuccesPayment(payload) {
     return async (dispatch) => {
         try {
+            dispatch(setLoading(true))
             const { data } = await axios.post('http://localhost:3000/user/topup', payload, {
                 headers: {
                     access_token: localStorage.getItem('access_token')
@@ -41,6 +46,9 @@ export function fetchSuccesPayment(payload) {
             // dispatch profile lagi
         } catch (error) {
             console.log(error);
+            dispatch(setErrorMessage(error.response.data.message))
+        } finally {
+            dispatch(setLoading(false))
         }
     }
 }
@@ -58,6 +66,7 @@ export function fetchBuyItem(payload) {
             console.log(status, 'response'); // 201
         } catch (error) {
             console.log(error.response.data.message);
+            dispatch(setErrorMessage(error.response.data.message))
             // error handle
         } finally {
             dispatch(fetchUserProfile())
