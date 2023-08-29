@@ -1,6 +1,20 @@
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ProfilePage() {
+  const dispatch = useDispatch();
+  const { profile } = useSelector((state) => state.userReducer);
+  const [char, setChar] = useState("");
+  const [card, setCard] = useState("");
+  useEffect(() => {
+    // console.log(profile);
+    setChar(`/assets/character/${profile?.selectedChar}.png`);
+    setCard(`/assets/card/${profile?.selectedSkin}.png`);
+    // console.log(char);
+    console.log(card);
+  }, [profile]);
+
   return (
     <section
       className="min-h-[100vh] w-[100vw] "
@@ -65,11 +79,7 @@ export default function ProfilePage() {
       >
         <div className="flex">
           <div className="bg-[rgba(44,44,44,0.5)] my-[25%] ml-[20%] p-[10%] w-[300px] flex items-center justify-center rounded-md border-white border-2">
-            <img
-              className=""
-              src="../../public/assets/character/mr-king.png"
-              alt=""
-            />
+            <img className="" src={char} alt={profile?.selectedChar} />
           </div>
         </div>
         <div className="text-[rgba(255,255,255,0.9)] text-[1.2rem] font-semibold flex flex-col justify-center pl-[6vw] w-[300px] mr-[75px]">
@@ -114,8 +124,8 @@ export default function ProfilePage() {
               <div className="w-[90px] p-[15px] m-[5px] flex items-center justify-center rounded-[3px] ">
                 <img
                   className=""
-                  src="../../public/assets/character/mr-king.png"
-                  alt=""
+                  src={char}
+                  alt={profile?.selectedChar}
                 />
               </div>
             </div>
@@ -126,8 +136,8 @@ export default function ProfilePage() {
               <div className=" w-[90px] p-[15px] m-[5px] flex items-center justify-center rounded-[3px]">
                 <img
                   className="max-h-[55px]"
-                  src="../../public/assets/card/blue-card.png"
-                  alt="kartu"
+                  src={card}
+                  alt={profile?.selectedSkin}
                 />
               </div>
             </div>
