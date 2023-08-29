@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import CardHomePage from "../components/CardHomePage";
+import { useEffect } from "react";
 
 export default function HomePage() {
   return (

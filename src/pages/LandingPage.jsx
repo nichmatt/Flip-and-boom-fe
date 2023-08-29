@@ -28,18 +28,9 @@ export default function LandingPage() {
     >
       <div className="flex bg-[url(/assets/LandingPage/bgLandingpage.png)] bg-cover h-[100vh] relative bg-opacity-10 border-b-[3px] border-[rgba(0,0,0,0.7)] ">
         <div className="w-[50vw] h-[100vh] flex">
-          <div>
-            {/* <img
-              className="w-[450vw] pl-[50px]"
-              src="/assets/LandingPage/mainimg-landingpage-01.png"
-              alt=""
-            /> */}
-          </div>
+          <div></div>
         </div>
-        {/* <div
-          className="w-32 h-32 bg-transparent"
-          style={{ perspective: "1000px" }}
-        > */}
+
         <div
           className="relative w-full h-full duration-[1234ms]"
           style={
