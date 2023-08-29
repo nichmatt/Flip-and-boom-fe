@@ -1,8 +1,7 @@
 import { GAME_MODE_SET } from "../actionType";
 
 const initialState = {
-  // gameMode: "impossible",
-  gameMode: "easy",
+  gameMode: "HOME",
 };
 
 function gameModeReducer(state = initialState, action) {
