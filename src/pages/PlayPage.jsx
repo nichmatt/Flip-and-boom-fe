@@ -33,7 +33,7 @@ export default function PlayPage() {
 	const [hp, setHp] = useState(1);
 	const [enemyHp, setEnemyHp] = useState(1);
 	const [chosenCard, setChosenCard] = useState([]);
-	const [turn, setTurn] = useState("startGame");
+	const [turn, setTurn] = useState("user");
 	const [totalTurn, setTotalTurn] = useState(0);
 	const [showGameResult, setShowGameResult] = useState(false);
 	const [aiMemory, setAiMemory] = useState({
@@ -167,6 +167,7 @@ export default function PlayPage() {
 					enemyHp={enemyHp}
 					setHp={setHp}
 					setEnemyHp={setEnemyHp}
+          turn={turn}
 				/>
 
 				{/* card playing arena */}

@@ -68,6 +68,8 @@ export const cpuTurnAccurate = async ({
 				[secondCard?.value, secondCard?.index],
 			]);
 
+			await pause();
+
 			setTurn("user");
 
 			return;
@@ -105,6 +107,8 @@ export const cpuTurnAccurate = async ({
 		await pause();
 
 		flipClose(board, setBoard);
+
+		await pause();
 
 		setTurn("user");
 
@@ -144,6 +148,8 @@ export const cpuTurnAccurate = async ({
 
 		if (hp - damageDealtToUser <= 0) return;
 
+		setTurn("wait");
+
 		await pause();
 
 		removeCardFromBoard(board, setBoard, enemyCards);
@@ -172,9 +178,13 @@ export const cpuTurnAccurate = async ({
 
 			if (enemyHp - 75 <= 0) return;
 
+			setTurn("wait");
+
 			await pause();
 
 			flipClose(board, setBoard);
+
+			await pause();
 
 			setTurn("user");
 
@@ -202,9 +212,15 @@ export const cpuTurnAccurate = async ({
 
 			if (hp - damageDealtToUser <= 0) return;
 
+			setTurn("wait");
+
 			await pause();
 
 			removeCardFromBoard(board, setBoard, enemyCards);
+
+			await pause();
+
+			setTurn("user");
 
 			return;
 		}
@@ -215,6 +231,8 @@ export const cpuTurnAccurate = async ({
 	await pause();
 
 	flipClose(board, setBoard);
+
+	await pause();
 
 	setTurn("user");
 };

@@ -58,7 +58,7 @@ export default function GameResult({ hp, totalTurn }) {
 		<>
 			<div className="fixed h-screen w-screen z-20 bg-transparent top-0 left-0 flex justify-center items-center animate__animated animate__fadeIn">
 				<div
-					className="w-9/12 h-4/5 backdrop-blur-[2px] bg-[rgba(8,8,8,0.86)] rounded-[20px] flex flex-col items-center justify-center text-3xl font-bold text-white"
+					className="w-9/12 h-4/5 backdrop-blur-[2px] bg-[rgba(8,8,8,0.97)] rounded-[20px] flex flex-col items-center justify-center text-3xl font-bold text-white"
 					style={{
 						boxShadow:
 							"35px 35px 68px 0px rgba(145, 192, 255, 0.5), inset -3px -3px 16px 0px rgba(145, 192, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255)",
