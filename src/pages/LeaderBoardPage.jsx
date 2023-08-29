@@ -8,9 +8,11 @@ export default function LeaderBoardPage() {
   const { data, filter } = useSelector((state) => state.getLeaderboardReducer);
   const [difficulty, setDifficulty] = useState("easy");
 
+  const [page, setPage] = useState("easy");
+
   async function handleChange(difficult) {
     setDifficulty(difficult);
-    // console.log(difficulty);
+    setPage(difficult);
     await dispatch(getLeaderboard(difficult));
   }
 
@@ -21,6 +23,7 @@ export default function LeaderBoardPage() {
 
   useEffect(() => {
     console.log(data);
+    console.log(page, "ini page sekarang");
   }, [data]);
 
   return (
@@ -33,7 +36,11 @@ export default function LeaderBoardPage() {
       >
         <div style={{ display: "flex" }}>
           <div
-            className="h-[50px] w-[120px] mt-[6vw] ml-[60vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            className={
+              page === "easy"
+                ? "ml-[70%] h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(2,255,247,0.5)] duration-300"
+                : "ml-[70%] dh-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            }
             style={{
               borderRadius: "5px",
               display: "flex",
@@ -56,7 +63,11 @@ export default function LeaderBoardPage() {
             </p>
           </div>
           <div
-            className="h-[50px] w-[120px] mt-[6vw]  ml-2  bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            className={
+              page === "medium"
+                ? "h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(2,255,247,0.5)] duration-300"
+                : "dh-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            }
             style={{
               borderRadius: "5px",
               display: "flex",
@@ -79,7 +90,11 @@ export default function LeaderBoardPage() {
             </p>
           </div>
           <div
-            className="h-[50px] w-[120px] mt-[6vw] ml-2  bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300 "
+            className={
+              page === "hard"
+                ? "h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(2,255,247,0.5)] duration-300"
+                : "dh-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            }
             style={{
               borderRadius: "5px",
               display: "flex",
@@ -101,7 +116,11 @@ export default function LeaderBoardPage() {
             </p>
           </div>
           <div
-            className="h-[50px]  w-[120px] mt-[6vw] ml-2  bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            className={
+              page === "impossible"
+                ? "h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(2,255,247,0.5)] duration-300"
+                : "dh-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            }
             style={{
               borderRadius: "5px",
               display: "flex",
