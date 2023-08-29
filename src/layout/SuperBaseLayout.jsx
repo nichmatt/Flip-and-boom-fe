@@ -4,9 +4,11 @@ import { useDispatch } from "react-redux";
 import { fetchUserProfile } from "../actionCreators";
 
 export default function SuperBaseLayout() {
-  const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
-	useEffect(() => {dispatch(fetchUserProfile())}, []);
+	useEffect(() => {
+		dispatch(fetchUserProfile());
+	}, []);
 
 	return (
 		<>
