@@ -6,3 +6,5 @@ export const SELECTED_SKIN_SET = "selectedSkinGet";
 export const SELECTED_CHAR_SET = "selectedCharGet";
 export const FETCHSHOP = "getShopData";
 export const FILTERITEMSHOP = "filterShopData";
+export const GETLEADERBOARD = "getLeaderboard";
+export const FILTERLEADERBOARD = "filterLeaderboard";
