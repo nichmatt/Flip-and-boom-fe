@@ -47,6 +47,9 @@ export default function Register({ statusSetter }) {
         <div className="w-[200px]">
           <img src="/assets/logo/logo-03-shadow-01.png" alt="logo" />
         </div>
+        <div className="text-[#2a2550] font-bold italic mt-[-25px]">
+          REGISTER
+        </div>
         <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px]">
           <input
             type="text"
@@ -54,7 +57,7 @@ export default function Register({ statusSetter }) {
             name="username"
             value={form.username}
             onChange={onChangeForm}
-            className="bg-transparent focus:outline-none"
+            className="bg-transparent focus:outline-none text-[#2a2550] text-xl"
           />
         </div>
         <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
@@ -64,7 +67,7 @@ export default function Register({ statusSetter }) {
             name="email"
             value={form.email}
             onChange={onChangeForm}
-            className="bg-transparent focus:outline-none"
+            className="bg-transparent focus:outline-none  text-[#2a2550]"
           />
         </div>
         <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
@@ -74,7 +77,7 @@ export default function Register({ statusSetter }) {
             name="password"
             value={form.password}
             onChange={onChangeForm}
-            className="bg-transparent focus:outline-none"
+            className="bg-transparent focus:outline-none  text-[#2a2550]"
           />
         </div>
         <NavLink

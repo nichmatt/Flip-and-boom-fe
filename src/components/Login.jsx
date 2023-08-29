@@ -47,6 +47,7 @@ export default function Login({ statusSetter }) {
         <div className="w-[200px] py-[25px]">
           <img src="/assets/logo/logo-03-shadow-01.png" alt="logo" />
         </div>
+        <div className="text-[#2a2550] font-bold italic mt-[-25px]">LOGIN</div>
         <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
           <input
             type="text"
@@ -54,7 +55,7 @@ export default function Login({ statusSetter }) {
             name="email"
             value={form.email}
             onChange={onChangeForm}
-            className="bg-transparent focus:outline-none"
+            className="bg-transparent focus:outline-none  text-[#2a2550]"
           />
         </div>
 
@@ -65,7 +66,7 @@ export default function Login({ statusSetter }) {
             name="password"
             onChange={onChangeForm}
             placeholder="Password"
-            className="bg-transparent focus:outline-none"
+            className="bg-transparent focus:outline-none text-[#2a2550]"
           />
         </div>
         <NavLink
@@ -84,7 +85,7 @@ export default function Login({ statusSetter }) {
           <img
             onClick={login}
             className="absolute w-[60px] left-[72%] hover:opacity-0 opacity-100 hover:hidden cursor-[url('/assets/lighter.svg'),_pointer] rounded-full"
-            src="/assets/logo/logo-05-unactive.png"
+            src="/assets/logo/logo-05-unactive.png text-[#2a2550]"
             alt=""
           />
         </div>
