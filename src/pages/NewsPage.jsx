@@ -1,6 +1,19 @@
 import NewsCard from "../components/NewsCard";
+import {useDispatch, useSelector} from 'react-redux'
+import {useEffect} from 'react'
+import { fetchNews } from "../actionCreators/news";
 
 export default function NewsPage() {
+  const dispatch = useDispatch()
+
+  const { news } = useSelector(state => state.newsReducer)
+  useEffect(() => {
+    dispatch(fetchNews())
+  }, [])
+
+  useEffect(() => {
+    console.log(news);
+  }, [news])
   return (
     <section
       className="min-h-[100vh] w-[100vw] "
@@ -31,8 +44,8 @@ export default function NewsPage() {
           </p>
         </div>
       </div>
-
-      <NewsCard message="selamat anda berhasil mendapatkan 10.000" />
+            {news?.map(n => (<NewsCard title={n?.title} newsId={n?.id} key={n?.id} />))}
+      {/*  */}
     </section>
   );
 }

@@ -1,4 +1,12 @@
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+
 export default function NavigationBar() {
+  const { profile } = useSelector((state) => state.userReducer);
+
+  useEffect(() => {
+    console.log(profile);
+  }, [profile]);
   return (
     <>
       <section
@@ -28,10 +36,10 @@ export default function NavigationBar() {
             style={{ textShadow: "1px 1px 10px" }}
             className="pr-[30px] pl-[10px] text-[#ffb800] italic"
           >
-            1.000
+            {profile?.balance}
           </p>
           <p className="px-[30px] text-[#fff] italic">LV : 10</p>
-          <p className="px-[30px] text-[#fff] italic">Jhon Doe</p>
+          <p className="px-[30px] text-[#fff] italic">{profile?.username}</p>
         </div>
       </section>
     </>
