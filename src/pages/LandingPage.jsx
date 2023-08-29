@@ -3,9 +3,13 @@ import Login from "../components/Login";
 import NewsCard from "../components/NewsCard";
 import Register from "../components/Register";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchNews } from "../actionCreators/news";
 
 export default function LandingPage() {
   const [status, setStatus] = useState("login");
+  const { news } = useSelector((state) => state.newsReducer);
+  const dispatch = useDispatch();
 
   function statusSetter() {
     if (status === "login") {
@@ -16,8 +20,12 @@ export default function LandingPage() {
   }
 
   useEffect(() => {
-    console.log(status);
-  }, [status]);
+    dispatch(fetchNews());
+  }, []);
+
+  useEffect(() => {
+    console.log(news);
+  }, [news]);
   return (
     <section
       id="LandingPage-section"
@@ -68,12 +76,12 @@ export default function LandingPage() {
       {/* </div> */}
 
       {/* OVERVIEW PART */}
-      <div className="px-[20vw] pt-[15vh] mt-[15vh] mb-[15vh] bg-[rgba(0,0,0,0.3)]">
+      <div className="px-[20vw] pt-[15vh] mt-[15vh] mb-[15vh] bg-[rgba(0,0,0,0.3)] z-20">
         <div className="flex flex-col justify-center items-center text-white">
           <div className="text-[1.7rem] border-b border-t py-[5px] px-[50px] mb-[50px]">
             OVERVIEW
           </div>
-          <div className="pb-[15vh] ">
+          <div className="pb-[15vh] z-20">
             "Welcome to the exciting world of matching card games! In these
             engaging and brain-teasing games, your task is to uncover pairs of
             cards with identical images or symbols. Test your memory and
@@ -88,10 +96,13 @@ export default function LandingPage() {
       </div>
 
       {/* NEWS PART */}
-      <div id="news" className="pb-[20vh]">
-        <div style={{ display: "flex" }}>
+      <div className="absolute top-[1380px] left-0 z-[1] opacity-90">
+        <img src="/assets/LandingPage/bomb-landingpage.png" alt="" />
+      </div>
+      <div id="news" className="pb-[20vh] ">
+        <div style={{ display: "flex" }} className="z-20">
           <div
-            className="h-[50px] w-[120px] mt-[6vw] ml-[30Vw] bg-[rgba(0,0,0,0.50)]"
+            className="h-[50px] w-[120px] mt-[6vw] ml-[30Vw] bg-[rgba(0,0,0,0.9)]  "
             style={{
               borderRadius: "0px 0px 0px 150px",
               display: "flex",
@@ -112,13 +123,19 @@ export default function LandingPage() {
             </p>
           </div>
         </div>
-        <NewsCard message="selamat anda berhasil mendapatkan 10.000" />
-        <NewsCard message="selamat anda berhasil mendapatkan 10.000" />
-        <NewsCard message="selamat anda berhasil mendapatkan 10.000" />
-        <NewsCard message="selamat anda berhasil mendapatkan 10.000" />
+        {news?.map((el, index) => {
+          if (index < 8) {
+            return <NewsCard title={el.text} />;
+          } else {
+            return null;
+          }
+        })}
       </div>
 
       {/* FOOTER PART */}
+      <div className="absolute top-[1180px] left-0 z-[-1] opacity-100">
+        <img src="/assets/LandingPage/footerhero-01.png" alt="" />
+      </div>
       <div className="flex px-[10vw] py-[5vh] bg-[rgba(0,0,0,0.70)]">
         <div className="w-[200px]">
           <img src="/assets/logo/logo-06.png" alt="" />

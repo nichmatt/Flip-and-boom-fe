@@ -1,4 +1,28 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getLeaderboard } from "../actionCreators/fetchLeaderboard";
+import { actionFilterLeaderboardData } from "../actionCreators/fetchLeaderboard";
+
 export default function LeaderBoardPage() {
+  const dispatch = useDispatch();
+  const { data, filter } = useSelector((state) => state.getLeaderboardReducer);
+  const [difficulty, setDifficulty] = useState("easy");
+
+  async function handleChange(difficult) {
+    setDifficulty(difficult);
+    // console.log(difficulty);
+    await dispatch(getLeaderboard(difficult));
+  }
+
+  useEffect(() => {
+    dispatch(getLeaderboard(difficulty));
+    // console.log(data);
+  }, []);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   return (
     <>
       <section
@@ -17,6 +41,7 @@ export default function LeaderBoardPage() {
               justifyContent: "center",
               cursor: "pointer",
             }}
+            onClick={() => handleChange("easy")}
           >
             <p
               style={{
@@ -39,6 +64,7 @@ export default function LeaderBoardPage() {
               justifyContent: "center",
               cursor: "pointer",
             }}
+            onClick={() => handleChange("medium")}
           >
             <p
               style={{
@@ -61,6 +87,7 @@ export default function LeaderBoardPage() {
               justifyContent: "center",
               cursor: "pointer",
             }}
+            onClick={() => handleChange("hard")}
           >
             <p
               style={{
@@ -82,6 +109,7 @@ export default function LeaderBoardPage() {
               justifyContent: "center",
               cursor: "pointer",
             }}
+            onClick={() => handleChange("impossible")}
           >
             <p
               style={{
@@ -114,21 +142,26 @@ export default function LeaderBoardPage() {
                 <th className="pb-3">POINT</th>
               </tr>
             </thead>
+            {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
             <tbody>
-              <tr className="hover:bg-[rgba(2,255,247,0.5)]  duration-300 ">
-                <td className="py-5 border-b border-[#20203E] text-slate-50 ">
-                  1.
-                </td>
-                <td className="py-5 border-b border-[#20203E] text-slate-50 ">
-                  Jhon Doe
-                </td>
-                <td className="py-5 border-b border-[#20203E] text-slate-50 ">
-                  IMPOSSIBLE
-                </td>
-                <td className="py-5 border-b border-[#20203E] text-slate-50 ">
-                  1900
-                </td>
-              </tr>
+              {data.map((el, index) => {
+                return (
+                  <tr className="hover:bg-[rgba(2,255,247,0.5)] text-center duration-300 ">
+                    <td className="py-5 border-b border-[#20203E] text-slate-50 ">
+                      {index + 1}
+                    </td>
+                    <td className="py-5 border-b border-[#20203E] text-slate-50 ">
+                      {el.username}
+                    </td>
+                    <td className="py-5 border-b border-[#20203E] text-slate-50 ">
+                      {difficulty.toUpperCase()}
+                    </td>
+                    <td className="py-5 border-b border-[#20203E] text-slate-50 ">
+                      {el[`${difficulty}Score`]}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
           <div></div>
