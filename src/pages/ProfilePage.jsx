@@ -21,7 +21,7 @@ export default function ProfilePage() {
     dispatch(fetchUserProfile());
   }, []);
 
-   return (
+  return (
     <section
       className="min-h-[100vh] w-[100vw] "
       style={{
@@ -30,7 +30,7 @@ export default function ProfilePage() {
     >
       <div style={{ display: "flex" }}>
         <div
-          className="h-[50px] w-[120px] mt-[6vw] ml-[75vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+          className="h-[50px] w-[120px] mt-[6vw] ml-[75vw] bg-[rgba(2,255,247,0.5)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
           style={{
             borderRadius: "5px",
             display: "flex",
@@ -84,11 +84,21 @@ export default function ProfilePage() {
         }}
       >
         <div className="flex">
-          <div className="bg-[rgba(44,44,44,0.5)] my-[25%] ml-[20%] p-[10%] w-[300px] flex items-center justify-center rounded-md border-white border-2">
+          <div className="bg-[rgba(44,44,44,0.5)] my-[10%] ml-[10%] p-[10%] w-[300px] h-[300px] flex items-center justify-center rounded-md border-white border-2">
             <img className="" src={char} alt={profile?.selectedChar} />
           </div>
+          <div className="bg-[rgba(44,44,44,0.5)] my-[10%] ml-[10px] p-[10%] w-[300px] h-[300px] flex items-center justify-center rounded-md border-white border-2">
+            <img className="" src={card} alt={profile?.selectedChar} />
+          </div>
         </div>
-        <div className="text-[rgba(255,255,255,0.9)] text-[1.2rem] font-semibold flex flex-col justify-center pl-[6vw] w-[300px] mr-[75px]">
+        <div
+          className="text-[rgba(255,255,255,0.9)] p-[25px] text-[1.2rem] font-semibold flex flex-col justify-center pl-[3vw] w-full  "
+          style={{
+            background: "rgb(255,255,255)",
+            background:
+              "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.560749299719888) 100%)",
+          }}
+        >
           <div className="text-[2.5rem] italic font-semibold">mr.King</div>
           <div>Level:</div>
           <div className="text-[1rem] pt-[2vh] italic font-bold">BESTSCORE</div>
@@ -119,30 +129,6 @@ export default function ProfilePage() {
           >
             <div>IMPOSSIBLE:</div>
             <div>{profile?.impossibleScore}</div>
-          </div>
-        </div>
-        <div>
-          <div className="flex bg-[rgba(7,7,7,0.2)] p-[15px] mt-[55px]">
-            <div>
-              <div className="text-white text-[10px] text-center italic font-semibold">
-                SELECTED SKIN
-              </div>
-              <div className="w-[90px] p-[15px] m-[5px] flex items-center justify-center rounded-[3px] ">
-                <img className="" src={char} alt={profile?.selectedChar} />
-              </div>
-            </div>
-            <div>
-              <div className="text-white text-[10px] text-center italic font-semibold">
-                SELECTED CARD
-              </div>
-              <div className=" w-[90px] p-[15px] m-[5px] flex items-center justify-center rounded-[3px]">
-                <img
-                  className="max-h-[55px]"
-                  src={card}
-                  alt={profile?.selectedSkin}
-                />
-              </div>
-            </div>
           </div>
         </div>
       </div>
