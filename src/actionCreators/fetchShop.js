@@ -27,6 +27,7 @@ export function fetchShopData() {
       dispatch(actionSetShopData(result));
     } catch (error) {
       console.log(error);
+      dispatch(setErrorMessage(error.response.data.message))
     }
   };
 }

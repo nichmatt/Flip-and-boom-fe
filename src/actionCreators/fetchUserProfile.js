@@ -37,6 +37,7 @@ export function fetchUserProfile() {
             dispatch(setProfile(data))
             dispatch(setUserInventories(data.Inventories))
         } catch (error) {
+            dispatch(setErrorMessage(error.response.data.message))
             // error handle
         } finally {
             await pause()
@@ -56,6 +57,7 @@ export function setUserSelectedItem(payload) {
             })
             dispatch(fetchUserProfile())
         } catch (error) {
+            dispatch(setErrorMessage(error.response.data.message))
             // error handle
         } finally {
             pause()

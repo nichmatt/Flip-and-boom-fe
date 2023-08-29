@@ -1,5 +1,6 @@
 import { GETLEADERBOARD, FILTERLEADERBOARD } from "../actionType";
 import axios from "axios";
+import { setErrorMessage } from "./messageModal";
 
 export function actionSetLeaderboardData(payload) {
   return {
@@ -31,6 +32,7 @@ export function getLeaderboard(difficulty = "easy") {
       dispatch(actionSetLeaderboardData(result));
     } catch (error) {
       console.log(error);
+      dispatch(setErrorMessage(error.response.data.message))
     }
   };
 }
