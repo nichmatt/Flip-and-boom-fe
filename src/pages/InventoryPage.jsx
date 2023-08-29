@@ -73,7 +73,7 @@ export default function ShopPage() {
             </NavLink>
           </div>
           <div
-            className="h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            className="h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(2,255,247,0.5)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
             style={{
               borderRadius: "5px",
               display: "flex",
@@ -86,16 +86,16 @@ export default function ShopPage() {
               to="/profile/inventory"
               style={{
                 fontSize: "14px",
+                color: "#fff",
                 fontWeight: "600",
                 fontStyle: "italic",
-                color: "#fff",
               }}
             >
               INVENTORY
             </NavLink>
           </div>
           <div
-            className="h-[50px] w-[120px] mt-[6vw] ml-[20vw] bg-lime-400 hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            className="h-[50px] w-[120px] mt-[6vw] ml-[1vw] hover:bg-[rgba(2,255,247,0.5)] bg-[#ffb800] duration-300"
             style={{
               borderRadius: "5px",
               display: "flex",
@@ -105,7 +105,17 @@ export default function ShopPage() {
             }}
             onClick={handleSave}
           >
-            <p className="text-lg font-basefont">Save change</p>
+            <p
+              className="text-lg font-basefont"
+              style={{
+                fontSize: "14px",
+                color: "#fff",
+                fontWeight: "600",
+                fontStyle: "italic",
+              }}
+            >
+              SAVE
+            </p>
           </div>
         </div>
         <div
