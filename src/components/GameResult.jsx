@@ -1,5 +1,7 @@
+  import { setMusicSetting } from "../actionCreators";
+import { scoreCalculation } from "../helpers";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { pause } from "../helpers";
 
@@ -95,6 +97,9 @@ export default function GameResult({ hp, totalTurn }) {
 					</div>
 				</div>
 			</div>
+    <audio autoPlay src="/assets/audio/hore.mp3">
+		<source src="/assets/audio/hore.mp3" />
+	  </audio>
 		</>
 	);
 }

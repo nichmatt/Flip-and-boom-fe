@@ -74,6 +74,7 @@ export default function ShopPage() {
   }, []);
 
   function handleCharacter() {
+
     const character = datas?.filter((type) => {
       setPage("character");
       return type.type === "char" && type.name !== "default";

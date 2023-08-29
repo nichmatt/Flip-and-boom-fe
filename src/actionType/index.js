@@ -9,3 +9,6 @@ export const FETCHUSERPROFILE = "user/getUserProfile"
 export const FETCHNEWS = "news/getNewsData"
 export const LOADINGSTATE = "loading/setLoadingState"
 export const SETINVENTORIES = "inventory/setUserInventori"
+export const SETMUSICSETTING = "music/setMusicSetting"
+export const SETSFXAUDIOSETTING = "sfx/setSfxMusicSetting"
+

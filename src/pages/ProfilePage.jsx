@@ -111,7 +111,7 @@ export default function ProfilePage() {
           }}
         >
           <div className="text-[2.5rem] italic font-semibold">mr.King</div>
-          <div>Level:</div>
+          <div>Level: 10</div>
           <div className="text-[1rem] pt-[2vh] italic font-bold">BESTSCORE</div>
           <div
             className="text-[rgb(149,149,149)]  text-[0.8rem] flex justify-between py-[3px]"

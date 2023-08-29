@@ -6,6 +6,7 @@ import paymentReducer from "./paymentReducer";
 import getLeaderboardReducer from "./getLeaderboardReducer";
 import userReducer from "./userReducer";
 import newsReducer from "./newReducer";
+import settingReducer from "./settingReducer";
 
 const rootReducer = combineReducers({
 
@@ -15,7 +16,7 @@ const rootReducer = combineReducers({
   getLeaderboardReducer,
   userReducer,
   newsReducer,
-  
+  settingReducer,
 });
 
 export default rootReducer;

@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useState, useRef, useEffect } from "react";
 
 import defaultSkin from "/assets/card/black-card/back-card.png";
 import ceruleanSkin from "/assets/card/blue-card/back-card.png";
@@ -57,8 +58,27 @@ import citrus250 from "/assets/card/orange-card/250.png";
 import citrusBomb from "/assets/card/orange-card/-75.png";
 
 export default function CardInPlay({ handleClick, card, index, shown, flip }) {
-	const { profile } = useSelector((state) => state.userReducer);
 
+	const { profile } = useSelector((state) => state.userReducer);
+  const { selectedSkin } = useSelector((state) => state.selectedReducer);
+  const [canPlay, setCanplay] = useState(false);
+  const [urlAudio, setUrlAudio] = useState("");
+  const list = [
+    "card-flip-1.mp3",
+    "card-flip-2.mp3",
+    "card-flip-3.mp3",
+    "card-flip-4.mp3",
+  ];
+  const randomAudio = () => {
+    let index = Math.floor(Math.random() * 4);
+    setUrlAudio(list[index]);
+  };
+
+  useEffect(() => {
+    // console.log(card);
+    flip ? (card === "bomb" ? setUrlAudio("boom.mp3") : randomAudio()) : "";
+    flip ? setCanplay(true) : setCanplay(false);
+  }, [flip]);
 	if (shown) {
 		return (
 			<div
@@ -220,9 +240,14 @@ export default function CardInPlay({ handleClick, card, index, shown, flip }) {
 						)}
 					</div>
 				</div>
+        {canPlay ? (
+          <audio autoPlay src={`/assets/audio/${urlAudio}`}></audio>
+        ) : (
+          <audio muted src=""></audio>
+        )}
 			</div>
 		);
 	}
 
-	return <div className="w-20 h-32"></div>;
+  return <div className="w-20 h-32"></div>;
 }

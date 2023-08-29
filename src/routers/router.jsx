@@ -62,7 +62,6 @@ const router = createBrowserRouter([
         ],
       },
       { path: "/play", element: <PlayPage /> },
-      { path: "/loading", element: <LoadingScreen /> },
     ],
   },
   {
