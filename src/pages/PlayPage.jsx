@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import GameResult from "../components/GameResult";
 import PlayPageHeader from "../components/PlayPageHeader";
 import PlayPageArena from "../components/PlayPageArena";
+import PlayPageFooter from "../components/PlayPageFooter";
 
 // code snippets to shorten the code in PlayPage
 import {
@@ -151,7 +152,7 @@ export default function PlayPage() {
 	return (
 		<>
 			<div
-				className="min-h-screen h-full w-full flex flex-col"
+				className="min-h-screen h-full w-full flex flex-col cursor-default"
 				style={{
 					background:
 						"linear-gradient(180deg, #251D3A 0%, #323569 99.99%, rgba(37, 29, 58, 0.00) 100%)",
@@ -172,7 +173,7 @@ export default function PlayPage() {
 				<PlayPageArena board={board} handleClick={handleClick} />
 
 				{/* footer arena */}
-				<div className="flex flex-col"></div>
+				<PlayPageFooter turn={turn} hp={hp} setHp={setHp} />
 			</div>
 		</>
 	);

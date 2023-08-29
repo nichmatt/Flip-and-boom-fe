@@ -54,7 +54,7 @@ export default function PlayPageHeader({ hp, enemyHp, setHp, setEnemyHp }) {
 					<div>
 						HP : <NumberTween number={hp} />
 					</div>
-					<div>Lumayan</div>
+					<div>{profile?.username?.toUpperCase()}</div>
 				</div>
 				<div className="h-6 w-[25rem] bg-black rounded-2xl border">
 					<div
@@ -71,7 +71,7 @@ export default function PlayPageHeader({ hp, enemyHp, setHp, setEnemyHp }) {
 			<div className="flex items-end pb-[1.375rem] text-7xl">VS</div>
 			<div className="flex flex-col justify-end pb-7">
 				<div className="text-2xl flex justify-between px-4 mb-1">
-					<div>Computer</div>
+					<div>{gameMode}</div>
 					<div>
 						HP : <NumberTween number={enemyHp} />
 					</div>
