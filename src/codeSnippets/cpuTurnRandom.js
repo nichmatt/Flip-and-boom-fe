@@ -17,7 +17,7 @@ export const cpuTurnRandom = async ({
 	aiMemory,
 	setAiMemory,
 }) => {
-  console.log('aibodoh');
+	console.log("aibodoh");
 
 	console.log(board);
 
@@ -31,8 +31,6 @@ export const cpuTurnRandom = async ({
 		randomNumber(boardShownTrueOnly),
 		1
 	);
-
-	// console.log("KARTU PERTAMA CPU");
 
 	const newBoard = flipOpen(board, setBoard, firstRandomCard[0].index);
 
@@ -58,9 +56,13 @@ export const cpuTurnRandom = async ({
 
 		if (enemyHp - 75 <= 0) return;
 
+		setTurn("wait");
+
 		await pause();
 
 		flipClose(board, setBoard);
+
+		await pause();
 
 		setTurn("user");
 
@@ -75,8 +77,6 @@ export const cpuTurnRandom = async ({
 		randomNumber(boardShownTrueOnly),
 		1
 	);
-
-	// console.log("KARTU KEDUA CPU");
 
 	flipOpen(newBoard, setBoard, secondRandomCard[0].index);
 
@@ -102,9 +102,13 @@ export const cpuTurnRandom = async ({
 
 		if (enemyHp - 75 <= 0) return;
 
+		setTurn("wait");
+
 		await pause();
 
 		flipClose(board, setBoard);
+
+		await pause();
 
 		setTurn("user");
 
@@ -132,16 +136,20 @@ export const cpuTurnRandom = async ({
 
 		if (hp - damageDealtToUser <= 0) return;
 
+		setTurn("wait");
+
 		await pause();
 
 		removeCardFromBoard(board, setBoard, enemyCards);
 	} else {
+		setTurn("wait");
+
 		await pause();
 
 		flipClose(board, setBoard);
-
-		await pause();
 	}
+
+	await pause();
 
 	setTurn("user");
 };

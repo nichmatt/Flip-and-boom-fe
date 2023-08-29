@@ -56,6 +56,8 @@ export const handleUserCardClick = async (
 
 		flipClose(board, setBoard);
 
+    await pause();
+
 		setTurn("cpu");
 
 		return;

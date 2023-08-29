@@ -13,7 +13,13 @@ import vampiricBlaster from "/assets/character/vampiric-blaster.png";
 
 import NumberTween from "./NumberTween";
 
-export default function PlayPageHeader({ hp, enemyHp, setHp, setEnemyHp }) {
+export default function PlayPageHeader({
+	hp,
+	enemyHp,
+	setHp,
+	setEnemyHp,
+	turn,
+}) {
 	const { profile } = useSelector((state) => state.userReducer);
 	const { gameMode } = useSelector((state) => state.gameModeReducer);
 
@@ -21,11 +27,54 @@ export default function PlayPageHeader({ hp, enemyHp, setHp, setEnemyHp }) {
 	const abc = hp + 100;
 
 	useEffect(() => {
-		setHp(1000), setEnemyHp(100);
+		setHp(1000), setEnemyHp(1000);
 	}, []);
 
 	return (
-		<div className="flex h-32 mx-44 justify-between text-white italic font-bold">
+		<div className="flex h-32 mx-44 justify-between text-white italic font-bold relative">
+			{turn == "user" ? (
+				<div className="absolute -left-28 top-[25%] flex flex-col items-center text-xl animate__animated animate__bounceIn gap-y-[0.35rem]">
+					<div>
+						<i
+							className="fa-solid fa-circle-right text-2xl animate-spinX"
+							style={{ color: "#D98F00" }}
+						></i>
+					</div>
+					<div>Your Turn</div>
+				</div>
+			) : (
+				<div className="absolute -left-28 top-[25%] flex flex-col items-center text-xl animate__animated animate__bounceOut gap-y-[0.35rem]">
+					<div>
+						<i
+							className="fa-solid fa-circle-right text-2xl animate-spinX"
+							style={{ color: "#D98F00" }}
+						></i>
+					</div>
+					<div>Your Turn</div>
+				</div>
+			)}
+
+			{turn == "cpu" ? (
+				<div className="absolute -right-28 top-[25%] flex flex-col items-center text-xl animate__animated animate__bounceIn gap-y-[0.35rem]">
+					<div>
+						<i
+							className="fa-solid fa-circle-left text-2xl animate-spinX"
+							style={{ color: "#D98F00" }}
+						></i>
+					</div>
+					<div>CPU Turn</div>
+				</div>
+			) : (
+				<div className="absolute -right-28 top-[25%] flex flex-col items-center text-xl animate__animated animate__bounceOut gap-y-[0.35rem]">
+					<div>
+						<i
+							className="fa-solid fa-circle-left text-2xl animate-spinX"
+							style={{ color: "#D98F00" }}
+						></i>
+					</div>
+					<div>CPU Turn</div>
+				</div>
+			)}
 			<div className="w-32 h-32 rotate-[10deg]">
 				<img
 					src={
