@@ -12,51 +12,48 @@ export default function ShopPage() {
 
   const [page, setPage] = useState("all");
 
+  const handleOnSucces = (result) => {
+    const { gross_amount, order_id, status_code } = result;
+
+    let topupBalance = "";
+    switch (gross_amount) {
+      case "16000.00":
+        topupBalance = 16;
+        break;
+      case "31000.00":
+        topupBalance = 32;
+        break;
+      case "61000.00":
+        topupBalance = 64;
+        break;
+    }
+    let newAmount = gross_amount.split(".")[0];
+    const payloadDispatch = {
+      amount: newAmount,
+      topupBalance: topupBalance,
+      status: status_code == 200 ? "success" : "cancel",
+      orderId: order_id,
+    };
+    dispatch(fetchSuccesPayment(payloadDispatch));
+  };
   const { datas, filter } = useSelector((state) => state.fetchShopReducer);
   const handlePay = (tokenMidtrans) => {
     window.snap.pay(tokenMidtrans, {
       onSuccess: function (result) {
-        console.log("success");
-        console.log(result);
-        const {
-          gross_amount,
-          order_id,
-          status_code,
-          // transaction_id,
-          // transaction_time,
-        } = result;
-
-        // validasi berdasarkan groos amount untuk ingame balance
-        let topupBalance = "";
-        switch (gross_amount) {
-          case "16.000.00":
-            topupBalance = 16;
-            break;
-          case "31.000.00":
-            topupBalance = 32;
-            break;
-          case "61.000.00":
-            topupBalance = 64;
-            break;
-        }
-        let newAmount = gross_amount.slice(0, gross_amount.indexOf(".00"));
-        const payloadDispatch = {
-          amount: newAmount,
-          topupBalance: topupBalance,
-          status: status_code === 200 ? "success" : "cancel",
-          orderId: order_id,
-        };
-        dispatch(fetchSuccesPayment(payloadDispatch));
+        handleOnSucces(result);
       },
       onPending: function (result) {
+        // pending handle
         console.log("pending");
         console.log(result);
       },
       onError: function (result) {
+        // error handle
         console.log("error");
         console.log(result);
       },
       onClose: function () {
+        // close handle
         console.log("customer closed the popup without finishing the payment");
       },
     });
@@ -74,9 +71,8 @@ export default function ShopPage() {
   }, []);
 
   function handleCharacter() {
-
+    setPage("character");
     const character = datas?.filter((type) => {
-      setPage("character");
       return type.type === "char" && type.name !== "default";
     });
     dispatch(actionFilterShopData(character));
@@ -94,10 +90,6 @@ export default function ShopPage() {
     setPage("all");
     dispatch(actionFilterShopData([]));
   }
-
-  useEffect(() => {
-    console.log(page, "ini page sekarang");
-  });
 
   return (
     <>
@@ -194,39 +186,46 @@ export default function ShopPage() {
             itemName="16 Points"
             itemCategory="VOUCHER"
             itemPrice="IDR 16.000"
+            type={'balance'}
           />
           <CardShop
             imgUrl="/assets/voucher/32.png"
             itemName="32 Points"
             itemCategory="VOUCHER"
             itemPrice="IDR 31.000"
+            type={'balance'}
           />
           <CardShop
             imgUrl="/assets/voucher/64.png"
             itemName="64 Points"
             itemCategory="VOUCHER"
             itemPrice="IDR 61.000"
+            type={'balance'}
           />
           {filter.length
-            ? filter.map((item) => {
+            ? filter?.map((item) => {
                 return (
                   <CardShop
                     key={item.id}
                     imgUrl={`/assets/shops/${item.name}.png`}
+                    itemId={item?.id}
                     itemName={item.name}
                     itemCategory={item.type}
                     itemPrice={`${item.price}`}
+                    type={'item'}
                   />
                 );
               })
-            : datas.map((item) =>
+            : datas?.map((item) =>
                 item.name !== "default" ? (
                   <CardShop
                     key={item.id}
                     imgUrl={`/assets/shops/${item.name}.png`}
+                    itemId={item?.id}
                     itemName={item.name}
                     itemCategory={item.type}
                     itemPrice={`${item.price}`}
+                    type={'item'}
                   />
                 ) : (
                   ""

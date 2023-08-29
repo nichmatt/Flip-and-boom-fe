@@ -1,18 +1,37 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGetTokenMidtrans } from "../actionCreators/payment";
-export default function CardShop({ imgUrl, itemName, itemCategory, itemPrice, }) {
+import { fetchBuyItem, fetchGetTokenMidtrans } from "../actionCreators/payment";
+export default function CardShop({
+  imgUrl,
+  itemName,
+  itemCategory,
+  itemPrice,
+  itemId,
+  type,
+}) {
   const dispatch = useDispatch();
 
-  const handleClickCard = (e) => {
-    dispatch(fetchGetTokenMidtrans(16000));
+  const { inventories } = useSelector((state) => state.userReducer);
+
+  const checkOwnedItem = () => {
+    return inventories ? inventories.some((el) => el.Item.id == itemId) : null;
   };
 
-  const { token } = useSelector(state => state.paymentReducer)
+  const handleClickCard = (e) => {
+    if (type === "balance") {
+      dispatch(fetchGetTokenMidtrans(itemPrice.split(" ")[1].replace(".", "")));
+    } else if (type === "item" && checkOwnedItem() === false) {
+      const payload = {
+        ItemId: itemId,
+        price: null,
+      };
+      dispatch(fetchBuyItem(payload));
+    }
+  };
 
   return (
     <section
-      className="w-[250px] h-[325px] bg-[rgba(0,0,0,0.3)] rounded-[5px] m-[10px] hover:bg-[rgba(231,231,231,0.3)] duration-300 hover:scale-[1.05]"
+      className={`w-[250px] h-[325px] bg-[rgba(0,0,0,0.3)] rounded-[5px] m-[10px] hover:bg-[rgba(231,231,231,0.3)] duration-300 hover:scale-[1.05] relative ${checkOwnedItem() ? 'cursor-not-allowed' : 'cursor-pointer'}`}
       onClick={handleClickCard}
     >
       <img
@@ -42,6 +61,15 @@ export default function CardShop({ imgUrl, itemName, itemCategory, itemPrice, })
           {itemPrice}
         </p>
       </div>
+      {type === "item" && checkOwnedItem() ? (
+        <div className="absolute w-full h-full top-0 flex justify-center items-center">
+          <span className="text-white text-6xl font-extrabold text-center  rotate-45 opacity-50">
+            Owned
+          </span>
+        </div>
+      ) : (
+        ""
+      )}
     </section>
   );
 }
