@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile } from "../actionCreators";
 
-
 export default function ProfilePage() {
   const { profile } = useSelector((state) => state.userReducer);
   const [char, setChar] = useState("");
   const [card, setCard] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (profile) {

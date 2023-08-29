@@ -38,8 +38,8 @@ export default function LeaderBoardPage() {
           <div
             className={
               page === "easy"
-                ? "ml-[70%] h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(2,255,247,0.5)] duration-300"
-                : "ml-[70%] dh-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+                ? "ml-[58%] h-[50px] w-[120px] mt-[6vw]  bg-[rgba(2,255,247,0.5)] duration-300"
+                : "ml-[58%] dh-[50px] w-[120px] mt-[6vw]  bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
             }
             style={{
               borderRadius: "5px",
