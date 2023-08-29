@@ -20,10 +20,10 @@ export default function CardInventory({
         {itemName}
       </p>
       <div id="price" className="flex justify-center ">
-        <div className="text-center text-white italic font-semibold text-xs ml-[20px] mr-[5px]  bg-[rgba(0,0,0,0.3)] px-[15px] flex items-center">
+        <div className="text-center py-[7px]  text-white italic font-semibold text-xs ml-[10px] mr-[5px]  bg-[rgba(0,0,0,0.3)] px-[15px] flex items-center">
           {itemCategory}
         </div>
-        {selectedSkin === itemName &&  itemCategory === 'skin'? (
+        {selectedSkin === itemName && itemCategory === "skin" ? (
           <p
             style={{ textShadow: "1px 1px 10px" }}
             className="pr-[30px] pl-[10px] py-[3px] text-[#9eff27] italic font-semibold"
@@ -33,12 +33,16 @@ export default function CardInventory({
         ) : (
           ""
         )}
-        {selectedChar === itemName && itemCategory === 'char' ? (<p
+        {selectedChar === itemName && itemCategory === "char" ? (
+          <p
             style={{ textShadow: "1px 1px 10px" }}
             className="pr-[30px] pl-[10px] py-[3px] text-[#9eff27] italic font-semibold"
           >
             char used
-          </p>) : ''}
+          </p>
+        ) : (
+          ""
+        )}
       </div>
     </section>
   );

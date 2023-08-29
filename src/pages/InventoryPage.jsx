@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardInventory from "../components/CardInventory.jsx";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { setUserSelectedItem } from "../actionCreators";
 export default function ShopPage() {
+  const navigate = useNavigate();
   const { inventories, profile } = useSelector((state) => state.userReducer);
   const [selectedChar, serSelectedChar] = useState("");
   const [selectedSkin, setSelectedSkin] = useState("");
@@ -36,6 +37,7 @@ export default function ShopPage() {
       skin: selectedSkin,
     };
     dispatch(setUserSelectedItem(payload));
+    navigate("/profile");
     // console.log(payload);
   };
   // for defelop
