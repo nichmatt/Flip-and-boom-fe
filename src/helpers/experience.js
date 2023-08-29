@@ -1,3 +1,3 @@
 export const experience = (exp) => {
-	return Math.ceil(exp / 5000);
+	return Math.floor(exp / 5000) + 1;
 };
