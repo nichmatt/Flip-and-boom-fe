@@ -120,13 +120,13 @@ export default function PlayPage() {
 					break;
 
 				case "MEDIUM":
-					Math.ceil(Math.random() * 100) > 75
+					Math.ceil(Math.random() * 100) < 25
 						? cpuTurnAccurate(cpuTurnParameters)
 						: cpuTurnRandom(cpuTurnParameters);
 					break;
 
 				case "HARD":
-					Math.ceil(Math.random() * 100) < 50
+					Math.ceil(Math.random() * 100) < 60
 						? cpuTurnAccurate(cpuTurnParameters)
 						: cpuTurnRandom(cpuTurnParameters);
 					break;
