@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile } from "../actionCreators";
+import { experience } from "../helpers";
 
 export default function ProfilePage() {
   const { profile } = useSelector((state) => state.userReducer);
@@ -110,8 +111,10 @@ export default function ProfilePage() {
               "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.560749299719888) 100%)",
           }}
         >
-          <div className="text-[2.5rem] italic font-semibold">mr.King</div>
-          <div>Level: 10</div>
+          <div className="text-[2.5rem] italic font-semibold">
+            {profile?.username}
+          </div>
+          <div>Level: {experience(profile?.exprience)}</div>
           <div className="text-[1rem] pt-[2vh] italic font-bold">BESTSCORE</div>
           <div
             className="text-[rgb(149,149,149)]  text-[0.8rem] flex justify-between py-[3px]"
