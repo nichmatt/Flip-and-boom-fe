@@ -1,13 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CardShop from "../components/CardShop";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSuccesPayment } from "../actionCreators/payment";
 import { fetchShopData } from "../actionCreators";
 import { actionFilterShopData } from "../actionCreators/fetchShop";
+import { NavLink } from "react-router-dom";
 
 export default function ShopPage() {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.paymentReducer);
+
+  const [page, setPage] = useState("all");
 
   const { datas, filter } = useSelector((state) => state.fetchShopReducer);
   const handlePay = (tokenMidtrans) => {
@@ -73,6 +76,7 @@ export default function ShopPage() {
   function handleCharacter() {
     const character = datas?.filter((type) => {
       // console.log("lu masuk ga sih");
+      setPage("character");
       return type.type === "char";
     });
     dispatch(actionFilterShopData(character));
@@ -80,14 +84,20 @@ export default function ShopPage() {
 
   function handleSkin() {
     const skin = datas.filter((type) => {
+      setPage("card");
       return type.type === "skin";
     });
     dispatch(actionFilterShopData(skin));
   }
 
   function showAll() {
+    setPage("all");
     dispatch(actionFilterShopData([]));
   }
+
+  useEffect(() => {
+    console.log(page, "ini page sekarang");
+  });
 
   return (
     <>
@@ -95,9 +105,13 @@ export default function ShopPage() {
         id="Shop-Section"
         className="mt-[25px] break-before-page flex flex-col"
       >
-        <div className="ml-[30vw] flex">
-          <div
-            className="h-[50px] w-[120px] mt-[6vw] ml-[20vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+        <div className="ml-[30vw] flex pl-[25vw]">
+          <NavLink
+            className={
+              page === "character"
+                ? "h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(2,255,247,0.5)] duration-300"
+                : "h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            }
             style={{
               borderRadius: "5px",
               display: "flex",
@@ -117,9 +131,13 @@ export default function ShopPage() {
             >
               CHARACTERS
             </p>
-          </div>
+          </NavLink>
           <div
-            className="h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            className={
+              page === "card"
+                ? "h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(2,255,247,0.5)] duration-300"
+                : "h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            }
             style={{
               borderRadius: "5px",
               display: "flex",
@@ -141,7 +159,11 @@ export default function ShopPage() {
             </p>
           </div>
           <div
-            className="h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            className={
+              page === "all"
+                ? "h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(2,255,247,0.5)] duration-300"
+                : "h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            }
             style={{
               borderRadius: "5px",
               display: "flex",

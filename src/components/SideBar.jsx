@@ -73,6 +73,13 @@ export default function SIdeBar() {
             NEWS
           </NavLink>
         </div>
+        <div>
+          <div className="text-[20px] m-auto w-[250px] rounded-full shadow-md drop-shadow-2xl flex items-center justify-center text-[#2a2550] cursor-pointer">
+            <i className="fa-solid fa-right-from-bracket m-5 hover:text-[#ffb800]"></i>
+            <i class="fa-solid fa-volume-high  m-5 hover:text-[#ffb800]"></i>
+            <i class="fa-solid fa-volume-xmark  m-5 hover:text-[#ffb800]"></i>
+          </div>
+        </div>
       </div>
     </>
   );
