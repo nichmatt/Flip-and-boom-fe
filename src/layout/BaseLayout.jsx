@@ -7,11 +7,10 @@ import { fetchUserProfile } from "../actionCreators";
 import { useEffect } from "react";
 
 export default function BaseLayout() {
-  const dispatch = useDispatch();
+
+
   const { loading } = useSelector((state) => state.userReducer);
-  useEffect(() => {
-    dispatch(fetchUserProfile());
-  }, []);
+
   return (
     <>
       <NavigationBar />

@@ -5,7 +5,7 @@ const myObject = {
 	totalValue: 0,
 };
 
-export default function NumberTween(props) {
+export default function NumberTween2(props) {
 	const [total, setTotal] = useState(props.number);
 
 	useEffect(() => {
