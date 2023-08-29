@@ -148,6 +148,10 @@ export const cpuTurnAccurate = async ({
 
 		removeCardFromBoard(board, setBoard, enemyCards);
 
+		await pause();
+
+		setTurn("user");
+
 		return;
 	} else {
 		const secondRandomCard = boardToRandomized?.splice(

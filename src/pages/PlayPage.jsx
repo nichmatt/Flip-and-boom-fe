@@ -1,6 +1,7 @@
 // npm packages
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 // components
 import GameResult from "../components/GameResult";
@@ -21,15 +22,17 @@ import { pause } from "../helpers";
 
 // export default jsx
 export default function PlayPage() {
+	const navigate = useNavigate();
+
 	// state from redux
 	const { gameMode } = useSelector((state) => state.gameModeReducer);
 
 	// collection of useState
 	const [board, setBoard] = useState([]);
-	const [hp, setHp] = useState(1000);
-	const [enemyHp, setEnemyHp] = useState(1000);
+	const [hp, setHp] = useState(1);
+	const [enemyHp, setEnemyHp] = useState(1);
 	const [chosenCard, setChosenCard] = useState([]);
-	const [turn, setTurn] = useState("user");
+	const [turn, setTurn] = useState("startGame");
 	const [totalTurn, setTotalTurn] = useState(0);
 	const [showGameResult, setShowGameResult] = useState(false);
 	const [aiMemory, setAiMemory] = useState({
@@ -65,7 +68,7 @@ export default function PlayPage() {
 	};
 
 	// collection of function parameters
-	const cpuTurnRandomParameters = {
+	const cpuTurnParameters = {
 		board,
 		setEnemyHp,
 		enemyHp,
@@ -77,13 +80,16 @@ export default function PlayPage() {
 		setAiMemory,
 	};
 
-	const cpuTurnAccurateParameters = {
-		...cpuTurnRandomParameters,
-	};
-
 	// created lifecycle
 	useEffect(() => {
+		gameMode == "HOME" && navigate("/home");
+
 		createdLifecycle(setBoard);
+
+		(async () => {
+			await pause();
+			setTurn("user");
+		})();
 	}, []);
 
 	// watcher for chosenCard useState
@@ -108,12 +114,24 @@ export default function PlayPage() {
 		setTotalTurn(totalTurn + 1);
 		if (turn == "cpu") {
 			switch (gameMode) {
-				case "easy":
-					cpuTurnRandom(cpuTurnRandomParameters);
+				case "EAZY":
+					cpuTurnRandom(cpuTurnParameters);
+					break;
+
+				case "MEDIUM":
+					Math.ceil(Math.random() * 100) > 75
+						? cpuTurnAccurate(cpuTurnParameters)
+						: cpuTurnRandom(cpuTurnParameters);
+					break;
+
+				case "HARD":
+					Math.ceil(Math.random() * 100) < 50
+						? cpuTurnAccurate(cpuTurnParameters)
+						: cpuTurnRandom(cpuTurnParameters);
 					break;
 
 				default:
-					cpuTurnAccurate(cpuTurnAccurateParameters);
+					cpuTurnAccurate(cpuTurnParameters);
 					break;
 			}
 		}
@@ -143,7 +161,12 @@ export default function PlayPage() {
 				{showGameResult && <GameResult hp={hp} totalTurn={totalTurn} />}
 
 				{/* health bar for player and enemy */}
-				<PlayPageHeader hp={hp} enemyHp={enemyHp} />
+				<PlayPageHeader
+					hp={hp}
+					enemyHp={enemyHp}
+					setHp={setHp}
+					setEnemyHp={setEnemyHp}
+				/>
 
 				{/* card playing arena */}
 				<PlayPageArena board={board} handleClick={handleClick} />
