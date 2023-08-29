@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { pause } from '../helpers'
 import { FETCHUSERPROFILE, LOADINGSTATE, SETINVENTORIES } from "../actionType";
 import { API_URL } from '../config/index'
 export function setProfile(payload) {
@@ -22,6 +23,7 @@ export function setLoading(payload) {
     }
 }
 
+
 export function fetchUserProfile() {
     return async (dispatch) => {
         try {
@@ -37,6 +39,26 @@ export function fetchUserProfile() {
         } catch (error) {
             // error handle
         } finally {
+            await pause()
+            dispatch(setLoading(false))
+        }
+    }
+}
+
+export function setUserSelectedItem(payload) {
+    return async (dispatch) => {
+        try {
+            dispatch(setLoading(true))
+            const data = await axios.put(API_URL + '/update', payload, {
+                headers: {
+                    'access_token': localStorage.getItem('access_token')
+                }
+            })
+            dispatch(fetchUserProfile())
+        } catch (error) {
+            // error handle
+        } finally {
+            pause()
             dispatch(setLoading(false))
         }
     }

@@ -75,17 +75,16 @@ export default function ShopPage() {
 
   function handleCharacter() {
     const character = datas?.filter((type) => {
-      // console.log("lu masuk ga sih");
+      return type.type === "char" && type.name !== "default";
       setPage("character");
-      return type.type === "char";
     });
     dispatch(actionFilterShopData(character));
   }
 
   function handleSkin() {
     const skin = datas.filter((type) => {
+      return type.type === "skin" && type.name !== "default";
       setPage("card");
-      return type.type === "skin";
     });
     dispatch(actionFilterShopData(skin));
   }
@@ -219,8 +218,8 @@ export default function ShopPage() {
                   />
                 );
               })
-            : datas.map((item) => {
-                return (
+            : datas.map((item) =>
+                item.name !== "default" ? (
                   <CardShop
                     key={item.id}
                     imgUrl={`/assets/shops/${item.name}.png`}
@@ -228,8 +227,10 @@ export default function ShopPage() {
                     itemCategory={item.type}
                     itemPrice={`${item.price}`}
                   />
-                );
-              })}
+                ) : (
+                  ""
+                )
+              )}
         </div>
       </section>
     </>
