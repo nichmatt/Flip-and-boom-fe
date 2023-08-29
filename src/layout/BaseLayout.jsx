@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile } from "../actionCreators";
 
 export default function BaseLayout() {
-  const dispatch = useDispatch()
-  // const { profile } = useSelector(state => state.userReducer)
-  dispatch(fetchUserProfile())
+  // const dispatch = useDispatch()
+  // // const { profile } = useSelector(state => state.userReducer)
+  // dispatch(fetchUserProfile())
   return (
     <>
       <NavigationBar />

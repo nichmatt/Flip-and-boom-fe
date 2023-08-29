@@ -1,9 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function ProfilePage() {
-  const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.userReducer);
   const [char, setChar] = useState("");
   const [card, setCard] = useState("");

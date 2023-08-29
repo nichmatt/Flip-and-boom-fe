@@ -19,7 +19,7 @@ export const cpuTurnRandom = async ({
 }) => {
   console.log('aibodoh');
 
-	console.log(aiMemory, "<<<<<<");
+	console.log(board);
 
 	const enemyCards = [];
 
@@ -32,7 +32,7 @@ export const cpuTurnRandom = async ({
 		1
 	);
 
-	console.log("KARTU PERTAMA CPU");
+	// console.log("KARTU PERTAMA CPU");
 
 	const newBoard = flipOpen(board, setBoard, firstRandomCard[0].index);
 
@@ -76,7 +76,7 @@ export const cpuTurnRandom = async ({
 		1
 	);
 
-	console.log("KARTU KEDUA CPU");
+	// console.log("KARTU KEDUA CPU");
 
 	flipOpen(newBoard, setBoard, secondRandomCard[0].index);
 

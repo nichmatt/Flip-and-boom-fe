@@ -1,8 +1,12 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchUserProfile } from "../actionCreators";
 
 export default function SuperBaseLayout() {
-	useEffect(() => {}, []);
+  const dispatch = useDispatch()
+
+	useEffect(() => {dispatch(fetchUserProfile())}, []);
 
 	return (
 		<>
