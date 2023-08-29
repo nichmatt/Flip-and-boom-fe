@@ -12,6 +12,7 @@ import InventoryPage from "../pages/InventoryPage";
 import NewsPage from "../pages/NewsPage";
 import LoadingScreen from "../components/LoadingScreen";
 import LandingPage from "../pages/LandingPage";
+import TutorialPage from "../pages/TutorialPage";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
           {
             path: "/news",
             element: <NewsPage />,
+          },
+          {
+            path: "/tutorial",
+            element: <TutorialPage />,
           },
         ],
       },

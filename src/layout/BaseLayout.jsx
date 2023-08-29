@@ -41,4 +41,5 @@ export default function BaseLayout() {
       </div>
     </>
   );
+
 }

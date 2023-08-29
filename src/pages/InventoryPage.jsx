@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardInventory from "../components/CardInventory.jsx";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { setUserSelectedItem } from "../actionCreators";
 export default function ShopPage() {
+  const navigate = useNavigate();
   const { inventories, profile } = useSelector((state) => state.userReducer);
   const [selectedChar, serSelectedChar] = useState("");
   const [selectedSkin, setSelectedSkin] = useState("");
@@ -36,6 +37,7 @@ export default function ShopPage() {
       skin: selectedSkin,
     };
     dispatch(setUserSelectedItem(payload));
+    navigate("/profile");
     // console.log(payload);
   };
   // for defelop
@@ -73,7 +75,7 @@ export default function ShopPage() {
             </NavLink>
           </div>
           <div
-            className="h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(0,0,0,0.50)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            className="h-[50px] w-[120px] mt-[6vw] ml-[1vw] bg-[rgba(2,255,247,0.5)] hover:bg-[rgba(2,255,247,0.5)] duration-300"
             style={{
               borderRadius: "5px",
               display: "flex",
@@ -86,16 +88,16 @@ export default function ShopPage() {
               to="/profile/inventory"
               style={{
                 fontSize: "14px",
+                color: "#fff",
                 fontWeight: "600",
                 fontStyle: "italic",
-                color: "#fff",
               }}
             >
               INVENTORY
             </NavLink>
           </div>
           <div
-            className="h-[50px] w-[120px] mt-[6vw] ml-[20vw] bg-lime-400 hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            className="h-[50px] w-[120px] mt-[6vw] ml-[1vw] hover:bg-[rgba(2,255,247,0.5)] bg-[#ffb800] duration-300"
             style={{
               borderRadius: "5px",
               display: "flex",
@@ -105,7 +107,17 @@ export default function ShopPage() {
             }}
             onClick={handleSave}
           >
-            <p className="text-lg font-basefont">Save change</p>
+            <p
+              className="text-lg font-basefont"
+              style={{
+                fontSize: "14px",
+                color: "#fff",
+                fontWeight: "600",
+                fontStyle: "italic",
+              }}
+            >
+              SAVE
+            </p>
           </div>
         </div>
         <div

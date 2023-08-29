@@ -19,11 +19,9 @@ export default function HomePage() {
             <div className="absolute rotate-[-8deg] left-[32vw] hover:left-[30vw] top-[7vh] hover:z-20 hover:scale-100  transition-all delay-75 ease-in-out">
               <CardHomePage
                 urlCard={"/assets/card/amethyst.png"}
-                urlChar={
-                  "/assets/character/smoldering-detonation.png"
-                }
+                urlChar={"/assets/character/smoldering-detonation.png"}
                 gameMode={"MEDIUM"}
-                colorMode={"#145AC9"}
+                colorMode={"#6306C6"}
               />
             </div>
             <div className="absolute rotate-[8deg] left-[44vw] hover:left-[46vw]  top-[7vh] hover:scale-105 hover:z-20 transition-all delay-75 ease-in-out">
@@ -31,7 +29,7 @@ export default function HomePage() {
                 urlCard={"/assets/card/cerulean.png"}
                 urlChar={"/assets/character/mrs-party.png"}
                 gameMode={"HARD"}
-                colorMode={"#D100FC"}
+                colorMode={"#145AC9"}
               />
             </div>
             <div className="absolute rotate-[18deg] left-[56vw] top-[14vh] hover:scale-105 hover:left-[60vw] transition-all delay-75 ease-in-out">
@@ -39,7 +37,7 @@ export default function HomePage() {
                 urlCard={"/assets/card/prismancer.png"}
                 urlChar={"/assets/character/mr-king.png"}
                 gameMode={"IMPOSSIBLE"}
-                colorMode={"#6306C6"}
+                colorMode={"#D100FC"}
               />
             </div>
           </div>
