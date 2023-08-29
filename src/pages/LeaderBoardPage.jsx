@@ -145,10 +145,9 @@ export default function LeaderBoardPage() {
         </div>
 
         <div
-          className="w-[63vw] mt-[1vw] ml-[30vw]"
+          className="w-[63vw] mt-[1vw] ml-[30vw] py-[10px]"
           style={{
-            border: "7px solid #20203E",
-            borderRadius: "20px",
+            borderRadius: "5px",
             backgroundColor: "rgba(0, 0, 0, 0.50)",
           }}
         >

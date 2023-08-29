@@ -84,10 +84,22 @@ export default function ProfilePage() {
         }}
       >
         <div className="flex">
-          <div className="bg-[rgba(44,44,44,0.5)] my-[10%] ml-[10%] p-[10%] w-[300px] h-[300px] flex items-center justify-center rounded-md border-white border-2">
+          <div className="bg-[rgba(44,44,44,0.5)] my-[10%] ml-[10%] p-[0%] w-[300px] h-[300px] flex items-center justify-center rounded-md border-white border-2">
+            <div
+              className="absolute top-[500px] text-2xl font-bold italic text-[#ffab10]"
+              style={{ textShadow: "0.5px 0.1px 5px" }}
+            >
+              SELECTED
+            </div>
             <img className="" src={char} alt={profile?.selectedChar} />
           </div>
           <div className="bg-[rgba(44,44,44,0.5)] my-[10%] ml-[10px] p-[10%] w-[300px] h-[300px] flex items-center justify-center rounded-md border-white border-2">
+            <div
+              className="absolute top-[500px] text-2xl font-bold italic text-[#ffb800]"
+              style={{ textShadow: "0.5px 0.1px 5px" }}
+            >
+              SELECTED
+            </div>
             <img className="" src={card} alt={profile?.selectedChar} />
           </div>
         </div>

@@ -72,6 +72,18 @@ export default function SIdeBar() {
           >
             NEWS
           </NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "pending"
+                : isActive
+                ? "w-full bg-[#2a2550] text-center my-[5px] py-[5px] font-semibold italic text-xl text-[#ffb800] rounded-3xl x-[2vw]"
+                : "w-full hover:bg-[#ffb800] text-center py-[5px] my-[5px] font-bold italic text-xl text-[#2a2550] duration-300"
+            }
+            to="/tutorial"
+          >
+            TUTORIAL
+          </NavLink>
         </div>
         <div>
           <div className="text-[20px] m-auto w-[250px] rounded-full shadow-md drop-shadow-2xl flex items-center justify-center text-[#2a2550] cursor-pointer">
