@@ -3,15 +3,19 @@ import NavigationBar from "../components/Navigation";
 import SIdeBar from "../components/SideBar";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserProfile } from "../actionCreators";
-import { useEffect } from "react";
+import { fetchUserProfile, setMusicSetting } from "../actionCreators";
+import { useEffect  } from "react";
 
 export default function BaseLayout() {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.userReducer);
+  const { music } = useSelector((state) => state.settingReducer);
+
   useEffect(() => {
     dispatch(fetchUserProfile());
+    dispatch(setMusicSetting(true))
   }, []);
+
   return (
     <>
       <NavigationBar />
@@ -25,8 +29,15 @@ export default function BaseLayout() {
         <SIdeBar />
         <Outlet />
         {loading ? <LoadingScreen /> : ""}
-
-        {/* <div className="overflow-y-auto"></div> */}
+        {music ? (
+          <audio loop autoPlay src="/assets/audio/lobby_BGM.mp3">
+            <source src="/assets/audio/lobby_BGM.mp3" type="audio/mp3"></source>
+          </audio>
+        ) : (
+          <audio loop autoPlay muted src="">
+            <source src="" type="audio/mp3"></source>
+          </audio>
+        )}
       </div>
     </>
   );

@@ -89,7 +89,7 @@ export default function ProfilePage() {
         </div>
         <div className="text-[rgba(255,255,255,0.9)] text-[1.2rem] font-semibold flex flex-col justify-center pl-[6vw] w-[300px] mr-[75px]">
           <div className="text-[2.5rem] italic font-semibold">mr.King</div>
-          <div>Level:</div>
+          <div>Level: 10</div>
           <div className="text-[1rem] pt-[2vh] italic font-bold">BESTSCORE</div>
           <div
             className="text-[rgb(149,149,149)]  text-[0.8rem] flex justify-between py-[3px]"

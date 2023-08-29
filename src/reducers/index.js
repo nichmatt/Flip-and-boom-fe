@@ -6,6 +6,7 @@ import fetchShopReducer from "./fetchShopReducer";
 import paymentReducer from "./paymentReducer";
 import userReducer from "./userReducer";
 import newsReducer from "./newReducer";
+import settingReducer from "./settingReducer";
 
 const rootReducer = combineReducers({
   gameModeReducer,
@@ -14,8 +15,7 @@ const rootReducer = combineReducers({
 	paymentReducer,
   userReducer,
   newsReducer,
-  
-  
+  settingReducer,
 });
 
 export default rootReducer;

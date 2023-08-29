@@ -74,17 +74,18 @@ export default function ShopPage() {
   }, []);
 
   function handleCharacter() {
+
     const character = datas?.filter((type) => {
-      return type.type === "char" && type.name !== "default";
       setPage("character");
+      return type.type === "char" && type.name !== "default";
     });
     dispatch(actionFilterShopData(character));
   }
 
   function handleSkin() {
     const skin = datas.filter((type) => {
-      return type.type === "skin" && type.name !== "default";
       setPage("card");
+      return type.type === "skin" && type.name !== "default";
     });
     dispatch(actionFilterShopData(skin));
   }

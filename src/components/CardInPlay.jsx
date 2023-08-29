@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useState, useRef, useEffect } from "react";
 
 import defaultSkin from "/assets/card/black-card/back-card.png";
 import blueSkin from "/assets/card/blue-card/back-card.png";
@@ -14,74 +15,96 @@ import default250 from "/assets/card/black-card/250.png";
 import defaultBomb from "/assets/card/black-card/-75.png";
 
 export default function CardInPlay({ handleClick, card, index, shown, flip }) {
-	const { selectedSkin } = useSelector((state) => state.selectedReducer);
+  const { selectedSkin } = useSelector((state) => state.selectedReducer);
+  const [canPlay, setCanplay] = useState(false);
+  const [urlAudio, setUrlAudio] = useState("");
+  const list = [
+    "card-flip-1.mp3",
+    "card-flip-2.mp3",
+    "card-flip-3.mp3",
+    "card-flip-4.mp3",
+  ];
+  const randomAudio = () => {
+    let index = Math.floor(Math.random() * 4);
+    setUrlAudio(list[index]);
+  };
 
-	if (shown) {
-		return (
-			<div
-				onClick={handleClick}
-				className="w-[6.35rem] h-36 bg-transparent"
-				value={card}
-				index={index}
-				style={{ perspective: "1000px" }}
-			>
-				<div
-					className="flip-card-inner relative w-full h-full duration-[1234ms]"
-					style={
-						flip
-							? { transformStyle: "preserve-3d", transform: "rotateY(180deg)" }
-							: { transformStyle: "preserve-3d" }
-					}
-				>
-					<div
-						className="flip-card-front text-black absolute w-full h-full flex flex-col justify-center items-center"
-						style={{
-							backfaceVisibility: "hidden",
-							WebkitBackfaceVisibility: "hidden",
-							MozBackfaceVisibility: "hidden",
-						}}
-					>
-						<img src={selectedSkin == "cerulean" ? blueSkin : defaultSkin} />
-					</div>
-					<div
-						className="flip-card-back text-white absolute w-full h-full flex justify-center items-center"
-						style={{
-							transform: "rotateY(180deg)",
-							backfaceVisibility: "hidden",
-							WebkitBackfaceVisibility: "hidden",
-							MozBackfaceVisibility: "hidden",
-						}}
-					>
-						{selectedSkin == "cerulean" ? (
-							<img src={``} />
-						) : (
-							<img
-								src={
-									card == 100
-										? default100
-										: card == 125
-										? default125
-										: card == 150
-										? default150
-										: card == 175
-										? default175
-										: card == 200
-										? default200
-										: card == 210
-										? default210
-										: card == 220
-										? default220
-										: card == 250
-										? default250
-										: defaultBomb
-								}
-							/>
-						)}
-					</div>
-				</div>
-			</div>
-		);
-	}
+  useEffect(() => {
+    // console.log(card);
+    flip ? (card === "bomb" ? setUrlAudio("boom.mp3") : randomAudio()) : "";
+    flip ? setCanplay(true) : setCanplay(false);
+  }, [flip]);
+  if (shown) {
+    return (
+      <div
+        onClick={handleClick}
+        className="w-[6.35rem] h-36 bg-transparent"
+        value={card}
+        index={index}
+        style={{ perspective: "1000px" }}
+      >
+        <div
+          className="flip-card-inner relative w-full h-full duration-[1234ms]"
+          style={
+            flip
+              ? { transformStyle: "preserve-3d", transform: "rotateY(180deg)" }
+              : { transformStyle: "preserve-3d" }
+          }
+        >
+          <div
+            className="flip-card-front text-black absolute w-full h-full flex flex-col justify-center items-center"
+            style={{
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              MozBackfaceVisibility: "hidden",
+            }}
+          >
+            <img src={selectedSkin == "cerulean" ? blueSkin : defaultSkin} />
+          </div>
+          <div
+            className="flip-card-back text-white absolute w-full h-full flex justify-center items-center"
+            style={{
+              transform: "rotateY(180deg)",
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              MozBackfaceVisibility: "hidden",
+            }}
+          >
+            {selectedSkin == "cerulean" ? (
+              <img src={``} />
+            ) : (
+              <img
+                src={
+                  card == 100
+                    ? default100
+                    : card == 125
+                    ? default125
+                    : card == 150
+                    ? default150
+                    : card == 175
+                    ? default175
+                    : card == 200
+                    ? default200
+                    : card == 210
+                    ? default210
+                    : card == 220
+                    ? default220
+                    : card == 250
+                    ? default250
+                    : defaultBomb
+                }
+              />
+            )}
+          </div>
+        </div>
+        {canPlay ? (
+          <audio autoPlay src={`/assets/audio/${urlAudio}`}></audio>
+        ) : (
+          <audio muted src=""></audio>
+        )}
+      </div>
+    );
+  }
 
-	return <div className="w-20 h-32"></div>;
+  return <div className="w-20 h-32"></div>;
 }
