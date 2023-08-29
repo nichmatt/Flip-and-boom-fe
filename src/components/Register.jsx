@@ -1,5 +1,40 @@
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { actionRegister } from "../actionCreators/loginRegister";
+
 export default function Register({ statusSetter }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // handle input form
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const onChangeForm = (event) => {
+    const { value, name } = event.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+    console.log(form, "ini form nya");
+  };
+
+  // end of handle input form
+
+  //function register
+  const register = async (event) => {
+    try {
+      event.preventDefault();
+      await dispatch(actionRegister(form));
+      statusSetter();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div
@@ -16,6 +51,9 @@ export default function Register({ statusSetter }) {
           <input
             type="text"
             placeholder="Username"
+            name="username"
+            value={form.username}
+            onChange={onChangeForm}
             className="bg-transparent focus:outline-none"
           />
         </div>
@@ -23,6 +61,9 @@ export default function Register({ statusSetter }) {
           <input
             type="text"
             placeholder="Email"
+            name="email"
+            value={form.email}
+            onChange={onChangeForm}
             className="bg-transparent focus:outline-none"
           />
         </div>
@@ -30,6 +71,9 @@ export default function Register({ statusSetter }) {
           <input
             type="Password"
             placeholder="Password"
+            name="password"
+            value={form.password}
+            onChange={onChangeForm}
             className="bg-transparent focus:outline-none"
           />
         </div>
@@ -44,11 +88,13 @@ export default function Register({ statusSetter }) {
             className="absolute w-[60px] left-[72%] hover:opacity-100 opacity-100 cursor-[url('/assets/lighter.svg'),_pointer] rounded-full"
             src="/assets/logo/logo-05.png"
             alt=""
+            onClick={register}
           />
           <img
             className="absolute w-[60px] left-[72%] hover:opacity-0 opacity-100 hover:hidden cursor-[url('/assets/lighter.svg'),_pointer] rounded-full"
             src="/assets/logo/logo-05-unactive.png"
             alt=""
+            onClick={register}
           />
         </div>
       </div>

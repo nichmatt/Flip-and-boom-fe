@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 
 import BaseLayout from "../layout/BaseLayout";
 import SuperBaseLayout from "../layout/SuperBaseLayout";
@@ -19,6 +19,12 @@ const router = createBrowserRouter([
     children: [
       {
         element: <BaseLayout />,
+        loader: () => {
+          const token = localStorage.getItem("access_token");
+          if (!token) throw redirect("/");
+          // console.log("loader");
+          return null;
+        },
         children: [
           {
             path: "/home",
@@ -51,12 +57,17 @@ const router = createBrowserRouter([
         ],
       },
       { path: "/play", element: <PlayPage /> },
-      {path: '/loading', element: <LoadingScreen />}
+      { path: "/loading", element: <LoadingScreen /> },
     ],
   },
   {
     path: "/",
     element: <LandingPage />,
+    loader: () => {
+      const token = localStorage.getItem("access_token");
+      if (token) throw redirect("/home");
+      return null;
+    },
   },
 ]);
 
