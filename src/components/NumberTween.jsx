@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TweenLite } from "gsap";
 
 const myObject = {
-	totalValue: 1000,
+	totalValue: 1,
 };
 
 export default function NumberTween(props) {

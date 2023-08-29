@@ -1,9 +1,48 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import CardInventory from "../components/CardInventory.jsx";
-import MrKingCard from "/assets/character/mr-king.png";
-import Card from "/assets/card/blue-card.png";
 import { NavLink } from "react-router-dom";
-
+import { setUserSelectedItem } from "../actionCreators";
 export default function ShopPage() {
+  const { inventories, profile } = useSelector((state) => state.userReducer);
+  const [selectedChar, serSelectedChar] = useState("");
+  const [selectedSkin, setSelectedSkin] = useState("");
+
+  const dispatch = useDispatch();
+  const generateUrl = (type, item) => {
+    if (type === "char") {
+      return `/assets/character/${item}.png`;
+    } else if (type === "skin") {
+      return `/assets/card/${item}.png`;
+    }
+  };
+
+  useEffect(() => {
+    serSelectedChar(profile.selectedChar);
+    setSelectedSkin(profile.selectedSkin);
+  }, []);
+
+  const handleChange = (type, payload) => {
+    if (type === "char") {
+      serSelectedChar(payload);
+    } else if (type === "skin") {
+      setSelectedSkin(payload);
+    }
+  };
+
+  const handleSave = () => {
+    const payload = {
+      char: selectedChar,
+      skin: selectedSkin,
+    };
+    dispatch(setUserSelectedItem(payload));
+    // console.log(payload);
+  };
+  // for defelop
+
+  // useEffect(() => {
+  //   console.log(selectedChar, selectedSkin);
+  // }, [selectedChar, selectedSkin]);
   return (
     <>
       <section
@@ -55,66 +94,35 @@ export default function ShopPage() {
               INVENTORY
             </NavLink>
           </div>
+          <div
+            className="h-[50px] w-[120px] mt-[6vw] ml-[20vw] bg-lime-400 hover:bg-[rgba(2,255,247,0.5)] duration-300"
+            style={{
+              borderRadius: "5px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+            }}
+            onClick={handleSave}
+          >
+            <p className="text-lg font-basefont">Save change</p>
+          </div>
         </div>
         <div
           id="column-shop"
           className="mt-[2vw] w-[57vw] ml-[32vw] flex flex-wrap"
         >
-          <CardInventory
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardInventory
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardInventory
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardInventory
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardInventory
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardInventory
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardInventory
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardInventory
-            imgUrl={Card}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardInventory
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardInventory
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
-          <CardInventory
-            imgUrl={MrKingCard}
-            itemName="mrKing"
-            itemCategory="CHARACTER"
-          />
+          {inventories?.map((inv, index) => (
+            <CardInventory
+              imgUrl={generateUrl(inv?.Item?.type, inv?.Item?.name)}
+              itemCategory={inv?.Item?.type}
+              itemName={inv?.Item?.name}
+              selectedSkin={selectedSkin}
+              selectedChar={selectedChar}
+              changeSelect={handleChange}
+              key={index}
+            />
+          ))}
         </div>
       </section>
     </>

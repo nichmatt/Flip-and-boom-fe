@@ -1,12 +1,23 @@
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 import defaultChar from "/assets/character/default.png";
+import smolderingDetonation from "/assets/character/smoldering-detonation.png";
+import mrsParty from "/assets/character/mrs-party.png";
 import mrKing from "/assets/character/mr-king.png";
 
 import NumberTween from "./NumberTween";
 
-export default function PlayPageHeader({ hp, enemyHp }) {
+export default function PlayPageHeader({ hp, enemyHp, setHp, setEnemyHp }) {
 	const { selectedChar } = useSelector((state) => state.selectedReducer);
+	const { gameMode } = useSelector((state) => state.gameModeReducer);
+
+	// this const to rerender
+	const abc = hp + 100;
+
+	useEffect(() => {
+		setHp(1000), setEnemyHp(1000);
+	}, []);
 
 	return (
 		<div className="flex h-32 mx-44 justify-between text-white italic font-bold">
@@ -60,7 +71,17 @@ export default function PlayPageHeader({ hp, enemyHp }) {
 				className="w-32 h-32"
 				style={{ transform: "scaleX(-1) rotate(10deg)" }}
 			>
-				<img src={selectedChar == "mrKing" ? mrKing : mrKing} />
+				<img
+					src={
+						gameMode == "IMPOSSIBLE"
+							? mrKing
+							: gameMode == "HARD"
+							? mrsParty
+							: gameMode == "MEDIUM"
+							? smolderingDetonation
+							: defaultChar
+					}
+				/>
 			</div>
 		</div>
 	);

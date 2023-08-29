@@ -1,7 +1,26 @@
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserProfile } from "../actionCreators";
 
 export default function ProfilePage() {
-  return (
+  const dispatch = useDispatch();
+  const { profile } = useSelector((state) => state.userReducer);
+  const [char, setChar] = useState("");
+  const [card, setCard] = useState("");
+
+  useEffect(() => {
+    if (profile) {
+      setChar(`/assets/character/${profile?.selectedChar}.png`);
+      setCard(`/assets/card/${profile?.selectedSkin}.png`);
+    }
+  }, [profile]);
+
+  useEffect(() => {
+    dispatch(fetchUserProfile());
+  }, []);
+
+   return (
     <section
       className="min-h-[100vh] w-[100vw] "
       style={{
@@ -65,11 +84,7 @@ export default function ProfilePage() {
       >
         <div className="flex">
           <div className="bg-[rgba(44,44,44,0.5)] my-[25%] ml-[20%] p-[10%] w-[300px] flex items-center justify-center rounded-md border-white border-2">
-            <img
-              className=""
-              src="../../public/assets/character/mr-king.png"
-              alt=""
-            />
+            <img className="" src={char} alt={profile?.selectedChar} />
           </div>
         </div>
         <div className="text-[rgba(255,255,255,0.9)] text-[1.2rem] font-semibold flex flex-col justify-center pl-[6vw] w-[300px] mr-[75px]">
@@ -81,28 +96,28 @@ export default function ProfilePage() {
             style={{ textShadow: "0.5px 0.1px 1px" }}
           >
             <div>EASY:</div>
-            <div>1500</div>
+            <div>{profile?.easyScore}</div>
           </div>
           <div
             className="text-[rgba(218,218,218,0.9)]  text-[0.8rem] flex justify-between py-[3px]"
             style={{ textShadow: "0.5px 0.1px 2px" }}
           >
             <div>MEDIUM:</div>
-            <div>1500</div>
+            <div>{profile?.mediumScore}</div>
           </div>
           <div
             className="text-[rgba(241,241,241,0.9)]  text-[0.8rem] flex justify-between py-[3px]"
             style={{ textShadow: "0.5px 0.1px 3px" }}
           >
             <div>HARD:</div>
-            <div>1000</div>
+            <div>{profile?.hardScore}</div>
           </div>
           <div
             className="text-[rgb(255,213,45)]  text-[0.8rem] flex justify-between py-[3px]"
             style={{ textShadow: "0.5px 0.1px 5px" }}
           >
             <div>IMPOSSIBLE:</div>
-            <div>2000</div>
+            <div>{profile?.impossibleScore}</div>
           </div>
         </div>
         <div>
@@ -112,11 +127,7 @@ export default function ProfilePage() {
                 SELECTED SKIN
               </div>
               <div className="w-[90px] p-[15px] m-[5px] flex items-center justify-center rounded-[3px] ">
-                <img
-                  className=""
-                  src="../../public/assets/character/mr-king.png"
-                  alt=""
-                />
+                <img className="" src={char} alt={profile?.selectedChar} />
               </div>
             </div>
             <div>
@@ -126,8 +137,8 @@ export default function ProfilePage() {
               <div className=" w-[90px] p-[15px] m-[5px] flex items-center justify-center rounded-[3px]">
                 <img
                   className="max-h-[55px]"
-                  src="../../public/assets/card/blue-card.png"
-                  alt="kartu"
+                  src={card}
+                  alt={profile?.selectedSkin}
                 />
               </div>
             </div>

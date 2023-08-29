@@ -1,5 +1,40 @@
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { actionLogin } from "../actionCreators/loginRegister";
+
 export default function Login({ statusSetter }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // handle input form
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const onChangeForm = (event) => {
+    const { value, name } = event.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+    console.log(form, "ini form nya");
+  };
+
+  // end of handle input form
+
+  //function login
+  const login = async (event) => {
+    try {
+      event.preventDefault();
+      await dispatch(actionLogin(form));
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div
@@ -12,19 +47,26 @@ export default function Login({ statusSetter }) {
         <div className="w-[200px] py-[25px]">
           <img src="/assets/logo/logo-03-shadow-01.png" alt="logo" />
         </div>
+        <div className="text-[#2a2550] font-bold italic mt-[-25px]">LOGIN</div>
         <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
           <input
             type="text"
             placeholder="Email"
-            className="bg-transparent focus:outline-none"
+            name="email"
+            value={form.email}
+            onChange={onChangeForm}
+            className="bg-transparent focus:outline-none  text-[#2a2550]"
           />
         </div>
 
         <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
           <input
             type="Password"
+            value={form.password}
+            name="password"
+            onChange={onChangeForm}
             placeholder="Password"
-            className="bg-transparent focus:outline-none"
+            className="bg-transparent focus:outline-none text-[#2a2550]"
           />
         </div>
         <NavLink
@@ -35,13 +77,15 @@ export default function Login({ statusSetter }) {
         </NavLink>
         <div className="w-[90px] cursor-[url(/assets/logo/lighter.svg),_pointer]">
           <img
+            onClick={login}
             className="absolute w-[60px] left-[72%] hover:opacity-100 opacity-100 cursor-[url('/assets/lighter.svg'),_pointer] rounded-full"
             src="/assets/logo/logo-05.png"
             alt=""
           />
           <img
+            onClick={login}
             className="absolute w-[60px] left-[72%] hover:opacity-0 opacity-100 hover:hidden cursor-[url('/assets/lighter.svg'),_pointer] rounded-full"
-            src="/assets/logo/logo-05-unactive.png"
+            src="/assets/logo/logo-05-unactive.png text-[#2a2550]"
             alt=""
           />
         </div>
