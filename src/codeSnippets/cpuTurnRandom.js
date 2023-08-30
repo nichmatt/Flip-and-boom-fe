@@ -16,7 +16,17 @@ export const cpuTurnRandom = async ({
 	setBoard,
 	aiMemory,
 	setAiMemory,
+	skipTurn,
+	setSkipTurn,
 }) => {
+	if (skipTurn) {
+		setTurn("user");
+
+		setSkipTurn(false);
+
+		return;
+	}
+
 	console.log("aibodoh");
 
 	console.log(board);
@@ -56,7 +66,7 @@ export const cpuTurnRandom = async ({
 
 		if (enemyHp - 75 <= 0) return;
 
-		setTurn("wait");
+		setTurn("cpuwait");
 
 		await pause();
 
@@ -102,7 +112,7 @@ export const cpuTurnRandom = async ({
 
 		if (enemyHp - 75 <= 0) return;
 
-		setTurn("wait");
+		setTurn("cpuwait");
 
 		await pause();
 
@@ -136,13 +146,13 @@ export const cpuTurnRandom = async ({
 
 		if (hp - damageDealtToUser <= 0) return;
 
-		setTurn("wait");
+		setTurn("cpuwait");
 
 		await pause();
 
 		removeCardFromBoard(board, setBoard, enemyCards);
 	} else {
-		setTurn("wait");
+		setTurn("cpuwait");
 
 		await pause();
 

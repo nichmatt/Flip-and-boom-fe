@@ -16,10 +16,20 @@ export const cpuTurnAccurate = async ({
 	setBoard,
 	aiMemory,
 	setAiMemory,
+	skipTurn,
+	setSkipTurn,
 }) => {
+	if (skipTurn) {
+		setTurn("user");
+
+		setSkipTurn(false);
+
+		return;
+	}
+
 	console.log("aipintar");
 
-	console.log(aiMemory, "<<<<");
+	console.log(board);
 
 	const enemyCards = [];
 
@@ -59,7 +69,7 @@ export const cpuTurnAccurate = async ({
 
 			if (hp - score <= 0) return;
 
-			setTurn("wait");
+			setTurn("cpuwait");
 
 			await pause();
 
@@ -148,7 +158,7 @@ export const cpuTurnAccurate = async ({
 
 		if (hp - damageDealtToUser <= 0) return;
 
-		setTurn("wait");
+		setTurn("cpuwait");
 
 		await pause();
 
@@ -178,7 +188,7 @@ export const cpuTurnAccurate = async ({
 
 			if (enemyHp - 75 <= 0) return;
 
-			setTurn("wait");
+			setTurn("cpuwait");
 
 			await pause();
 
@@ -212,7 +222,7 @@ export const cpuTurnAccurate = async ({
 
 			if (hp - damageDealtToUser <= 0) return;
 
-			setTurn("wait");
+			setTurn("cpuwait");
 
 			await pause();
 
@@ -226,7 +236,7 @@ export const cpuTurnAccurate = async ({
 		}
 	}
 
-	setTurn("wait");
+	setTurn("cpuwait");
 
 	await pause();
 

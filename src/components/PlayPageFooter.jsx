@@ -7,10 +7,17 @@ import powerup3 from "/power-up/powerup-03.svg";
 
 import PowerUpModal from "./PowerUpModal";
 
-export default function PlayPageFooter({ turn, hp, setHp }) {
+export default function PlayPageFooter({
+	turn,
+	hp,
+	setHp,
+	setSkipTurn,
+	board,
+	setBoard,setTurn
+}) {
 	const { profile } = useSelector((state) => state.userReducer);
 
-	const [puModal, setPuModal] = useState(false);
+	const [puModal, setPuModal] = useState("test");
 
 	const [pu1, setPu1] = useState(true);
 	const [pu2, setPu2] = useState(true);
@@ -26,7 +33,7 @@ export default function PlayPageFooter({ turn, hp, setHp }) {
 
 	return (
 		<>
-			{puModal && (
+			{(puModal == "pu1" || puModal == "pu2" || puModal == "pu3") && (
 				<PowerUpModal
 					balance={profile?.balance}
 					setPu1={setPu1}
@@ -37,6 +44,35 @@ export default function PlayPageFooter({ turn, hp, setHp }) {
 					powerup3={powerup3}
 					puModal={puModal}
 					setPuModal={setPuModal}
+					hp={hp}
+					setHp={setHp}
+					animateParent={"animate__fadeIn"}
+					animateChildren={"animate__slideInDown"}
+					setSkipTurn={setSkipTurn}
+					board={board}
+					setBoard={setBoard}
+          setTurn={setTurn}
+				/>
+			)}
+			{puModal == false && (
+				<PowerUpModal
+					balance={profile?.balance}
+					setPu1={setPu1}
+					setPu2={setPu2}
+					setPu3={setPu3}
+					powerup1={powerup1}
+					powerup2={powerup2}
+					powerup3={powerup3}
+					puModal={puModal}
+					setPuModal={setPuModal}
+					hp={hp}
+					setHp={setHp}
+					animateParent={"animate__fadeOut"}
+					animateChildren={"animate__slideOutUp"}
+					setSkipTurn={setSkipTurn}
+					board={board}
+					setBoard={setBoard}
+          setTurn={setTurn}
 				/>
 			)}
 			<div className="w-full h-24 pt-5 flex flex-col">
