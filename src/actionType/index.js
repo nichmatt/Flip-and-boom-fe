@@ -11,4 +11,5 @@ export const LOADINGSTATE = "loading/setLoadingState"
 export const SETINVENTORIES = "inventory/setUserInventori"
 export const SETMUSICSETTING = "music/setMusicSetting"
 export const SETSFXAUDIOSETTING = "sfx/setSfxMusicSetting"
-
+export const SETERRORMESSAGE = "error/setErrorMessage"
+export const SETRESPONSEMESSAGE = "response/setResponseMessage"

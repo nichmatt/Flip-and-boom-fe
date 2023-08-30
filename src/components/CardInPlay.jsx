@@ -60,6 +60,7 @@ import citrusBomb from "/assets/card/orange-card/-75.png";
 export default function CardInPlay({ handleClick, card, index, shown, flip }) {
 
 	const { profile } = useSelector((state) => state.userReducer);
+
   const [canPlay, setCanplay] = useState(false);
   const [urlAudio, setUrlAudio] = useState("");
   const list = [

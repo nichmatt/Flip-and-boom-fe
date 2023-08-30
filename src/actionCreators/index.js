@@ -2,6 +2,7 @@ import { setGameMode } from "./gameMode";
 import { fetchShopData } from "./fetchShop";
 import { fetchUserProfile, setLoading, setUserSelectedItem } from './fetchUserProfile';
 import { setMusicSetting, setSFXAudio } from '../actionCreators/setting'
+import { setErrorMessage, setResponseMessage } from './messageModal'
 
 export {
     setGameMode,
@@ -10,6 +11,8 @@ export {
     setLoading,
     setUserSelectedItem,
     setMusicSetting,
-    setSFXAudio
+    setSFXAudio,
+    setErrorMessage,
+    setResponseMessage
 };
 

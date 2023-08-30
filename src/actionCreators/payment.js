@@ -1,4 +1,7 @@
 import axios from "axios";
+import { fetchUserProfile, setLoading } from "./fetchUserProfile";
+import { API_URL } from "../config";
+import { setErrorMessage } from "./messageModal";
 
 export const getTokenMidtrans = (payload) => {
     return {
@@ -10,11 +13,18 @@ export const getTokenMidtrans = (payload) => {
 export function fetchGetTokenMidtrans(amount) {
     return async (dispatch) => {
         try {
-            const { data } = await axios.post('http://localhost:3000/user/token-midtrans', { amount }, { headers: { access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqaG9uIiwiZW1haWwiOiJqaG9uQG1haWwuY29tIiwiaWF0IjoxNjkzMTg5MDQ2fQ.S4m8rnxjXaa4DxVu6pucjth0-QXD_DiLw6hd1JRo6UA' } })
-            console.log(data.token, 'ini response axios');
+            dispatch(setLoading(true))
+            const { data } = await axios.post('http://localhost:3000/user/token-midtrans', { amount }, {
+                headers: {
+                    access_token: localStorage.getItem('access_token')
+                }
+            })
+            // console.log(data.token, 'ini response axios');
             dispatch(getTokenMidtrans(data.token))
         } catch (error) {
             console.log(error);
+        } finally {
+            dispatch(setLoading(false))
         }
     }
 }
@@ -23,12 +33,44 @@ export function fetchGetTokenMidtrans(amount) {
 export function fetchSuccesPayment(payload) {
     return async (dispatch) => {
         try {
-            await axios.post('http://localhost:3000/user/topup', payload, { headers: { access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJqaG9uIiwiZW1haWwiOiJqaG9uQG1haWwuY29tIiwiaWF0IjoxNjkzMTg5MDQ2fQ.S4m8rnxjXaa4DxVu6pucjth0-QXD_DiLw6hd1JRo6UA' } })
+            dispatch(setLoading(true))
+            const { data } = await axios.post('http://localhost:3000/user/topup', payload, {
+                headers: {
+                    access_token: localStorage.getItem('access_token')
+                }
+            })
+            // tampilkan ke modal
+            console.log(data, '<<<<<< response server after payment');
             // dispatch user
-            dispatch()
+            dispatch(fetchUserProfile())
             // dispatch profile lagi
         } catch (error) {
             console.log(error);
+            dispatch(setErrorMessage(error.response.data.message))
+        } finally {
+            dispatch(setLoading(false))
+        }
+    }
+}
+
+export function fetchBuyItem(payload) {
+    return async (dispatch) => {
+        try {
+            dispatch(setLoading(true))
+            const { data, status } = await axios.post(API_URL + '/buyItem', payload, {
+                headers: {
+                    'access_token': localStorage.getItem('access_token')
+                }
+            })
+            console.log(data.message, 'response setelah berhasil');
+            console.log(status, 'response'); // 201
+        } catch (error) {
+            console.log(error.response.data.message);
+            dispatch(setErrorMessage(error.response.data.message))
+            // error handle
+        } finally {
+            dispatch(fetchUserProfile())
+            dispatch(setLoading(false))
         }
     }
 }
