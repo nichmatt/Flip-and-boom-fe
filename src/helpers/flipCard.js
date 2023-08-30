@@ -1,17 +1,17 @@
 export const flipOpen = (board, setBoard, index) => {
-	const cloneBoard = structuredClone(board);
+  const cloneBoard = structuredClone(board);
 
-	cloneBoard[+index].flip = true;
+  cloneBoard[+index].flip = true;
 
-	setBoard(cloneBoard);
+  setBoard(cloneBoard);
 
-	return cloneBoard;
+  return cloneBoard;
 };
 
 export const flipClose = (board, setBoard) => {
-	const newBoard = structuredClone(board);
+  const newBoard = structuredClone(board);
 
 	newBoard?.forEach((el) => (el.flip = false));
 
-	setBoard(newBoard);
+  setBoard(newBoard);
 };
