@@ -64,7 +64,7 @@ export default function PlayPageHeader({
 					</div>
 					<div>CPU Turn</div>
 				</div>
-			) : (
+			) : turn == "cpuwait" ? (
 				<div className="absolute -right-28 top-[25%] flex flex-col items-center text-xl animate__animated animate__bounceOut gap-y-[0.35rem]">
 					<div>
 						<i
@@ -74,7 +74,7 @@ export default function PlayPageHeader({
 					</div>
 					<div>CPU Turn</div>
 				</div>
-			)}
+			) : null}
 			<div className="w-32 h-32 rotate-[10deg]">
 				<img
 					src={
