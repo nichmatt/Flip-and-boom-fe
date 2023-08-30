@@ -11,11 +11,11 @@ import PlayPageFooter from "../components/PlayPageFooter";
 
 // code snippets to shorten the code in PlayPage
 import {
-  handleUserCardClick,
-  cpuTurnRandom,
-  cpuTurnAccurate,
-  afterFlip2Card,
-  createdLifecycle,
+	handleUserCardClick,
+	cpuTurnRandom,
+	cpuTurnAccurate,
+	afterFlip2Card,
+	createdLifecycle,
 } from "../codeSnippets";
 
 // helpers
@@ -23,19 +23,18 @@ import { pause } from "../helpers";
 
 // export default jsx
 export default function PlayPage() {
-
 	const navigate = useNavigate();
 
-         // audio setup
-  const audioRef = useRef();
-  
-  // state from redux
-  const { gameMode } = useSelector((state) => state.gameModeReducer);
-  const { music } = useSelector((state) => state.settingReducer);
-  
-  useEffect(() => {
-	music ? (audioRef.current.volume = 0.7) : (audioRef.current.volume = 0)
-  }, [music])
+	// audio setup
+	const audioRef = useRef();
+
+	// state from redux
+	const { gameMode } = useSelector((state) => state.gameModeReducer);
+	const { music } = useSelector((state) => state.settingReducer);
+
+	useEffect(() => {
+		music ? (audioRef.current.volume = 0.7) : (audioRef.current.volume = 0);
+	}, [music]);
 
 	// collection of useState
 	const [board, setBoard] = useState([]);
@@ -151,7 +150,10 @@ export default function PlayPage() {
 	useEffect(() => {
 		if (enemyHp <= 0 || hp <= 0) {
 			(async () => {
+				setTurn("wait");
+
 				await pause();
+        
 				setShowGameResult(true);
 			})();
 		}
@@ -176,7 +178,7 @@ export default function PlayPage() {
 					enemyHp={enemyHp}
 					setHp={setHp}
 					setEnemyHp={setEnemyHp}
-          turn={turn}
+					turn={turn}
 				/>
 
 				{/* card playing arena */}
@@ -185,9 +187,9 @@ export default function PlayPage() {
 				{/* footer arena */}
 				<PlayPageFooter turn={turn} hp={hp} setHp={setHp} />
 			</div>
-         <audio loop autoPlay ref={audioRef} src="/assets/audio/ingame_BGM.mp3">
-        {/* <source src="/assets/audio/ingame_BGM.mp3" type="audio/mp3" /> */}
-      </audio>
+			<audio loop autoPlay ref={audioRef} src="/assets/audio/ingame_BGM.mp3">
+				{/* <source src="/assets/audio/ingame_BGM.mp3" type="audio/mp3" /> */}
+			</audio>
 		</>
 	);
 }

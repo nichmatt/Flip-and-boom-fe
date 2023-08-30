@@ -5,25 +5,37 @@ import powerup1 from "/power-up/powerup-01.svg";
 import powerup2 from "/power-up/powerup-02.svg";
 import powerup3 from "/power-up/powerup-03.png";
 
+import PowerUpModal from "./PowerUpModal";
+
 export default function PlayPageFooter({ turn, hp, setHp }) {
 	const { profile } = useSelector((state) => state.userReducer);
 
-	const [pu1, setPu1] = useState(true);
+	const [puModal, setPuModal] = useState(false);
 
-	const handleClick1 = () => {
+	const [pu1, setPu1] = useState(true);
+	const [pu2, setPu2] = useState(true);
+	const [pu3, setPu3] = useState(true);
+
+	const handleClick = (name) => {
 		if (turn != "user") return;
 
-		if (hp > 900) return;
-
-		setHp(hp + 100);
-
-		setPu1(false);
+		setPuModal(name);
 
 		return;
 	};
 
 	return (
 		<>
+			{puModal && (
+				<PowerUpModal
+					balance={profile?.balance}
+					setPu1={setPu1}
+					setPu2={setPu2}
+					setPu3={setPu3}
+          puModal={puModal}
+          setPuModal={setPuModal}
+				/>
+			)}
 			<div className="w-full h-24 pt-5 flex flex-col">
 				<div className="w-full border-t-2 border-t-[#D98F00]"></div>
 				<div className="flex justify-between px-20 items-center h-full">
@@ -45,13 +57,34 @@ export default function PlayPageFooter({ turn, hp, setHp }) {
 							POWER UPS
 						</h1>
 						<div className="w-14 h-14 cursor-pointer duration-500 hover:scale-[1.75] hover:-translate-y-4">
-							{pu1 && <img src={powerup1} onClick={handleClick1} />}
+							{pu1 && (
+								<img
+									src={powerup1}
+									onClick={() => {
+										handleClick("pu1");
+									}}
+								/>
+							)}
 						</div>
 						<div className="w-14 h-14 cursor-pointer duration-500 hover:scale-[1.75] hover:-translate-y-4">
-							<img src={powerup2} />
+							{pu2 && (
+								<img
+									src={powerup2}
+									onClick={() => {
+										handleClick("pu2");
+									}}
+								/>
+							)}
 						</div>
 						<div className="w-14 h-14 cursor-pointer duration-500 hover:scale-[1.75] hover:-translate-y-4">
-							<img src={powerup3} />
+							{pu3 && (
+								<img
+									src={powerup3}
+									onClick={() => {
+										handleClick("pu3");
+									}}
+								/>
+							)}
 						</div>
 					</div>
 				</div>

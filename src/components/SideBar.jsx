@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setMusicSetting } from "../actionCreators";
 export default function SIdeBar() {
+
   const dispatch = useDispatch();
   const { music } = useSelector((state) => state.settingReducer);
   const navigate = useNavigate();
