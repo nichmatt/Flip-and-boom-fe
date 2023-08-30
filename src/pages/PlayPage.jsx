@@ -44,6 +44,7 @@ export default function PlayPage() {
 	const [turn, setTurn] = useState("user");
 	const [totalTurn, setTotalTurn] = useState(0);
 	const [showGameResult, setShowGameResult] = useState(false);
+	const [skipTurn, setSkipTurn] = useState(false);
 	const [aiMemory, setAiMemory] = useState({
 		250: [],
 		220: [],
@@ -87,6 +88,8 @@ export default function PlayPage() {
 		setBoard,
 		aiMemory,
 		setAiMemory,
+		skipTurn,
+		setSkipTurn,
 	};
 
 	// created lifecycle
@@ -120,7 +123,9 @@ export default function PlayPage() {
 	// watcher for turn useState
 	useEffect(() => {
 		console.log(`TURN : ${turn}`);
+
 		setTotalTurn(totalTurn + 1);
+
 		if (turn == "cpu") {
 			switch (gameMode) {
 				case "EAZY":
@@ -153,7 +158,7 @@ export default function PlayPage() {
 				setTurn("wait");
 
 				await pause();
-        
+
 				setShowGameResult(true);
 			})();
 		}
@@ -185,7 +190,15 @@ export default function PlayPage() {
 				<PlayPageArena board={board} handleClick={handleClick} />
 
 				{/* footer arena */}
-				<PlayPageFooter turn={turn} hp={hp} setHp={setHp} />
+				<PlayPageFooter
+					turn={turn}
+					hp={hp}
+					setHp={setHp}
+					setSkipTurn={setSkipTurn}
+					board={board}
+					setBoard={setBoard}
+          setTurn={setTurn}
+				/>
 			</div>
 			<audio loop autoPlay ref={audioRef} src="/assets/audio/ingame_BGM.mp3">
 				{/* <source src="/assets/audio/ingame_BGM.mp3" type="audio/mp3" /> */}

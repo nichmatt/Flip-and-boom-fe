@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useState,  useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import defaultSkin from "/assets/card/black-card/back-card.png";
 import ceruleanSkin from "/assets/card/blue-card/back-card.png";
@@ -57,28 +57,34 @@ import citrus220 from "/assets/card/orange-card/220.png";
 import citrus250 from "/assets/card/orange-card/250.png";
 import citrusBomb from "/assets/card/orange-card/-75.png";
 
-export default function CardInPlay({ handleClick, card, index, shown, flip }) {
-
+export default function CardInPlay({
+	handleClick,
+	card,
+	index,
+	shown,
+	flip,
+	flash,
+}) {
 	const { profile } = useSelector((state) => state.userReducer);
 
-  const [canPlay, setCanplay] = useState(false);
-  const [urlAudio, setUrlAudio] = useState("");
-  const list = [
-    "card-flip-1.mp3",
-    "card-flip-2.mp3",
-    "card-flip-3.mp3",
-    "card-flip-4.mp3",
-  ];
-  const randomAudio = () => {
-    let index = Math.floor(Math.random() * 4);
-    setUrlAudio(list[index]);
-  };
+	const [canPlay, setCanplay] = useState(false);
+	const [urlAudio, setUrlAudio] = useState("");
+	const list = [
+		"card-flip-1.mp3",
+		"card-flip-2.mp3",
+		"card-flip-3.mp3",
+		"card-flip-4.mp3",
+	];
+	const randomAudio = () => {
+		let index = Math.floor(Math.random() * 4);
+		setUrlAudio(list[index]);
+	};
 
-  useEffect(() => {
-    // console.log(card);
-    flip ? (card === "bomb" ? setUrlAudio("boom.mp3") : randomAudio()) : "";
-    flip ? setCanplay(true) : setCanplay(false);
-  }, [flip]);
+	useEffect(() => {
+		// console.log(card);
+		flip ? (card === "bomb" ? setUrlAudio("boom.mp3") : randomAudio()) : "";
+		flip ? setCanplay(true) : setCanplay(false);
+	}, [flip]);
 	if (shown) {
 		return (
 			<div
@@ -89,7 +95,11 @@ export default function CardInPlay({ handleClick, card, index, shown, flip }) {
 				style={{ perspective: "1000px" }}
 			>
 				<div
-					className="flip-card-inner relative w-full h-full duration-[1234ms]"
+					className={`flip-card-inner relative w-full h-full ${
+						flash
+							? "outline-2 outline-white outline animate-lumayan2"
+							: "duration-[1234ms]"
+					}  `}
 					style={
 						flip
 							? { transformStyle: "preserve-3d", transform: "rotateY(180deg)" }
@@ -240,14 +250,14 @@ export default function CardInPlay({ handleClick, card, index, shown, flip }) {
 						)}
 					</div>
 				</div>
-        {canPlay ? (
-          <audio autoPlay src={`/assets/audio/${urlAudio}`}></audio>
-        ) : (
-          <audio muted src=""></audio>
-        )}
+				{canPlay ? (
+					<audio autoPlay src={`/assets/audio/${urlAudio}`}></audio>
+				) : (
+					<audio muted src=""></audio>
+				)}
 			</div>
 		);
 	}
 
-  return <div className="w-20 h-32"></div>;
+	return <div className="w-20 h-32"></div>;
 }

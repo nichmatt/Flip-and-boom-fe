@@ -41,7 +41,7 @@ export default function NavigationBar() {
 						{profile?.balance}
 					</p>
 					<p className="px-[30px] text-[#fff] italic">
-						LV : {experience(profile?.exprience)}
+						LV : {experience(profile?.experience)}
 					</p>
 					<p className="px-[30px] text-[#fff] italic">{profile?.username}</p>
 				</div>
