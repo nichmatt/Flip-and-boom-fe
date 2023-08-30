@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBuyItem, fetchGetTokenMidtrans } from "../actionCreators/payment";
+import { setErrorMessage } from "../actionCreators";
 export default function CardShop({
   imgUrl,
   itemName,
@@ -11,7 +12,7 @@ export default function CardShop({
 }) {
   const dispatch = useDispatch();
 
-  const { inventories } = useSelector((state) => state.userReducer);
+  const { inventories, profile } = useSelector((state) => state.userReducer);
 
   const checkOwnedItem = () => {
     return inventories ? inventories.some((el) => el.Item.id == itemId) : null;
@@ -21,17 +22,23 @@ export default function CardShop({
     if (type === "balance") {
       dispatch(fetchGetTokenMidtrans(itemPrice.split(" ")[1].replace(".", "")));
     } else if (type === "item" && checkOwnedItem() === false) {
-      const payload = {
-        ItemId: itemId,
-        price: null,
-      };
-      dispatch(fetchBuyItem(payload));
+      if (profile.balance < itemPrice) {
+        dispatch(setErrorMessage("Not Enough Balance"));
+      } else {
+        const payload = {
+          ItemId: itemId,
+          price: null,
+        };
+        dispatch(fetchBuyItem(payload));
+      }
     }
   };
 
   return (
     <section
-      className={`w-[250px] h-[325px] bg-[rgba(0,0,0,0.3)] rounded-[5px] m-[10px] hover:bg-[rgba(231,231,231,0.3)] duration-300 hover:scale-[1.05] relative ${checkOwnedItem() ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+      className={`w-[250px] h-[325px] bg-[rgba(0,0,0,0.3)] rounded-[5px] m-[10px] hover:bg-[rgba(231,231,231,0.3)] duration-300 hover:scale-[1.05] relative ${
+        checkOwnedItem() ? "cursor-not-allowed" : "cursor-pointer"
+      }`}
       onClick={handleClickCard}
     >
       <img
@@ -63,7 +70,7 @@ export default function CardShop({
       </div>
       {type === "item" && checkOwnedItem() ? (
         <div className="absolute w-full h-full top-0 flex justify-center items-center">
-          <span className="text-white text-6xl font-extrabold text-center  rotate-45 opacity-50">
+          <span className="text-white text-6xl font-extrabold text-center rotate-45 opacity-50 uppercase">
             Owned
           </span>
         </div>
