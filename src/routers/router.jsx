@@ -12,7 +12,8 @@ import InventoryPage from "../pages/InventoryPage";
 import NewsPage from "../pages/NewsPage";
 import LoadingScreen from "../components/LoadingScreen";
 import LandingPage from "../pages/LandingPage";
-import TutorialPage from "../pages/TutorialPage";
+import TutorialPage from "../pages/TutorialPage.jsx";
+import { EmblaCarousel } from "../components/EmblaCarousel";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,7 @@ const router = createBrowserRouter([
         ],
       },
       { path: "/play", element: <PlayPage /> },
+      { path: "/testing", element: <EmblaCarousel /> },
     ],
   },
   {
