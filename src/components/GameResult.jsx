@@ -1,5 +1,4 @@
   import { setMusicSetting } from "../actionCreators";
-import { scoreCalculation } from "../helpers";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 

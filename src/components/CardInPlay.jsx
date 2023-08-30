@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useState, useRef, useEffect } from "react";
+import { useState,  useEffect } from "react";
 
 import defaultSkin from "/assets/card/black-card/back-card.png";
 import ceruleanSkin from "/assets/card/blue-card/back-card.png";
@@ -60,7 +60,6 @@ import citrusBomb from "/assets/card/orange-card/-75.png";
 export default function CardInPlay({ handleClick, card, index, shown, flip }) {
 
 	const { profile } = useSelector((state) => state.userReducer);
-  const { selectedSkin } = useSelector((state) => state.selectedReducer);
   const [canPlay, setCanplay] = useState(false);
   const [urlAudio, setUrlAudio] = useState("");
   const list = [
