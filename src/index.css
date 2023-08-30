@@ -19,3 +19,18 @@
 .embla__slide {
   width: 100%;
 }
+
+.continuous-slide {
+  animation: slide-continuous 15s linear infinite;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+@keyframes slide-continuous {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
