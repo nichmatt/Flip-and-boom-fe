@@ -45,8 +45,32 @@ export default function PlayPage() {
 	const [totalTurn, setTotalTurn] = useState(0);
 	const [showGameResult, setShowGameResult] = useState(false);
 	const [skipTurn, setSkipTurn] = useState(false);
-	const [throwBomb, setThrowBomb] = useState(false);
+
+	const [throwBomb100, setThrowBomb100] = useState(false);
+	const [throwBomb125, setThrowBomb125] = useState(false);
+	const [throwBomb150, setThrowBomb150] = useState(false);
+	const [throwBomb175, setThrowBomb175] = useState(false);
+	const [throwBomb200, setThrowBomb200] = useState(false);
+	const [throwBomb210, setThrowBomb210] = useState(false);
+	const [throwBomb220, setThrowBomb220] = useState(false);
+	const [throwBomb250, setThrowBomb250] = useState(false);
 	const [boom, setBoom] = useState(false);
+
+	const [throwBombSelf100, setThrowBombSelf100] = useState(false);
+	const [throwBombSelf125, setThrowBombSelf125] = useState(false);
+	const [throwBombSelf150, setThrowBombSelf150] = useState(false);
+	const [throwBombSelf175, setThrowBombSelf175] = useState(false);
+	const [throwBombSelf200, setThrowBombSelf200] = useState(false);
+	const [throwBombSelf210, setThrowBombSelf210] = useState(false);
+	const [throwBombSelf220, setThrowBombSelf220] = useState(false);
+	const [throwBombSelf250, setThrowBombSelf250] = useState(false);
+	const [boomSelf, setBoomSelf] = useState(false);
+
+	const [wobbleCpu, setWobbleCpu] = useState(false);
+	const [wobbleSelf, setWobbleSelf] = useState(false);
+	const [shakeCpu, setshakeCpu] = useState(false);
+	const [shakeSelf, setshakeSelf] = useState(false);
+
 	const [aiMemory, setAiMemory] = useState({
 		250: [],
 		220: [],
@@ -75,7 +99,9 @@ export default function PlayPage() {
 			board,
 			setBoard,
 			aiMemory,
-			setAiMemory
+			setAiMemory,
+			setshakeSelf,
+			setBoomSelf
 		);
 	};
 
@@ -92,6 +118,18 @@ export default function PlayPage() {
 		setAiMemory,
 		skipTurn,
 		setSkipTurn,
+		setWobbleSelf,
+		setshakeCpu,
+		setBoomSelf,
+		setBoom,
+    setThrowBombSelf100,
+    setThrowBombSelf125,
+    setThrowBombSelf150,
+    setThrowBombSelf175,
+    setThrowBombSelf200,
+    setThrowBombSelf210,
+    setThrowBombSelf220,
+    setThrowBombSelf250,
 	};
 
 	// created lifecycle
@@ -120,7 +158,15 @@ export default function PlayPage() {
 				aiMemory,
 				setAiMemory,
 				setBoom,
-				setThrowBomb
+				setThrowBomb100,
+				setThrowBomb125,
+				setThrowBomb150,
+				setThrowBomb175,
+				setThrowBomb200,
+				setThrowBomb210,
+				setThrowBomb220,
+				setThrowBomb250,
+				setWobbleCpu
 			);
 	}, [chosenCard]);
 
@@ -189,7 +235,27 @@ export default function PlayPage() {
 					setEnemyHp={setEnemyHp}
 					turn={turn}
 					boom={boom}
-					throwBomb={throwBomb}
+					throwBomb100={throwBomb100}
+					throwBomb125={throwBomb125}
+					throwBomb150={throwBomb150}
+					throwBomb175={throwBomb175}
+					throwBomb200={throwBomb200}
+					throwBomb210={throwBomb210}
+					throwBomb220={throwBomb220}
+					throwBomb250={throwBomb250}
+					boomSelf={boomSelf}
+					throwBombSelf100={throwBombSelf100}
+					throwBombSelf125={throwBombSelf125}
+					throwBombSelf150={throwBombSelf150}
+					throwBombSelf175={throwBombSelf175}
+					throwBombSelf200={throwBombSelf200}
+					throwBombSelf210={throwBombSelf210}
+					throwBombSelf220={throwBombSelf220}
+					throwBombSelf250={throwBombSelf250}
+					wobbleCpu={wobbleCpu}
+					wobbleSelf={wobbleSelf}
+					shakeCpu={shakeCpu}
+					shakeSelf={shakeSelf}
 				/>
 
 				{/* card playing arena */}
