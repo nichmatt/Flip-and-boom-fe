@@ -1,5 +1,6 @@
 import { FETCHSHOP, FILTERITEMSHOP } from "../actionType";
 import axios from "axios";
+import { API_URL } from "../config";
 export function actionSetShopData(payload) {
   return {
     type: FETCHSHOP,
@@ -17,7 +18,7 @@ export function actionFilterShopData(payload) {
 export function fetchShopData() {
   return async function (dispatch, getState) {
     try {
-      const response = await axios.get("http://localhost:3000/items", {
+      const response = await axios.get(API_URL + "/items", {
         headers: {
           access_token: localStorage.getItem("access_token"),
         },

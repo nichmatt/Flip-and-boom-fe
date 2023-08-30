@@ -1,6 +1,7 @@
 import { GETLEADERBOARD, FILTERLEADERBOARD } from "../actionType";
 import axios from "axios";
 import { setErrorMessage } from "./messageModal";
+import { API_URL } from "../config";
 
 export function actionSetLeaderboardData(payload) {
   return {
@@ -20,7 +21,7 @@ export function getLeaderboard(difficulty = "easy") {
   return async function (dispatch, getState) {
     try {
       const response = await axios.get(
-        `http://localhost:3000/leaderboard?difficulty=${difficulty}`,
+        `${API_URL}/leaderboard?difficulty=${difficulty}`,
         {
           headers: {
             access_token: localStorage.getItem("access_token"),
