@@ -90,7 +90,7 @@ export default function CardInPlay({
 		return (
 			<div
 				onClick={handleClick}
-				className="w-[6.35rem] h-36 bg-transparent"
+				className="w-[6.35rem] h-36 bg-transparent hover:scale-105 cursor-pointer duration-200"
 				value={card}
 				index={index}
 				style={{ perspective: "1000px" }}

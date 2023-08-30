@@ -70,6 +70,8 @@ export default function PowerUpModal({
 					break;
 				}
 
+        dispatch(fetchBuyItem({ ItemId: null, price }));
+
 				await handleClick();
 
 				setSkipTurn(true);
@@ -83,6 +85,8 @@ export default function PowerUpModal({
 					setErrorBalance(true);
 					break;
 				}
+
+        dispatch(fetchBuyItem({ ItemId: null, price }));
 
 				const clonedBoard = structuredClone(board);
 

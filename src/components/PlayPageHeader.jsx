@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import defaultChar from "/assets/character/default.png";
 import smolderingDetonation from "/assets/character/smoldering-detonation.png";
@@ -11,6 +11,10 @@ import normalGuy from "/assets/character/normal-guy.png";
 import owen from "/assets/character/owen.png";
 import vampiricBlaster from "/assets/character/vampiric-blaster.png";
 
+// effects
+import attackBomb from "/assets/bomb/bomb-08.png";
+import explosion from "/explosion/explosion.png";
+
 import NumberTween from "./NumberTween";
 
 export default function PlayPageHeader({
@@ -19,6 +23,8 @@ export default function PlayPageHeader({
 	setHp,
 	setEnemyHp,
 	turn,
+	boom,
+	throwBomb,
 }) {
 	const { profile } = useSelector((state) => state.userReducer);
 	const { gameMode } = useSelector((state) => state.gameModeReducer);
@@ -31,7 +37,18 @@ export default function PlayPageHeader({
 	}, []);
 
 	return (
-		<div className="flex h-32 mx-44 justify-between text-white italic font-bold relative">
+		<div className="flex h-32 mx-auto justify-between text-white italic font-bold relative w-[84.1rem]">
+			{throwBomb && (
+				<div className="absolute w-24 top-10 left-0 animate-attackBomb">
+					<img src={attackBomb} className="" />
+				</div>
+			)}
+			{boom && (
+				<div className="absolute w-24 top-8 right-0 z-50 animate__animated animate__zoomIn scale-[1.75]">
+					<img src={explosion} className="" />
+				</div>
+			)}
+
 			{turn == "user" ? (
 				<div className="absolute -left-28 top-[25%] flex flex-col items-center text-xl animate__animated animate__bounceIn gap-y-[0.35rem]">
 					<div>
@@ -75,7 +92,7 @@ export default function PlayPageHeader({
 					<div>CPU Turn</div>
 				</div>
 			) : null}
-			<div className="w-32 h-32 rotate-[10deg]">
+			<div className="w-32 h-32 relative">
 				<img
 					src={
 						profile?.selectedChar == "mr-king"
@@ -96,6 +113,7 @@ export default function PlayPageHeader({
 							? vampiricBlaster
 							: defaultChar
 					}
+					className="rotate-[10deg]"
 				/>
 			</div>
 			<div className="flex flex-col justify-end pb-7">

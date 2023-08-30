@@ -40,6 +40,10 @@ export const afterFlip2Card = async (
 
 		await pause();
 
+    
+
+    await pause();
+
 		removeCardFromBoard(board, setBoard, chosenCard);
 	} else {
 		await pause();
