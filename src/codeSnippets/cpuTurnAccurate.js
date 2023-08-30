@@ -7,19 +7,30 @@ import {
 } from "../helpers";
 
 export const cpuTurnAccurate = async ({
-  board,
-  setEnemyHp,
-  enemyHp,
-  setTurn,
-  setHp,
-  hp,
-  setBoard,
-  aiMemory,
-  setAiMemory,
-}) => {
-  console.log("aipintar");
 
-  console.log(aiMemory, "<<<<");
+	board,
+	setEnemyHp,
+	enemyHp,
+	setTurn,
+	setHp,
+	hp,
+	setBoard,
+	aiMemory,
+	setAiMemory,
+	skipTurn,
+	setSkipTurn,
+}) => {
+	if (skipTurn) {
+		setTurn("user");
+
+		setSkipTurn(false);
+
+		return;
+	}
+
+	console.log("aipintar");
+
+	console.log(board);
 
   console.log(board);
 
@@ -59,7 +70,8 @@ export const cpuTurnAccurate = async ({
 
       hp - score <= 0 ? setHp(0) : setHp(hp - score);
 
-      if (hp - score <= 0) return;
+
+			setTurn("cpuwait");
 
       setTurn("wait");
 
@@ -148,8 +160,7 @@ export const cpuTurnAccurate = async ({
 
     hp - damageDealtToUser <= 0 ? setHp(0) : setHp(hp - damageDealtToUser);
 
-    if (hp - damageDealtToUser <= 0) return;
-
+		setTurn("cpuwait");
     setTurn("wait");
 
     await pause();
@@ -178,7 +189,8 @@ export const cpuTurnAccurate = async ({
     if (secondRandomCard[0].value == "bomb") {
       enemyHp - 75 <= 0 ? setEnemyHp(0) : setEnemyHp(enemyHp - 75);
 
-      if (enemyHp - 75 <= 0) return;
+
+			setTurn("cpuwait");
 
       setTurn("wait");
 
@@ -212,7 +224,8 @@ export const cpuTurnAccurate = async ({
 
       hp - damageDealtToUser <= 0 ? setHp(0) : setHp(hp - damageDealtToUser);
 
-      if (hp - damageDealtToUser <= 0) return;
+
+			setTurn("cpuwait");
 
       setTurn("wait");
 
@@ -224,17 +237,8 @@ export const cpuTurnAccurate = async ({
 
       setTurn("user");
 
-      return;
+
     }
   }
 
-  setTurn("wait");
-
-  await pause();
-
-  flipClose(board, setBoard);
-
-  await pause();
-
-  setTurn("user");
 };

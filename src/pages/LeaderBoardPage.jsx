@@ -18,13 +18,7 @@ export default function LeaderBoardPage() {
 
   useEffect(() => {
     dispatch(getLeaderboard(difficulty));
-    // console.log(data);
   }, []);
-
-  useEffect(() => {
-    console.log(data);
-    console.log(page, "ini page sekarang");
-  }, [data]);
 
   return (
     <>
@@ -163,7 +157,7 @@ export default function LeaderBoardPage() {
             {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
             <tbody>
               {data.map((el, index) => {
-                return (
+                return el[`${difficulty}Score`] !== null ? (
                   <tr className="hover:bg-[rgba(2,255,247,0.5)] text-center duration-300 ">
                     <td className="py-5 border-b border-[#20203E] text-slate-50 ">
                       {index + 1}
@@ -178,6 +172,8 @@ export default function LeaderBoardPage() {
                       {el[`${difficulty}Score`]}
                     </td>
                   </tr>
+                ) : (
+                  ""
                 );
               })}
             </tbody>

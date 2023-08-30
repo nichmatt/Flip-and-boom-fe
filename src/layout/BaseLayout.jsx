@@ -6,12 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile, setMusicSetting } from "../actionCreators";
 import { useEffect } from "react";
 import ErrorModal from "../components/ErrorModal";
+import MessageModal from "../components/MessageModal";
 
 export default function BaseLayout() {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.userReducer);
   const { music } = useSelector((state) => state.settingReducer);
-  const { error } = useSelector((state) => state.messageReducer);
+  const { error, message } = useSelector((state) => state.messageReducer);
 
   useEffect(() => {
     dispatch(fetchUserProfile());
@@ -31,8 +32,9 @@ export default function BaseLayout() {
         <SIdeBar />
         <Outlet />
         {loading ? <LoadingScreen /> : ""}
-        {error ? (<ErrorModal message={error} />) : ''}
-        
+        {error ? <ErrorModal message={error} /> : ""}
+        {message ? <MessageModal message={message} /> : ""}
+
         {music ? (
           <audio loop autoPlay src="/assets/audio/lobby_BGM.mp3">
             <source src="/assets/audio/lobby_BGM.mp3" type="audio/mp3"></source>

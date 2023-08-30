@@ -9,9 +9,10 @@ export default function PlayPageArena({ board, handleClick }) {
 						return (
 							<CardInPlay
 								key={index}
-								card={card.value}
-								shown={card.shown}
-								flip={card.flip}
+								card={card?.value}
+								shown={card?.shown}
+								flip={card?.flip}
+								flash={card?.flash}
 								index={index}
 								handleClick={handleClick}
 							/>

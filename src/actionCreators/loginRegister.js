@@ -1,10 +1,13 @@
 import { redirect } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../config";
+import { setErrorMessage, setResponseMessage } from "./messageModal";
+import { setLoading } from "./fetchUserProfile";
 
 export function actionLogin(payload) {
   return async (dispatch, getState) => {
     try {
+      dispatch(setLoading(true))
       const { data } = await axios({
         method: "post",
         url: API_URL + "/login",
@@ -17,9 +20,11 @@ export function actionLogin(payload) {
         ? localStorage.setItem("access_token", data.access_token)
         : null;
       data.access_token ? localStorage.setItem("email", payload.email) : null;
-      redirect("/play");
+      dispatch(setLoading(false))
+      dispatch(setResponseMessage('Success login'))
     } catch (error) {
-      dispatch(setErrorMessage(error.message))
+      const errorMessage = error.response.data.message || error.message
+      dispatch(setErrorMessage(errorMessage))
     }
   };
 }
@@ -27,6 +32,7 @@ export function actionLogin(payload) {
 export function actionRegister(payload) {
   return async (dispatch, getState) => {
     try {
+      dispatch(setLoading(true))
       const { data } = await axios({
         method: "post",
         url: API_URL + "/register",
@@ -35,9 +41,12 @@ export function actionRegister(payload) {
       if (data.statusCode >= 400) {
         throw { message: data.message };
       }
+      // message succes
+      dispatch(setLoading(false))
+      dispatch(setResponseMessage('success register'))
     } catch (error) {
-      alert(error.message, "failed");
-      dispatch(setErrorMessage(error.message))
+      const errorMessage = error.response.data.message || error.message
+      dispatch(setErrorMessage(errorMessage))
     }
   };
 }
