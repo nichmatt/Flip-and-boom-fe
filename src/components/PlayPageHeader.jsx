@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useSpring, animated } from "react-spring";
+
 
 import defaultChar from "/assets/character/default.png";
 import smolderingDetonation from "/assets/character/smoldering-detonation.png";
@@ -10,6 +12,7 @@ import crimsonSpecter from "/assets/character/crimson-specter.png";
 import normalGuy from "/assets/character/normal-guy.png";
 import owen from "/assets/character/owen.png";
 import vampiricBlaster from "/assets/character/vampiric-blaster.png";
+
 
 // effects
 import bomb100 from "/assets/bomb/bomb-01.png";
@@ -58,6 +61,21 @@ export default function PlayPageHeader({
 }) {
   const { profile } = useSelector((state) => state.userReducer);
   const { gameMode } = useSelector((state) => state.gameModeReducer);
+
+  const props = useSpring({
+    val: hp,
+    from: {
+      val: 0,
+    },
+  });
+
+  const props2 = useSpring({
+    val: enemyHp,
+    from: {
+      val: 0,
+    },
+  });
+
 
   // this const to rerender
   const abc = hp + 100;
@@ -233,7 +251,9 @@ export default function PlayPageHeader({
 			<div className="flex flex-col justify-end pb-7">
 				<div className="text-2xl flex justify-between px-4 mb-1">
 					<div>
-						HP : <NumberTween3 number={hp} />
+						HP : <animated.div className="number">
+                      {props.val.interpolate(val => Math.floor(val) )}
+                    </animated.div>
 					</div>
 					<div>{profile?.username?.toUpperCase()}</div>
 				</div>
@@ -254,7 +274,9 @@ export default function PlayPageHeader({
 				<div className="text-2xl flex justify-between px-4 mb-1">
 					<div>{gameMode}</div>
 					<div>
-						HP : <NumberTween4 number={enemyHp} />
+						HP : <animated.div className="number">
+                      {props2.val.interpolate(val => Math.floor(val) )}
+                    </animated.div>
 					</div>
 				</div>
 				<div className="h-6 w-[25rem] bg-black rounded-2xl border">

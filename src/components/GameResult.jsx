@@ -2,11 +2,10 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, redirect } from "react-router-dom";
+import { useSpring, animated } from "react-spring";
 
 import { pause } from "../helpers";
 
-import NumberTween from "./NumberTween";
-import NumberTween2 from "./NumberTween2";
 import Card1 from "/assets/card/amethyst.png";
 import Card2 from "/assets/card/citrus.png";
 // import { fetchUserScoreExp } from "../actionCreators/updateUser";
@@ -19,6 +18,19 @@ export default function GameResult({ hp, totalTurn }) {
   const [score, setScore] = useState(0);
   const [exp, setExp] = useState(0);
   const [showCard, setShowCard] = useState(false);
+  const props = useSpring({
+    val: score,
+    from: {
+      val: 0,
+    },
+  });
+
+  const props2 = useSpring({
+    val: exp,
+    from: {
+      val: 0,
+    },
+  });
 
   useEffect(() => {
     if (hp > 0) {
@@ -28,7 +40,7 @@ export default function GameResult({ hp, totalTurn }) {
         let tempScore = 0;
 
         for (let i = 1; i <= hp; i++) {
-          tempScore += 2 + 2 * (i / 1000);
+          tempScore += 1 + 1 * (i / 1000);
         }
 
         tempScore = Math.floor(tempScore);
@@ -37,7 +49,7 @@ export default function GameResult({ hp, totalTurn }) {
 
         await pause(3000);
 
-        tempScore += Math.floor(100000 / totalTurn);
+        tempScore += Math.floor(25000 / totalTurn);
 
         setScore(tempScore);
 
@@ -61,9 +73,6 @@ export default function GameResult({ hp, totalTurn }) {
             break;
         }
         setShowCard(true);
-        // console.log(score);
-        // console.log(exp);
-        // console.log(gameMode);
       })();
     } else {
       setShowCard(true);
@@ -77,7 +86,7 @@ export default function GameResult({ hp, totalTurn }) {
         score,
         experience: exp,
       };
-      // dispatch(fetchUserScoreExp(payload));
+      dispatch(fetchUserScoreExp(payload));
       console.log(payload, "<<<< ini payload");
     }
     if (choice === "leaderboard") {
@@ -114,17 +123,26 @@ export default function GameResult({ hp, totalTurn }) {
                   {totalTurn}
                 </h2>
               </div>
-              {hp > 0 ? (<>
-                <h1>
-                  SCORE : <NumberTween number={score} />
-                </h1>
-                <h1>
-                  EXPERIENCE : <NumberTween2 number={exp} />
-                </h1>
-              </>) : (<>
-                <h1>You Lose</h1>
-              </>)}
-              
+              {hp > 0 ? (
+                <>
+                  <h1>
+                    {/* SCORE : <NumberTween number={score} /> */}
+                    SCORE : <animated.div className="number">
+                      {props.val.interpolate(val => Math.floor(val) )}
+                    </animated.div>
+                  </h1>
+                  <h1>
+                    {/* EXPERIENCE : <NumberTween2 number={exp} /> */}
+                    EXPERIENCE : <animated.div className="number">
+                      {props2.val.interpolate(val => Math.floor(val) )}
+                    </animated.div>
+                  </h1>
+                </>
+              ) : (
+                <>
+                  <h1>You Lose</h1>
+                </>
+              )}
             </div>
             {showCard ? (
               <div
