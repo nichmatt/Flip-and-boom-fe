@@ -37,6 +37,7 @@ export default function ShopPage() {
     dispatch(fetchSuccesPayment(payloadDispatch));
   };
   const { datas, filter } = useSelector((state) => state.fetchShopReducer);
+
   const handlePay = (tokenMidtrans) => {
     snap.pay(tokenMidtrans, {
       onSuccess: function (result) {
@@ -64,7 +65,7 @@ export default function ShopPage() {
     if (token) {
       handlePay(token);
     }
-    console.log(token);
+    // console.log(token);
   }, [token]);
 
   useEffect(() => {

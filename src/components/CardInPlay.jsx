@@ -82,7 +82,7 @@ export default function CardInPlay({ handleClick, card, index, shown, flip }) {
     return (
       <div
         onClick={handleClick}
-        className="w-[6.35rem] h-36 bg-transparent hover:cursor-pointer hover:scale-125"
+        className="w-[6.35rem] h-36 bg-transparent hover:cursor-pointer hover:scale-105 transition-all duration-100"
         value={card}
         index={index}
         style={{ perspective: "1000px" }}

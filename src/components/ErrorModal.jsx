@@ -13,12 +13,12 @@ export default function ErrorModal({ message }) {
         onClick={handleClose}
       />
       <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[35] ">
-        <div className="w-[30rem] h-[20rem] bg-slate-100 rounded-xl flex flex-col items-center animate__animated animate__shakeX animate__fast">
+        <div className="w-[20rem] h-[15rem] bg-slate-100 rounded-xl flex flex-col items-center animate__animated animate__shakeX animate__fast">
           <div className="my-5 drop-shadow-md shadow-black">
             <svg
               className="text-red-600 animate__animated animate__pulse animate__infinite"
-              width="120"
-              height="100"
+              width="80"
+              height="70"
               fill="none"
               stroke="currentColor"
               strokeLinecap="round"
@@ -33,14 +33,14 @@ export default function ErrorModal({ message }) {
             </svg>
           </div>
           <div className="mx-10">
-            <p className="text-center text-4xl font-bold text-black uppercase">
+            <p className="text-center text-2xl font-bold text-black uppercase">
               Error
             </p>
-            <h1 className="text-xl">{message}</h1>
+            <h1 className="text-lg">{message}</h1>
           </div>
           <div className="my-5">
             <button
-              className="py-2 px-5 border border-black rounded-md bg-sky-500 text-lg font-semibold active:bg-sky-700 shadow-sm hover:shadow-md shadow-black"
+              className="py-1 px-3 border border-black rounded-md bg-sky-500 text-lg font-semibold active:bg-sky-700 shadow-sm hover:shadow-md shadow-black"
               onClick={handleClose}
             >
               Close
