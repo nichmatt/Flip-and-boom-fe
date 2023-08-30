@@ -29,7 +29,7 @@ export default function Login({ statusSetter }) {
     try {
       event.preventDefault();
       if (!form.email || !form.password)
-        throw { message: "All field is require" };
+        throw { message: "All field is required" };
       await dispatch(actionLogin(form));
       navigate("/home");
     } catch (error) {

@@ -28,8 +28,6 @@ export const handleUserCardClick = async (
 
 	flipOpen(board, setBoard, index);
 
-	// console.log(`FLIP KE-${chosenCard.length + 1} : ${value}`);
-
 	const clonedAiMemory = structuredClone(aiMemory);
 
 	let pushChecker = true;
@@ -50,7 +48,7 @@ export const handleUserCardClick = async (
 	if (value == "bomb") {
 		setBoomSelf(true);
 
-    setTurn("wait");
+		setTurn("wait");
 
 		await pause(900);
 
@@ -62,7 +60,9 @@ export const handleUserCardClick = async (
 
 		resetChosenCard();
 
-		setHp(hp - 75);
+		hp - 75 <= 0 ? setHp(0) : setHp(hp - 75);
+
+		if (hp - 75 <= 0) return;
 
 		await pause();
 
