@@ -5,13 +5,14 @@ import { setErrorMessage, setResponseMessage } from "./messageModal";
 import { MIDTRANSSETOKEN } from "../actionType";
 
 export const getTokenMidtrans = (payload) => {
-    return {
-        type: MIDTRANSSETOKEN,
-        payload
-    }
-}
+  return {
+    type: MIDTRANSSETOKEN,
+    payload,
+  };
+};
 
 export function fetchGetTokenMidtrans(amount) {
+
     return async (dispatch) => {
         try {
             dispatch(setLoading(true))
@@ -28,11 +29,12 @@ export function fetchGetTokenMidtrans(amount) {
         } finally {
             dispatch(setLoading(false))
         }
-    }
+      );
+    
 }
 
-
 export function fetchSuccesPayment(payload) {
+
     return async (dispatch) => {
         try {
             dispatch(setLoading(true))
@@ -49,10 +51,12 @@ export function fetchSuccesPayment(payload) {
         } finally {
             dispatch(setLoading(false))
         }
-    }
+    
+  };
 }
 
 export function fetchBuyItem(payload) {
+
     return async (dispatch) => {
         try {
             dispatch(setLoading(true))
@@ -69,5 +73,6 @@ export function fetchBuyItem(payload) {
             dispatch(setLoading(false))
             dispatch(setErrorMessage(error.response.data.message))
         }
-    }
+    
+  };
 }

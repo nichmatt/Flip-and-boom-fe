@@ -89,7 +89,7 @@ export default function Login({ statusSetter }) {
           <img
             onClick={login}
             className="absolute w-[60px] left-[72%] hover:opacity-0 opacity-100 hover:hidden cursor-[url('/assets/lighter.svg'),_pointer] rounded-full"
-            src="/assets/logo/logo-05-unactive.png text-[#2a2550]"
+            src="/assets/logo/logo-05-unactive.png"
             alt=""
           />
         </div>

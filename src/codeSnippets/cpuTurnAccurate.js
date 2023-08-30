@@ -1,12 +1,13 @@
 import {
-	randomNumber,
-	pause,
-	removeCardFromBoard,
-	flipOpen,
-	flipClose,
+  randomNumber,
+  pause,
+  removeCardFromBoard,
+  flipOpen,
+  flipClose,
 } from "../helpers";
 
 export const cpuTurnAccurate = async ({
+
 	board,
 	setEnemyHp,
 	enemyHp,
@@ -31,218 +32,213 @@ export const cpuTurnAccurate = async ({
 
 	console.log(board);
 
-	const enemyCards = [];
+  console.log(board);
 
-	const clonedAiMemory = structuredClone(aiMemory);
+  const enemyCards = [];
 
-	const bombSet = new Set(clonedAiMemory?.bomb);
+  const clonedAiMemory = structuredClone(aiMemory);
 
-	const boardShownTrueOnlyWithoutBomb = structuredClone(board).filter(
-		(el) => el.shown && !bombSet.has(el.index)
-	);
+  const bombSet = new Set(clonedAiMemory?.bomb);
 
-	const loopSequence = [250, 220, 210, 200, 175, 150, 125, 100];
+  const boardShownTrueOnlyWithoutBomb = structuredClone(board).filter(
+    (el) => el.shown && !bombSet.has(el.index)
+  );
 
-	await pause();
+  const loopSequence = [250, 220, 210, 200, 175, 150, 125, 100];
 
-	for (let score of loopSequence) {
-		if (clonedAiMemory[score].length >= 2) {
-			const firstCard = boardShownTrueOnlyWithoutBomb.find(
-				(el) => el.index == clonedAiMemory[score][0]
-			);
+  await pause();
 
-			const newBoard = flipOpen(board, setBoard, clonedAiMemory[score][0]);
+  for (let score of loopSequence) {
+    if (clonedAiMemory[score].length >= 2) {
+      const firstCard = boardShownTrueOnlyWithoutBomb.find(
+        (el) => el.index == clonedAiMemory[score][0]
+      );
 
-			await pause();
+      const newBoard = flipOpen(board, setBoard, clonedAiMemory[score][0]);
 
-			const secondCard = boardShownTrueOnlyWithoutBomb.find(
-				(el) => el.index == clonedAiMemory[score][1]
-			);
+      await pause();
 
-			flipOpen(newBoard, setBoard, clonedAiMemory[score][1]);
+      const secondCard = boardShownTrueOnlyWithoutBomb.find(
+        (el) => el.index == clonedAiMemory[score][1]
+      );
 
-			clonedAiMemory[score].splice(0, 2);
+      flipOpen(newBoard, setBoard, clonedAiMemory[score][1]);
 
-			setAiMemory(clonedAiMemory);
+      clonedAiMemory[score].splice(0, 2);
 
-			hp - score <= 0 ? setHp(0) : setHp(hp - score);
+      setAiMemory(clonedAiMemory);
 
-			if (hp - score <= 0) return;
+      hp - score <= 0 ? setHp(0) : setHp(hp - score);
+
 
 			setTurn("cpuwait");
 
-			await pause();
+      setTurn("wait");
 
-			removeCardFromBoard(board, setBoard, [
-				[firstCard?.value, firstCard?.index],
-				[secondCard?.value, secondCard?.index],
-			]);
+      await pause();
 
-			await pause();
+      removeCardFromBoard(board, setBoard, [
+        [firstCard?.value, firstCard?.index],
+        [secondCard?.value, secondCard?.index],
+      ]);
 
-			setTurn("user");
+      await pause();
 
-			return;
-		}
-	}
+      setTurn("user");
 
-	const singleIndex = new Set();
+      return;
+    }
+  }
 
-	loopSequence.forEach((num) => {
-		clonedAiMemory[num].length && singleIndex.add(clonedAiMemory[num][0]);
-	});
+  const singleIndex = new Set();
 
-	const boardToRandomized = boardShownTrueOnlyWithoutBomb.filter(
-		(el) => !singleIndex.has(el.index)
-	);
+  loopSequence.forEach((num) => {
+    clonedAiMemory[num].length && singleIndex.add(clonedAiMemory[num][0]);
+  });
 
-	const firstRandomCard = boardToRandomized?.splice(
-		randomNumber(boardToRandomized),
-		1
-	);
+  const boardToRandomized = boardShownTrueOnlyWithoutBomb.filter(
+    (el) => !singleIndex.has(el.index)
+  );
 
-	console.log("KARTU PERTAMA CPU");
+  const firstRandomCard = boardToRandomized?.splice(
+    randomNumber(boardToRandomized),
+    1
+  );
 
-	const newBoard = flipOpen(board, setBoard, firstRandomCard[0].index);
+  console.log("KARTU PERTAMA CPU");
 
-	clonedAiMemory[firstRandomCard[0]?.value]?.push(firstRandomCard[0]?.index);
+  const newBoard = flipOpen(board, setBoard, firstRandomCard[0].index);
 
-	setAiMemory(clonedAiMemory);
+  clonedAiMemory[firstRandomCard[0]?.value]?.push(firstRandomCard[0]?.index);
 
-	if (firstRandomCard[0].value == "bomb") {
-		enemyHp - 75 <= 0 ? setEnemyHp(0) : setEnemyHp(enemyHp - 75);
+  setAiMemory(clonedAiMemory);
 
-		if (enemyHp - 75 <= 0) return;
+  if (firstRandomCard[0].value == "bomb") {
+    enemyHp - 75 <= 0 ? setEnemyHp(0) : setEnemyHp(enemyHp - 75);
 
-		await pause();
+    if (enemyHp - 75 <= 0) return;
 
-		flipClose(board, setBoard);
+    await pause();
 
-		await pause();
+    flipClose(board, setBoard);
 
-		setTurn("user");
+    await pause();
 
-		return;
-	}
+    setTurn("user");
 
-	enemyCards.push([firstRandomCard[0].value, firstRandomCard[0].index]);
+    return;
+  }
 
-	await pause();
+  enemyCards.push([firstRandomCard[0].value, firstRandomCard[0].index]);
 
-	console.log("KARTU KEDUA CPU");
+  await pause();
 
-	if (clonedAiMemory[firstRandomCard[0].value].length >= 2) {
-		const secondCard = board?.find(
-			(el) => el.index == clonedAiMemory[firstRandomCard[0].value][0]
-		);
+  console.log("KARTU KEDUA CPU");
 
-		enemyCards.push([secondCard.value, secondCard.index]);
+  if (clonedAiMemory[firstRandomCard[0].value].length >= 2) {
+    const secondCard = board?.find(
+      (el) => el.index == clonedAiMemory[firstRandomCard[0].value][0]
+    );
 
-		flipOpen(newBoard, setBoard, secondCard.index);
+    enemyCards.push([secondCard.value, secondCard.index]);
 
-		const damageDealtToUser = +enemyCards[0][0];
+    flipOpen(newBoard, setBoard, secondCard.index);
 
-		for (let i = 0; i < clonedAiMemory[damageDealtToUser]?.length; i++) {
-			if (
-				clonedAiMemory[damageDealtToUser][i] == enemyCards[0][1] ||
-				clonedAiMemory[damageDealtToUser][i] == enemyCards[1][1]
-			) {
-				clonedAiMemory[damageDealtToUser].splice(i, 1);
-				i--;
-			}
-		}
+    const damageDealtToUser = +enemyCards[0][0];
 
-		setAiMemory(clonedAiMemory);
+    for (let i = 0; i < clonedAiMemory[damageDealtToUser]?.length; i++) {
+      if (
+        clonedAiMemory[damageDealtToUser][i] == enemyCards[0][1] ||
+        clonedAiMemory[damageDealtToUser][i] == enemyCards[1][1]
+      ) {
+        clonedAiMemory[damageDealtToUser].splice(i, 1);
+        i--;
+      }
+    }
 
-		hp - damageDealtToUser <= 0 ? setHp(0) : setHp(hp - damageDealtToUser);
+    setAiMemory(clonedAiMemory);
 
-		if (hp - damageDealtToUser <= 0) return;
+    hp - damageDealtToUser <= 0 ? setHp(0) : setHp(hp - damageDealtToUser);
 
 		setTurn("cpuwait");
+    setTurn("wait");
 
-		await pause();
+    await pause();
 
-		removeCardFromBoard(board, setBoard, enemyCards);
+    removeCardFromBoard(board, setBoard, enemyCards);
 
-		await pause();
+    await pause();
 
-		setTurn("user");
+    setTurn("user");
 
-		return;
-	} else {
-		const secondRandomCard = boardToRandomized?.splice(
-			randomNumber(boardToRandomized),
-			1
-		);
+    return;
+  } else {
+    const secondRandomCard = boardToRandomized?.splice(
+      randomNumber(boardToRandomized),
+      1
+    );
 
-		flipOpen(newBoard, setBoard, secondRandomCard[0].index);
+    flipOpen(newBoard, setBoard, secondRandomCard[0].index);
 
-		clonedAiMemory[secondRandomCard[0]?.value]?.push(
-			secondRandomCard[0]?.index
-		);
+    clonedAiMemory[secondRandomCard[0]?.value]?.push(
+      secondRandomCard[0]?.index
+    );
 
-		setAiMemory(clonedAiMemory);
+    setAiMemory(clonedAiMemory);
 
-		if (secondRandomCard[0].value == "bomb") {
-			enemyHp - 75 <= 0 ? setEnemyHp(0) : setEnemyHp(enemyHp - 75);
+    if (secondRandomCard[0].value == "bomb") {
+      enemyHp - 75 <= 0 ? setEnemyHp(0) : setEnemyHp(enemyHp - 75);
 
-			if (enemyHp - 75 <= 0) return;
-
-			setTurn("cpuwait");
-
-			await pause();
-
-			flipClose(board, setBoard);
-
-			await pause();
-
-			setTurn("user");
-
-			return;
-		}
-
-		enemyCards.push([secondRandomCard[0].value, secondRandomCard[0].index]);
-
-		if (enemyCards[0][0] == enemyCards[1][0]) {
-			const damageDealtToUser = +enemyCards[0][0];
-
-			for (let i = 0; i < clonedAiMemory[damageDealtToUser]?.length; i++) {
-				if (
-					clonedAiMemory[damageDealtToUser][i] == enemyCards[0][1] ||
-					clonedAiMemory[damageDealtToUser][i] == enemyCards[1][1]
-				) {
-					clonedAiMemory[damageDealtToUser].splice(i, 1);
-					i--;
-				}
-			}
-
-			setAiMemory(clonedAiMemory);
-
-			hp - damageDealtToUser <= 0 ? setHp(0) : setHp(hp - damageDealtToUser);
-
-			if (hp - damageDealtToUser <= 0) return;
 
 			setTurn("cpuwait");
 
-			await pause();
+      setTurn("wait");
 
-			removeCardFromBoard(board, setBoard, enemyCards);
+      await pause();
 
-			await pause();
+      flipClose(board, setBoard);
 
-			setTurn("user");
+      await pause();
 
-			return;
-		}
-	}
+      setTurn("user");
 
-	setTurn("cpuwait");
+      return;
+    }
 
-	await pause();
+    enemyCards.push([secondRandomCard[0].value, secondRandomCard[0].index]);
 
-	flipClose(board, setBoard);
+    if (enemyCards[0][0] == enemyCards[1][0]) {
+      const damageDealtToUser = +enemyCards[0][0];
 
-	await pause();
+      for (let i = 0; i < clonedAiMemory[damageDealtToUser]?.length; i++) {
+        if (
+          clonedAiMemory[damageDealtToUser][i] == enemyCards[0][1] ||
+          clonedAiMemory[damageDealtToUser][i] == enemyCards[1][1]
+        ) {
+          clonedAiMemory[damageDealtToUser].splice(i, 1);
+          i--;
+        }
+      }
 
-	setTurn("user");
+      setAiMemory(clonedAiMemory);
+
+      hp - damageDealtToUser <= 0 ? setHp(0) : setHp(hp - damageDealtToUser);
+
+
+			setTurn("cpuwait");
+
+      setTurn("wait");
+
+      await pause();
+
+      removeCardFromBoard(board, setBoard, enemyCards);
+
+      await pause();
+
+      setTurn("user");
+
+
+    }
+  }
+
 };
