@@ -27,34 +27,33 @@ import NumberTween3 from "./NumberTween3";
 import NumberTween4 from "./NumberTween4";
 
 export default function PlayPageHeader({
-
-	hp,
-	enemyHp,
-	setHp,
-	setEnemyHp,
-	turn,
-	boom,
-	throwBomb100,
-	throwBomb125,
-	throwBomb150,
-	throwBomb175,
-	throwBomb200,
-	throwBomb210,
-	throwBomb220,
-	throwBomb250,
-	boomSelf,
-	throwBombSelf100,
-	throwBombSelf125,
-	throwBombSelf150,
-	throwBombSelf175,
-	throwBombSelf200,
-	throwBombSelf210,
-	throwBombSelf220,
-	throwBombSelf250,
-	wobbleCpu,
-	wobbleSelf,
-	shakeCpu,
-	shakeSelf,
+  hp,
+  enemyHp,
+  setHp,
+  setEnemyHp,
+  turn,
+  boom,
+  throwBomb100,
+  throwBomb125,
+  throwBomb150,
+  throwBomb175,
+  throwBomb200,
+  throwBomb210,
+  throwBomb220,
+  throwBomb250,
+  boomSelf,
+  throwBombSelf100,
+  throwBombSelf125,
+  throwBombSelf150,
+  throwBombSelf175,
+  throwBombSelf200,
+  throwBombSelf210,
+  throwBombSelf220,
+  throwBombSelf250,
+  wobbleCpu,
+  wobbleSelf,
+  shakeCpu,
+  shakeSelf,
 }) {
   const { profile } = useSelector((state) => state.userReducer);
   const { gameMode } = useSelector((state) => state.gameModeReducer);
@@ -63,103 +62,103 @@ export default function PlayPageHeader({
   const abc = hp + 100;
 
   useEffect(() => {
-    setHp(1000), setEnemyHp(1000);
+    setHp(1000), setEnemyHp(0);
   }, []);
 
-	return (
-		<div className="flex h-32 mx-auto justify-between text-white italic font-bold relative w-[84.1rem]">
-			{throwBomb100 && (
-				<div className="absolute w-24 top-10 left-0 animate-attackBomb">
-					<img src={bomb100} className="" />
-				</div>
-			)}
-			{throwBomb125 && (
-				<div className="absolute w-24 top-10 left-0 animate-attackBomb">
-					<img src={bomb125} className="" />
-				</div>
-			)}
-			{throwBomb150 && (
-				<div className="absolute w-24 top-10 left-0 animate-attackBomb">
-					<img src={bomb150} className="" />
-				</div>
-			)}
-			{throwBomb175 && (
-				<div className="absolute w-24 top-10 left-0 animate-attackBomb">
-					<img src={bomb175} className="" />
-				</div>
-			)}
-			{throwBomb200 && (
-				<div className="absolute w-24 top-10 left-0 animate-attackBomb">
-					<img src={bomb200} className="" />
-				</div>
-			)}
-			{throwBomb210 && (
-				<div className="absolute w-24 top-10 left-0 animate-attackBomb">
-					<img src={bomb210} className="" />
-				</div>
-			)}
-			{throwBomb220 && (
-				<div className="absolute w-24 top-10 left-0 animate-attackBomb">
-					<img src={bomb220} className="" />
-				</div>
-			)}
-			{throwBomb250 && (
-				<div className="absolute w-24 top-10 left-0 animate-attackBomb">
-					<img src={bomb250} className="" />
-				</div>
-			)}
+  return (
+    <div className="flex h-32 mx-auto justify-between text-white italic font-bold relative w-[84.1rem]">
+      {throwBomb100 && (
+        <div className="absolute w-24 top-10 left-0 animate-attackBomb">
+          <img src={bomb100} className="" />
+        </div>
+      )}
+      {throwBomb125 && (
+        <div className="absolute w-24 top-10 left-0 animate-attackBomb">
+          <img src={bomb125} className="" />
+        </div>
+      )}
+      {throwBomb150 && (
+        <div className="absolute w-24 top-10 left-0 animate-attackBomb">
+          <img src={bomb150} className="" />
+        </div>
+      )}
+      {throwBomb175 && (
+        <div className="absolute w-24 top-10 left-0 animate-attackBomb">
+          <img src={bomb175} className="" />
+        </div>
+      )}
+      {throwBomb200 && (
+        <div className="absolute w-24 top-10 left-0 animate-attackBomb">
+          <img src={bomb200} className="" />
+        </div>
+      )}
+      {throwBomb210 && (
+        <div className="absolute w-24 top-10 left-0 animate-attackBomb">
+          <img src={bomb210} className="" />
+        </div>
+      )}
+      {throwBomb220 && (
+        <div className="absolute w-24 top-10 left-0 animate-attackBomb">
+          <img src={bomb220} className="" />
+        </div>
+      )}
+      {throwBomb250 && (
+        <div className="absolute w-24 top-10 left-0 animate-attackBomb">
+          <img src={bomb250} className="" />
+        </div>
+      )}
 
-			{throwBombSelf100 && (
-				<div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
-					<img src={bomb100} className="" />
-				</div>
-			)}
-			{throwBombSelf125 && (
-				<div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
-					<img src={bomb125} className="" />
-				</div>
-			)}
-			{throwBombSelf150 && (
-				<div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
-					<img src={bomb150} className="" />
-				</div>
-			)}
-			{throwBombSelf175 && (
-				<div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
-					<img src={bomb175} className="" />
-				</div>
-			)}
-			{throwBombSelf200 && (
-				<div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
-					<img src={bomb200} className="" />
-				</div>
-			)}
-			{throwBombSelf210 && (
-				<div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
-					<img src={bomb210} className="" />
-				</div>
-			)}
-			{throwBombSelf220 && (
-				<div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
-					<img src={bomb220} className="" />
-				</div>
-			)}
-			{throwBombSelf250 && (
-				<div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
-					<img src={bomb250} className="" />
-				</div>
-			)}
+      {throwBombSelf100 && (
+        <div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
+          <img src={bomb100} className="" />
+        </div>
+      )}
+      {throwBombSelf125 && (
+        <div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
+          <img src={bomb125} className="" />
+        </div>
+      )}
+      {throwBombSelf150 && (
+        <div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
+          <img src={bomb150} className="" />
+        </div>
+      )}
+      {throwBombSelf175 && (
+        <div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
+          <img src={bomb175} className="" />
+        </div>
+      )}
+      {throwBombSelf200 && (
+        <div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
+          <img src={bomb200} className="" />
+        </div>
+      )}
+      {throwBombSelf210 && (
+        <div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
+          <img src={bomb210} className="" />
+        </div>
+      )}
+      {throwBombSelf220 && (
+        <div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
+          <img src={bomb220} className="" />
+        </div>
+      )}
+      {throwBombSelf250 && (
+        <div className="absolute w-24 top-10 right-0 animate-attackBombSelf">
+          <img src={bomb250} className="" />
+        </div>
+      )}
 
-			{boom && (
-				<div className="absolute w-24 top-8 right-4 z-50 animate__animated animate__zoomIn scale-[1.75]">
-					<img src={explosion} className="" />
-				</div>
-			)}
-			{boomSelf && (
-				<div className="absolute w-24 top-8 left-4 z-50 animate__animated animate__zoomIn scale-[1.75]">
-					<img src={explosion} className="" />
-				</div>
-			)}
+      {boom && (
+        <div className="absolute w-24 top-8 right-4 z-50 animate__animated animate__zoomIn scale-[1.75]">
+          <img src={explosion} className="" />
+        </div>
+      )}
+      {boomSelf && (
+        <div className="absolute w-24 top-8 left-4 z-50 animate__animated animate__zoomIn scale-[1.75]">
+          <img src={explosion} className="" />
+        </div>
+      )}
 
       {turn == "user" ? (
         <div className="absolute -left-28 top-[25%] flex flex-col items-center text-xl animate__animated animate__bounceIn gap-y-[0.35rem]">

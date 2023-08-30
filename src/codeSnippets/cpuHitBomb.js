@@ -1,44 +1,40 @@
 import { pause } from "../helpers";
 
 export const cpuHitBomb = async (
-	setBoom,
-	setshakeCpu,
-	enemyHp,
-	setEnemyHp,
-	setTurn,
-	flipClose,
+  setBoom,
+  setshakeCpu,
+  enemyHp,
+  setEnemyHp,
+  setTurn,
+  flipClose,
   board,
   setBoard
 ) => {
-	setBoom(true);
+  setBoom(true);
 
-	await pause(900);
+  await pause(900);
 
-	setshakeCpu(true);
+  setshakeCpu(true);
 
-	await pause(100);
+  await pause(100);
 
-	setBoom(false);
+  setBoom(false);
 
-	enemyHp - 75 <= 0 ? setEnemyHp(0) : setEnemyHp(enemyHp - 75);
+  enemyHp - 75 <= 0 ? setEnemyHp(0) : setEnemyHp(enemyHp - 75);
 
-  console.log('a');
+  if (enemyHp - 75 <= 0) return;
 
-	if (enemyHp - 75 <= 0) return;
+  setTurn("cpuwait");
 
-  console.log('b');
+  await pause();
 
-	setTurn("cpuwait");
+  flipClose(board, setBoard);
 
-	await pause();
+  await pause();
 
-	flipClose(board, setBoard);
+  setTurn("user");
 
-	await pause();
-
-	setTurn("user");
-
-	setshakeCpu(false);
+  setshakeCpu(false);
 
   return;
 };
