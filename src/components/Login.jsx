@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { actionLogin } from "../actionCreators/loginRegister";
+import { setErrorMessage } from "../actionCreators/messageModal";
 
 export default function Login({ statusSetter }) {
   const dispatch = useDispatch();
@@ -19,19 +20,20 @@ export default function Login({ statusSetter }) {
       ...form,
       [name]: value,
     });
-    console.log(form, "ini form nya");
+    // console.log(form, "ini form nya");
   };
-
   // end of handle input form
 
   //function login
   const login = async (event) => {
     try {
       event.preventDefault();
+      if(!form.email || !form.password) throw { message: 'All field is require'}
       await dispatch(actionLogin(form));
-      navigate("/home");
+      navigate('/home')
     } catch (error) {
-      console.log(error);
+      dispatch(setErrorMessage(error.message))
+      // console.log(error);
     }
   };
 
@@ -48,27 +50,29 @@ export default function Login({ statusSetter }) {
           <img src="/assets/logo/logo-03-shadow-01.png" alt="logo" />
         </div>
         <div className="text-[#2a2550] font-bold italic mt-[-25px]">LOGIN</div>
-        <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
-          <input
-            type="text"
-            placeholder="Email"
-            name="email"
-            value={form.email}
-            onChange={onChangeForm}
-            className="bg-transparent focus:outline-none  text-[#2a2550]"
-          />
-        </div>
+        <form onSubmit={login}>
+          <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
+            <input
+              type="text"
+              placeholder="Email"
+              name="email"
+              value={form.email}
+              onChange={onChangeForm}
+              className="bg-transparent focus:outline-none  text-[#2a2550]"
+            />
+          </div>
 
-        <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
-          <input
-            type="Password"
-            value={form.password}
-            name="password"
-            onChange={onChangeForm}
-            placeholder="Password"
-            className="bg-transparent focus:outline-none text-[#2a2550]"
-          />
-        </div>
+          <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
+            <input
+              type="Password"
+              value={form.password}
+              name="password"
+              onChange={onChangeForm}
+              placeholder="Password"
+              className="bg-transparent focus:outline-none text-[#2a2550]"
+            />
+          </div>
+        </form>
         <NavLink
           className="py-[5px] text-[12px] w-full text-blue-500"
           onClick={() => statusSetter()}

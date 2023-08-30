@@ -80,6 +80,7 @@ export default function CardInPlay({
 		setUrlAudio(list[index]);
 	};
 
+
 	useEffect(() => {
 		// console.log(card);
 		flip ? (card === "bomb" ? setUrlAudio("boom.mp3") : randomAudio()) : "";

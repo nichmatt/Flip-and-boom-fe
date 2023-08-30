@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { actionRegister } from "../actionCreators/loginRegister";
+import { setErrorMessage } from "../actionCreators/messageModal";
 
 export default function Register({ statusSetter }) {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ export default function Register({ statusSetter }) {
   const [form, setForm] = useState({
     email: "",
     password: "",
+    username:""
   });
 
   const onChangeForm = (event) => {
@@ -28,10 +30,12 @@ export default function Register({ statusSetter }) {
   const register = async (event) => {
     try {
       event.preventDefault();
+      if(!form.username || !form.email || !form.password) throw { message : 'All field is require'}
       await dispatch(actionRegister(form));
       statusSetter();
+      // navigate('/home')
     } catch (error) {
-      console.log(error);
+      dispatch(setErrorMessage(error.message))
     }
   };
 
@@ -50,36 +54,38 @@ export default function Register({ statusSetter }) {
         <div className="text-[#2a2550] font-bold italic mt-[-25px]">
           REGISTER
         </div>
-        <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px]">
-          <input
-            type="text"
-            placeholder="Username"
-            name="username"
-            value={form.username}
-            onChange={onChangeForm}
-            className="bg-transparent focus:outline-none text-[#2a2550] text-xl"
-          />
-        </div>
-        <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
-          <input
-            type="text"
-            placeholder="Email"
-            name="email"
-            value={form.email}
-            onChange={onChangeForm}
-            className="bg-transparent focus:outline-none  text-[#2a2550]"
-          />
-        </div>
-        <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
-          <input
-            type="Password"
-            placeholder="Password"
-            name="password"
-            value={form.password}
-            onChange={onChangeForm}
-            className="bg-transparent focus:outline-none  text-[#2a2550]"
-          />
-        </div>
+        <form onSubmit={register}>
+          <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px]">
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              value={form.username}
+              onChange={onChangeForm}
+              className="bg-transparent focus:outline-none text-[#2a2550] text-xl"
+            />
+          </div>
+          <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
+            <input
+              type="text"
+              placeholder="Email"
+              name="email"
+              value={form.email}
+              onChange={onChangeForm}
+              className="bg-transparent focus:outline-none  text-[#2a2550]"
+            />
+          </div>
+          <div className="border-b-[1px] border-white p-[7px] my-[7px] font-semibold italic tracking-tighter w-[300px] ">
+            <input
+              type="Password"
+              placeholder="Password"
+              name="password"
+              value={form.password}
+              onChange={onChangeForm}
+              className="bg-transparent focus:outline-none  text-[#2a2550]"
+            />
+          </div>
+        </form>
         <NavLink
           className="py-[5px] text-[12px] w-full text-blue-500"
           onClick={() => statusSetter()}
