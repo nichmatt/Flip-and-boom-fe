@@ -9,11 +9,25 @@ export const afterFlip2Card = async (
 	resetChosenCard,
 	setTurn,
 	aiMemory,
-	setAiMemory
+	setAiMemory,
+	setBoom,
+	setThrowBomb
 ) => {
 	setTurn("wait");
 
 	if (chosenCard[0][0] == chosenCard[1][0]) {
+		setThrowBomb(true);
+
+		await pause(2789);
+
+		setThrowBomb(false);
+
+		setBoom(true);
+
+		await pause(1000);
+
+		setBoom(false);
+
 		const damageDealtToEnemy = +chosenCard[0][0];
 
 		const clonedAiMemory = structuredClone(aiMemory);
@@ -40,9 +54,7 @@ export const afterFlip2Card = async (
 
 		await pause();
 
-    
-
-    await pause();
+		await pause();
 
 		removeCardFromBoard(board, setBoard, chosenCard);
 	} else {
