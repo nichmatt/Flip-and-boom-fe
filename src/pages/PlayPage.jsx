@@ -118,7 +118,9 @@ export default function PlayPage() {
 				resetChosenCard,
 				setTurn,
 				aiMemory,
-				setAiMemory
+				setAiMemory,
+				setBoom,
+				setThrowBomb
 			);
 	}, [chosenCard]);
 
