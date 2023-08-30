@@ -11,11 +11,11 @@ import PlayPageFooter from "../components/PlayPageFooter";
 
 // code snippets to shorten the code in PlayPage
 import {
-  handleUserCardClick,
-  cpuTurnRandom,
-  cpuTurnAccurate,
-  afterFlip2Card,
-  createdLifecycle,
+	handleUserCardClick,
+	cpuTurnRandom,
+	cpuTurnAccurate,
+	afterFlip2Card,
+	createdLifecycle,
 } from "../codeSnippets";
 
 // helpers
@@ -45,6 +45,8 @@ export default function PlayPage() {
 	const [totalTurn, setTotalTurn] = useState(0);
 	const [showGameResult, setShowGameResult] = useState(false);
 	const [skipTurn, setSkipTurn] = useState(false);
+	const [throwBomb, setThrowBomb] = useState(false);
+	const [boom, setBoom] = useState(false);
 	const [aiMemory, setAiMemory] = useState({
 		250: [],
 		220: [],
@@ -184,6 +186,8 @@ export default function PlayPage() {
 					setHp={setHp}
 					setEnemyHp={setEnemyHp}
 					turn={turn}
+					boom={boom}
+					throwBomb={throwBomb}
 				/>
 
 				{/* card playing arena */}
@@ -197,7 +201,7 @@ export default function PlayPage() {
 					setSkipTurn={setSkipTurn}
 					board={board}
 					setBoard={setBoard}
-          setTurn={setTurn}
+					setTurn={setTurn}
 				/>
 			</div>
 			<audio loop autoPlay ref={audioRef} src="/assets/audio/ingame_BGM.mp3">
