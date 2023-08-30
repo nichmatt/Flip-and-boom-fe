@@ -61,7 +61,7 @@ export default function PlayPageHeader({
   const abc = hp + 100;
 
   useEffect(() => {
-    setHp(1000), setEnemyHp(0);
+    setHp(1000), setEnemyHp(1000);
   }, []);
 
 	return (

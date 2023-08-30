@@ -6,7 +6,9 @@ export const cpuHitBomb = async (
 	enemyHp,
 	setEnemyHp,
 	setTurn,
-	flipClose
+	flipClose,
+  board,
+  setBoard
 ) => {
 	setBoom(true);
 
@@ -20,7 +22,11 @@ export const cpuHitBomb = async (
 
 	enemyHp - 75 <= 0 ? setEnemyHp(0) : setEnemyHp(enemyHp - 75);
 
+  console.log('a');
+
 	if (enemyHp - 75 <= 0) return;
+
+  console.log('b');
 
 	setTurn("cpuwait");
 
@@ -33,4 +39,6 @@ export const cpuHitBomb = async (
 	setTurn("user");
 
 	setshakeCpu(false);
+
+  return;
 };
