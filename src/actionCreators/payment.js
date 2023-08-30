@@ -2,10 +2,11 @@ import axios from "axios";
 import { fetchUserProfile, setLoading } from "./fetchUserProfile";
 import { API_URL } from "../config";
 import { setErrorMessage } from "./messageModal";
+import { MIDTRANSSETOKEN } from "../actionType";
 
 export const getTokenMidtrans = (payload) => {
     return {
-        type: 'midtrans/token',
+        type: MIDTRANSSETOKEN,
         payload
     }
 }
@@ -19,7 +20,7 @@ export function fetchGetTokenMidtrans(amount) {
                     access_token: localStorage.getItem('access_token')
                 }
             })
-            // console.log(data.token, 'ini response axios');
+            console.log(data.token, 'ini response axios');
             dispatch(getTokenMidtrans(data.token))
         } catch (error) {
             console.log(error);
@@ -43,7 +44,6 @@ export function fetchSuccesPayment(payload) {
             console.log(data, '<<<<<< response server after payment');
             // dispatch user
             dispatch(fetchUserProfile())
-            // dispatch profile lagi
         } catch (error) {
             console.log(error);
             dispatch(setErrorMessage(error.response.data.message))

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 export default function HomePage() {
   return (
     <>
-      <div className="w-full flex h-full ml-[17vw]">
+      <div className="hover:cursor-pointer w-full flex h-full ml-[17vw]">
         <div className="flex-1 w-full pt-36 justify-center items-center ">
           <div className="flex justify-center items-center relative">
             <div className="absolute rotate-[-15deg] left-[20vw] top-[14vh] hover:scale-100 hover:left-[15vw] transition-all delay-75 ease-in-out hover:drop-shadow-md">

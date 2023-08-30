@@ -11,11 +11,11 @@ import PlayPageFooter from "../components/PlayPageFooter";
 
 // code snippets to shorten the code in PlayPage
 import {
-	handleUserCardClick,
-	cpuTurnRandom,
-	cpuTurnAccurate,
-	afterFlip2Card,
-	createdLifecycle,
+  handleUserCardClick,
+  cpuTurnRandom,
+  cpuTurnAccurate,
+  afterFlip2Card,
+  createdLifecycle,
 } from "../codeSnippets";
 
 // helpers

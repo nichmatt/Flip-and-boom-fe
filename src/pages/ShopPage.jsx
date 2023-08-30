@@ -38,9 +38,10 @@ export default function ShopPage() {
   };
   const { datas, filter } = useSelector((state) => state.fetchShopReducer);
   const handlePay = (tokenMidtrans) => {
-    window.snap.pay(tokenMidtrans, {
+    snap.pay(tokenMidtrans, {
       onSuccess: function (result) {
         handleOnSucces(result);
+        console.log('aaaaaa');
       },
       onPending: function (result) {
         // pending handle
@@ -63,11 +64,13 @@ export default function ShopPage() {
     if (token) {
       handlePay(token);
     }
+    console.log(token);
   }, [token]);
 
   useEffect(() => {
     dispatch(fetchShopData());
     // console.log(datas);
+    // console.log(token);
   }, []);
 
   function handleCharacter() {

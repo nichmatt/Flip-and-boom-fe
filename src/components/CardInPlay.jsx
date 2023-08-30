@@ -259,5 +259,6 @@ export default function CardInPlay({
 		);
 	}
 
+
 	return <div className="w-20 h-32"></div>;
 }
