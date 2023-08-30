@@ -13,3 +13,5 @@ export const SETMUSICSETTING = "music/setMusicSetting"
 export const SETSFXAUDIOSETTING = "sfx/setSfxMusicSetting"
 export const SETERRORMESSAGE = "error/setErrorMessage"
 export const SETRESPONSEMESSAGE = "response/setResponseMessage"
+export const MIDTRANSSETOKEN = 'midtrans/token'
+export const MIDTRANSCHANGESTATUSPAYMENT = 'midtrans/statusPayment'

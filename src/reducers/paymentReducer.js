@@ -1,26 +1,26 @@
+import { MIDTRANSCHANGESTATUSPAYMENT, MIDTRANSSETOKEN } from "../actionType";
+
 const initialState = {
     token: '',
-    loading: false,
     status: ''
 }
 
 
 const paymentReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'midtrans/token':
+        case MIDTRANSSETOKEN:
+            // console.log(action.payload);
             return {
                 ...state,
                 token: action.payload
             }
-        case 'midtrans/statusPayment':
+        case MIDTRANSCHANGESTATUSPAYMENT:
             return {
                 ...state,
                 status: action.payload
             }
         default:
-            return {
-                state
-            }
+            return state
     }
 }
 
