@@ -14,7 +14,7 @@ export function fetchGetTokenMidtrans(amount) {
     return async (dispatch) => {
         try {
             dispatch(setLoading(true))
-            const { data } = await axios.post('http://localhost:3000/user/token-midtrans', { amount }, {
+            const { data } = await axios.post(API_URL + '/user/token-midtrans', { amount }, {
                 headers: {
                     access_token: localStorage.getItem('access_token')
                 }
@@ -34,7 +34,7 @@ export function fetchSuccesPayment(payload) {
     return async (dispatch) => {
         try {
             dispatch(setLoading(true))
-            const { data } = await axios.post('http://localhost:3000/user/topup', payload, {
+            const { data } = await axios.post(API_URL +'/user/topup', payload, {
                 headers: {
                     access_token: localStorage.getItem('access_token')
                 }
@@ -65,9 +65,8 @@ export function fetchBuyItem(payload) {
             console.log(data.message, 'response setelah berhasil');
             console.log(status, 'response'); // 201
         } catch (error) {
-            console.log(error.response.data.message);
+            // console.log(error.response.data.message);
             dispatch(setErrorMessage(error.response.data.message))
-            // error handle
         } finally {
             dispatch(fetchUserProfile())
             dispatch(setLoading(false))
