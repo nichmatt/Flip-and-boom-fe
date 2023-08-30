@@ -14,6 +14,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import LandingPage from "../pages/LandingPage";
 import TutorialPage from "../pages/TutorialPage.jsx";
 import { EmblaCarousel } from "../components/EmblaCarousel";
+import UnregisteredPage from "../pages/UnregisteredPage";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       if (token) throw redirect("/home");
       return null;
     },
+  },
+  {
+    path: "*",
+    element: <UnregisteredPage />,
   },
 ]);
 

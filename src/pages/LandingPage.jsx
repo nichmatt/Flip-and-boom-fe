@@ -131,7 +131,7 @@ export default function LandingPage() {
         </div>
         {news?.map((el, index) => {
           if (index < 8) {
-            return <NewsCard title={el.text} />;
+            return <NewsCard title={el.text} key={index}/>;
           } else {
             return null;
           }
