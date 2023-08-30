@@ -25,6 +25,7 @@ import explosion from "/explosion/explosion.png";
 import NumberTween from "./NumberTween";
 
 export default function PlayPageHeader({
+
 	hp,
 	enemyHp,
 	setHp,
@@ -53,15 +54,15 @@ export default function PlayPageHeader({
 	shakeCpu,
 	shakeSelf,
 }) {
-	const { profile } = useSelector((state) => state.userReducer);
-	const { gameMode } = useSelector((state) => state.gameModeReducer);
+  const { profile } = useSelector((state) => state.userReducer);
+  const { gameMode } = useSelector((state) => state.gameModeReducer);
 
-	// this const to rerender
-	const abc = hp + 100;
+  // this const to rerender
+  const abc = hp + 100;
 
-	useEffect(() => {
-		setHp(1000), setEnemyHp(1000);
-	}, []);
+  useEffect(() => {
+    setHp(1000), setEnemyHp(0);
+  }, []);
 
 	return (
 		<div className="flex h-32 mx-auto justify-between text-white italic font-bold relative w-[84.1rem]">
@@ -158,27 +159,27 @@ export default function PlayPageHeader({
 				</div>
 			)}
 
-			{turn == "user" ? (
-				<div className="absolute -left-28 top-[25%] flex flex-col items-center text-xl animate__animated animate__bounceIn gap-y-[0.35rem]">
-					<div>
-						<i
-							className="fa-solid fa-circle-right text-2xl animate-spinX"
-							style={{ color: "#D98F00" }}
-						></i>
-					</div>
-					<div>Your Turn</div>
-				</div>
-			) : (
-				<div className="absolute -left-28 top-[25%] flex flex-col items-center text-xl animate__animated animate__bounceOut gap-y-[0.35rem]">
-					<div>
-						<i
-							className="fa-solid fa-circle-right text-2xl animate-spinX"
-							style={{ color: "#D98F00" }}
-						></i>
-					</div>
-					<div>Your Turn</div>
-				</div>
-			)}
+      {turn == "user" ? (
+        <div className="absolute -left-28 top-[25%] flex flex-col items-center text-xl animate__animated animate__bounceIn gap-y-[0.35rem]">
+          <div>
+            <i
+              className="fa-solid fa-circle-right text-2xl animate-spinX"
+              style={{ color: "#D98F00" }}
+            ></i>
+          </div>
+          <div>Your Turn</div>
+        </div>
+      ) : (
+        <div className="absolute -left-28 top-[25%] flex flex-col items-center text-xl animate__animated animate__bounceOut gap-y-[0.35rem]">
+          <div>
+            <i
+              className="fa-solid fa-circle-right text-2xl animate-spinX"
+              style={{ color: "#D98F00" }}
+            ></i>
+          </div>
+          <div>Your Turn</div>
+        </div>
+      )}
 
 			{turn == "cpu" ? (
 				<div className="absolute -right-28 top-[25%] flex flex-col items-center text-xl animate__animated animate__bounceIn gap-y-[0.35rem]">
