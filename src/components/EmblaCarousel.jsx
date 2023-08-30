@@ -69,7 +69,7 @@ export const EmblaCarousel = ({ message, setMessage }) => {
           // className="embla__prev my-[10px] px-[30px] absolute left-[-25px] top-[135px]"
           onClick={prev}
         >
-          <i class="fa-solid fa-chevron-left"></i>
+          <i className="fa-solid fa-chevron-left"></i>
         </button>
         <div className="px-4 text-orange-400">{message + 1}</div>
         <button
@@ -77,7 +77,7 @@ export const EmblaCarousel = ({ message, setMessage }) => {
           // className="embla__next my-[10px] px-[30px] absolute left-[335px] hover:text-[orange] top-[135px]"
           onClick={next}
         >
-          <i class="fa-solid fa-chevron-right"></i>
+          <i className="fa-solid fa-chevron-right"></i>
         </button>
       </div>
     </div>
