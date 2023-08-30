@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import powerup1 from "/power-up/powerup-01.svg";
 import powerup2 from "/power-up/powerup-02.svg";
-import powerup3 from "/power-up/powerup-03.png";
+import powerup3 from "/power-up/powerup-03.svg";
 
 import PowerUpModal from "./PowerUpModal";
 
@@ -32,8 +32,11 @@ export default function PlayPageFooter({ turn, hp, setHp }) {
 					setPu1={setPu1}
 					setPu2={setPu2}
 					setPu3={setPu3}
-          puModal={puModal}
-          setPuModal={setPuModal}
+					powerup1={powerup1}
+					powerup2={powerup2}
+					powerup3={powerup3}
+					puModal={puModal}
+					setPuModal={setPuModal}
 				/>
 			)}
 			<div className="w-full h-24 pt-5 flex flex-col">

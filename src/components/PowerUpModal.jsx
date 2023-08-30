@@ -3,6 +3,9 @@ export default function PowerUpModal({
 	setPu1,
 	setPu2,
 	setPu3,
+	powerup1,
+	powerup2,
+	powerup3,
 	puModal,
 	setPuModal,
 }) {
@@ -21,20 +24,69 @@ export default function PowerUpModal({
 				onClick={handleClick}
 			>
 				<div
-					className={`w-1/3 h-2/3 backdrop-blur-[2px] bg-[rgba(8,8,8,0.8)] rounded-[20px] text-white font-bold animate__animated animate__slideInDown flex flex-col px-10 justify-center items-center text-xl italic tracking-tighter`}
+					className={`w-[37.5%] h-[42.5%] backdrop-blur-[2px] rounded-[5px] text-white font-bold animate__animated animate__slideInDown flex flex-col px-10 justify-center items-center italic tracking-tighter`}
 					style={{
-						boxShadow:
-							"35px 35px 68px 0px rgba(145, 192, 255, 0.5), inset -3px -3px 16px 0px rgba(145, 192, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255)",
+						background:
+							"linear-gradient(180deg, #251D3A 0%, #323569 99.99%, rgba(37, 29, 58, 0.00) 100%)",
 					}}
 					onClick={handleClick2}
 				>
-					<div>YOUR BALANCE : {balance}</div>
-					<div>
-						POWER UP :{" "}
-						{puModal == "pu1" ? "HEAL" : puModal == "pu2" ? "DAMAGE" : "CARD HINT"}
+					<div className="w-16 h-16 mb-6">
+						<img
+							src={
+								puModal == "pu1"
+									? powerup1
+									: puModal == "pu2"
+									? powerup2
+									: powerup3
+							}
+						/>
 					</div>
-          <div>DESCRIPTION : {puModal == "pu1" ? "heal 100 HP" : puModal == "pu2" ? "reduce 100 enemy's HP" : "hint of 2 highest damage "}</div>
-					<div>price: {puModal == "pu3" ? 30 : 10}</div>
+					<div className="flex w-full">
+						<div className="flex flex-1 justify-between pr-2">
+							<div className="text-gray-300 pl-20">POWER UP</div>
+							<div>:</div>
+						</div>
+						<div className="w-[15rem]">
+							{puModal == "pu1" ? "HEAL" : puModal == "pu2" ? "SKIP" : "HINT"}
+						</div>
+					</div>
+
+					<div className="flex w-full">
+						<div className="flex flex-1 justify-between pr-2">
+							<div className="text-gray-300 pl-20">DESCRIPTION</div>
+							<div>:</div>
+						</div>
+						<div className="w-[15rem]">
+							{puModal == "pu1"
+								? "HEAL 100 HP"
+								: puModal == "pu2"
+								? "SKIP 1 ENEMY'S TURN"
+								: "FLASH 2 MATCHING CARDS RANDOMLY"}
+						</div>
+					</div>
+
+					<div className="flex w-full">
+						<div className="flex flex-1 justify-between pr-2">
+							<div className="text-gray-300 pl-20">PRICE</div>
+							<div>:</div>
+						</div>
+						<div className="w-[15rem]">{puModal == "pu3" ? 30 : 10}</div>
+					</div>
+
+					<div className="flex w-full">
+						<div className="flex flex-1 justify-between pr-2">
+							<div className="text-gray-300 pl-20">YOUR BALANCE</div>
+							<div>:</div>
+						</div>
+						<div className="w-[15rem]">{balance}</div>
+					</div>
+
+					<div className="mt-6">DO YOU WANT TO BUY THIS POWER UP ?</div>
+					<div className="flex justify-between w-full px-44">
+						<button type="button">YES</button>
+						<button type="button">CANCEL</button>
+					</div>
 				</div>
 			</div>
 		</>
