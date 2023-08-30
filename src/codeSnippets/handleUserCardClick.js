@@ -12,7 +12,9 @@ export const handleUserCardClick = async (
 	board,
 	setBoard,
 	aiMemory,
-	setAiMemory
+	setAiMemory,
+	setshakeSelf,
+	setBoomSelf
 ) => {
 	e.stopPropagation();
 
@@ -46,19 +48,31 @@ export const handleUserCardClick = async (
 	}
 
 	if (value == "bomb") {
+		setBoomSelf(true);
+
+    setTurn("wait");
+
+		await pause(900);
+
+		setshakeSelf(true);
+
+		await pause(100);
+
+		setBoomSelf(false);
+
 		resetChosenCard();
 
 		setHp(hp - 75);
-
-		setTurn("wait");
 
 		await pause();
 
 		flipClose(board, setBoard);
 
-    await pause();
+		await pause();
 
 		setTurn("cpu");
+
+		setshakeSelf(false);
 
 		return;
 	}
