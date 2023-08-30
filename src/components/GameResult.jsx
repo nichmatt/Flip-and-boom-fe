@@ -1,14 +1,20 @@
-import { setMusicSetting } from "../actionCreators";
+// import { setMusicSetting } from "../actionCreators";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, redirect } from "react-router-dom";
 
 import { pause } from "../helpers";
 
 import NumberTween from "./NumberTween";
 import NumberTween2 from "./NumberTween2";
+import Card1 from "/assets/card/amethyst.png";
+import Card2 from "/assets/card/citrus.png";
+import { fetchUserScoreExp } from "../actionCreators/updateUser";
 
 export default function GameResult({ hp, totalTurn }) {
   const { gameMode } = useSelector((state) => state.gameModeReducer);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [score, setScore] = useState(0);
   const [exp, setExp] = useState(0);
@@ -37,35 +43,52 @@ export default function GameResult({ hp, totalTurn }) {
 
       switch (gameMode) {
         case "EAZY":
-          setExp(tempScore * 0.25);
+          setExp(Math.round(tempScore * 0.25));
           break;
 
         case "MEDIUM":
-          setExp(tempScore);
+          setExp(Math.round(tempScore));
           break;
 
         case "HARD":
-          setExp(tempScore * 2);
+          setExp(Math.round(tempScore * 2));
           break;
 
         default:
-          setExp(tempScore * 5);
+          setExp(Math.round(tempScore * 5));
           break;
       }
     })();
   }, []);
 
+  const handleAfterMatch = (choice) => {
+    if (hp !== 0) {
+      const payload = {
+        difficulty: gameMode.toLowerCase(),
+        score,
+        experience: exp,
+      };
+      dispatch(fetchUserScoreExp(payload));
+    }
+    if (choice === "leaderboard") {
+      navigate("/leaderboard");
+    } else if (choice === "home") {
+      navigate("/home");
+    }
+    // console.log('tidak nge dispatch');
+  };
+
   return (
     <>
-      <div className="fixed h-screen w-screen z-20 bg-transparent top-0 left-0 flex justify-center items-center animate__animated animate__fadeIn">
+      <div className="fixed h-screen w-screen z-20 bg-[rgba(0,0,0,0.7)] top-0 left-0 flex justify-center items-center animate__animated animate__fadeIn">
         <div
-          className="w-9/12 h-4/5 backdrop-blur-[2px] bg-[rgba(8,8,8,0.97)] rounded-[20px] flex flex-col items-center justify-center text-3xl font-bold text-white"
+          className="w-9/12 h-4/5 backdrop-blur-[2px]  rounded-[20px] flex flex-col items-center justify-center text-3xl font-bold text-white"
           style={{
-            boxShadow:
-              "35px 35px 68px 0px rgba(145, 192, 255, 0.5), inset -3px -3px 16px 0px rgba(145, 192, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255)",
+            background:
+              "linear-gradient(180deg, #251D3A 0%, #323569 99.99%, rgba(37, 29, 58, 0.00) 100%)",
           }}
         >
-          <div className="grid grid-cols-3 w-full h-full">
+          <div className="grid grid-cols-3 w-full h-full flex-wrap">
             <div
               name="grid kiri"
               className="flex flex-col h-1/3 my-auto justify-between pl-10 italic tracking-tighter"
@@ -89,10 +112,43 @@ export default function GameResult({ hp, totalTurn }) {
                 EXPERIENCE : <NumberTween2 number={exp} />
               </h1>
             </div>
+            <div
+              name="grid "
+              className="tengah m-[20px]  w-[90%] h-[92%]  flex justify-center items-center rounded-md cursor-pointer"
+            >
+              <div
+                className="relative"
+                onClick={() => handleAfterMatch("leaderboard")}
+              >
+                <img src={Card2} alt="card-button" />
+                <div
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#F98800]"
+                  style={{ textShadow: "0.5px 0.1px 5px" }}
+                >
+                  <i className="fa-solid fa-play text-center w-full text-[5rem]"></i>
+                  <p className="my-[10px] uppercase">leaderboard</p>
+                </div>
+              </div>
+            </div>
 
-            <div name="grid tengah"></div>
-
-            <div name="grid kanan"></div>
+            <div
+              name="grid kanan"
+              className="tengah m-[20px]  w-[90%] h-[92%]  flex justify-center items-center  rounded-md"
+            >
+              <div
+                className="relative"
+                onClick={() => handleAfterMatch("home")}
+              >
+                <img src={Card1} alt="card-button" />
+                <div
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#6306C6]"
+                  style={{ textShadow: "0.5px 0.1px 5px" }}
+                >
+                  <i className="fa-solid fa-house text-center w-full text-[5rem]"></i>
+                  <p className="my-[10px] uppercase">home</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
