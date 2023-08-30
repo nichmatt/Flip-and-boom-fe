@@ -22,7 +22,9 @@ import bomb220 from "/assets/bomb/bomb-09.png";
 import bomb250 from "/assets/bomb/bomb-03.png";
 import explosion from "/explosion/explosion.png";
 
-import NumberTween from "./NumberTween";
+// import NumberTween from "./NumberTween";
+import NumberTween3 from "./NumberTween3";
+import NumberTween4 from "./NumberTween4";
 
 export default function PlayPageHeader({
 
@@ -231,7 +233,7 @@ export default function PlayPageHeader({
 			<div className="flex flex-col justify-end pb-7">
 				<div className="text-2xl flex justify-between px-4 mb-1">
 					<div>
-						HP : <NumberTween number={hp} />
+						HP : <NumberTween3 number={hp} />
 					</div>
 					<div>{profile?.username?.toUpperCase()}</div>
 				</div>
@@ -252,7 +254,7 @@ export default function PlayPageHeader({
 				<div className="text-2xl flex justify-between px-4 mb-1">
 					<div>{gameMode}</div>
 					<div>
-						HP : <NumberTween number={enemyHp} />
+						HP : <NumberTween4 number={enemyHp} />
 					</div>
 				</div>
 				<div className="h-6 w-[25rem] bg-black rounded-2xl border">

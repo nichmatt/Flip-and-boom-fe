@@ -65,7 +65,9 @@ export function fetchBuyItem(payload) {
       });
       dispatch(fetchUserProfile());
       dispatch(setLoading(false));
-      dispatch(setResponseMessage(data.message));
+      if (!payload.price) {
+        dispatch(setResponseMessage(data.message));
+      }
     } catch (error) {
       dispatch(fetchUserProfile());
       dispatch(setLoading(false));
