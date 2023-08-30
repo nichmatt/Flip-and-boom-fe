@@ -12,7 +12,7 @@ export default function Register({ statusSetter }) {
   const [form, setForm] = useState({
     email: "",
     password: "",
-    username:""
+    username: "",
   });
 
   const onChangeForm = (event) => {
@@ -30,12 +30,13 @@ export default function Register({ statusSetter }) {
   const register = async (event) => {
     try {
       event.preventDefault();
-      if(!form.username || !form.email || !form.password) throw { message : 'All field is require'}
+      if (!form.username || !form.email || !form.password)
+        throw { message: "All field is require" };
       await dispatch(actionRegister(form));
       statusSetter();
       // navigate('/home')
     } catch (error) {
-      dispatch(setErrorMessage(error.message))
+      dispatch(setErrorMessage(error.message));
     }
   };
 
@@ -45,7 +46,7 @@ export default function Register({ statusSetter }) {
         className=" flex-col text-white  px-[80px] pb-[90px] flex text-[1.25rem] items-center backdrop-blur-[2px] bg-[rgba(239,239,239,0.8)] rounded-[20px]"
         style={{
           boxShadow:
-            "35px 35px 68px 0px rgba(145, 192, 255, 0.5), inset -3px -3px 16px 0px rgba(145, 192, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);",
+            "35px 35px 68px 0px rgba(145, 192, 255, 0.5), inset -3px -3px 16px 0px rgba(145, 192, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255)",
         }}
       >
         <div className="w-[200px]">

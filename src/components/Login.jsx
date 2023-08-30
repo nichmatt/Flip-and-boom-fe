@@ -28,11 +28,12 @@ export default function Login({ statusSetter }) {
   const login = async (event) => {
     try {
       event.preventDefault();
-      if(!form.email || !form.password) throw { message: 'All field is require'}
+      if (!form.email || !form.password)
+        throw { message: "All field is require" };
       await dispatch(actionLogin(form));
-      navigate('/home')
+      navigate("/home");
     } catch (error) {
-      dispatch(setErrorMessage(error.message))
+      dispatch(setErrorMessage(error.message));
       // console.log(error);
     }
   };
@@ -43,7 +44,7 @@ export default function Login({ statusSetter }) {
         className=" flex-col text-white h-[495px]  px-[80px] pb-[90px] flex text-[1.25rem] items-center backdrop-blur-[2px] bg-[rgba(239,239,239,0.8)] rounded-[20px]"
         style={{
           boxShadow:
-            "35px 35px 68px 0px rgba(145, 192, 255, 0.5), inset -3px -3px 16px 0px rgba(145, 192, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);",
+            "35px 35px 68px 0px rgba(145, 192, 255, 0.5), inset -3px -3px 16px 0px rgba(145, 192, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255)",
         }}
       >
         <div className="w-[200px] py-[25px]">
