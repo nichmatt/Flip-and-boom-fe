@@ -18,6 +18,18 @@ export const cpuTurnRandom = async ({
 	setAiMemory,
 	skipTurn,
 	setSkipTurn,
+	setWobbleSelf,
+	setshakeCpu,
+	setBoomSelf,
+	setBoom,
+	setThrowBombSelf100,
+	setThrowBombSelf125,
+	setThrowBombSelf150,
+	setThrowBombSelf175,
+	setThrowBombSelf200,
+	setThrowBombSelf210,
+	setThrowBombSelf220,
+	setThrowBombSelf250,
 }) => {
 	if (skipTurn) {
 		setTurn("user");
@@ -62,6 +74,16 @@ export const cpuTurnRandom = async ({
 	}
 
 	if (firstRandomCard[0].value == "bomb") {
+    setBoom(true);
+
+		await pause(900);
+
+		setshakeCpu(true);
+
+		await pause(100);
+
+		setBoom(false);
+    
 		enemyHp - 75 <= 0 ? setEnemyHp(0) : setEnemyHp(enemyHp - 75);
 
 		if (enemyHp - 75 <= 0) return;
@@ -75,6 +97,8 @@ export const cpuTurnRandom = async ({
 		await pause();
 
 		setTurn("user");
+
+    setshakeCpu(false);
 
 		return;
 	}
@@ -108,6 +132,16 @@ export const cpuTurnRandom = async ({
 	}
 
 	if (secondRandomCard[0].value == "bomb") {
+    setBoom(true);
+
+		await pause(900);
+
+		setshakeCpu(true);
+
+		await pause(100);
+
+		setBoom(false);
+
 		enemyHp - 75 <= 0 ? setEnemyHp(0) : setEnemyHp(enemyHp - 75);
 
 		if (enemyHp - 75 <= 0) return;
@@ -122,12 +156,80 @@ export const cpuTurnRandom = async ({
 
 		setTurn("user");
 
+    setshakeCpu(false);
+
 		return;
 	}
 
 	enemyCards.push([secondRandomCard[0].value, secondRandomCard[0].index]);
 
 	if (enemyCards[0][0] == enemyCards[1][0]) {
+    switch (+enemyCards[0][0]) {
+			case 100:
+				setThrowBombSelf100(true);
+				break;
+			case 125:
+				setThrowBombSelf125(true);
+				break;
+			case 150:
+				setThrowBombSelf150(true);
+				break;
+			case 175:
+				setThrowBombSelf175(true);
+				break;
+			case 200:
+				setThrowBombSelf200(true);
+				break;
+			case 210:
+				setThrowBombSelf210(true);
+				break;
+			case 220:
+				setThrowBombSelf220(true);
+				break;
+			default:
+				setThrowBombSelf250(true);
+				break;
+		}
+
+		await pause(2789);
+
+		switch (+enemyCards[0][0]) {
+			case 100:
+				setThrowBombSelf100(false);
+				break;
+			case 125:
+				setThrowBombSelf125(false);
+				break;
+			case 150:
+				setThrowBombSelf150(false);
+				break;
+			case 175:
+				setThrowBombSelf175(false);
+				break;
+			case 200:
+				setThrowBombSelf200(false);
+				break;
+			case 210:
+				setThrowBombSelf210(false);
+				break;
+			case 220:
+				setThrowBombSelf220(false);
+				break;
+			default:
+				setThrowBombSelf250(false);
+				break;
+		}
+
+		setBoomSelf(true);
+
+		await pause(900);
+
+		setWobbleSelf(true);
+
+		await pause(100);
+
+		setBoomSelf(false);
+
 		const damageDealtToUser = +enemyCards[0][0];
 
 		for (let i = 0; i < clonedAiMemory[damageDealtToUser]?.length; i++) {
@@ -149,6 +251,8 @@ export const cpuTurnRandom = async ({
 		setTurn("cpuwait");
 
 		await pause();
+
+    setWobbleSelf(false);
 
 		removeCardFromBoard(board, setBoard, enemyCards);
 	} else {
