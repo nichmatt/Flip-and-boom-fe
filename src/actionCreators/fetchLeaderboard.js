@@ -37,10 +37,8 @@ export function getLeaderboard(difficulty = "easy") {
         }
       );
       const result = await response.data;
-      //   console.log(result);
       dispatch(actionSetLeaderboardData(result));
     } catch (error) {
-      // console.log(error);
       const message = error.response.data.message || error.message
       dispatch(setErrorMessage())
     } finally {

@@ -158,7 +158,7 @@ export default function LeaderBoardPage() {
             <tbody>
               {data.map((el, index) => {
                 return el[`${difficulty}Score`] !== null ? (
-                  <tr className="hover:bg-[rgba(2,255,247,0.5)] text-center duration-300 ">
+                  <tr className="hover:bg-[rgba(2,255,247,0.5)] text-center duration-300 " key={index}>
                     <td className="py-5 border-b border-[#20203E] text-slate-50 ">
                       {index + 1}
                     </td>

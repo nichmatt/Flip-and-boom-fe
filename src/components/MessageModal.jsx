@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { setResponseMessage } from "../actionCreators";
 export default function MessageModal({ message }) {
   const dispatch = useDispatch();
@@ -7,6 +8,12 @@ export default function MessageModal({ message }) {
     dispatch(setResponseMessage(""));
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      handleClose();
+    }, 5000);
+  });
+  
   return (
     <>
       <div

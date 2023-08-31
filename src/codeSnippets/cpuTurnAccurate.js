@@ -33,6 +33,7 @@ export const cpuTurnAccurate = async ({
   setThrowBombSelf210,
   setThrowBombSelf220,
   setThrowBombSelf250,
+  setThrowSound
 }) => {
   if (skipTurn) {
     setTurn("user");
@@ -42,11 +43,9 @@ export const cpuTurnAccurate = async ({
     return;
   }
 
-  console.log("aipintar");
-
-  console.log(board);
-
   const enemyCards = [];
+  // console.log(enemyCards);
+  console.log(board);
 
   const clonedAiMemory = structuredClone(aiMemory);
 
@@ -91,7 +90,8 @@ export const cpuTurnAccurate = async ({
         setThrowBombSelf220,
         setThrowBombSelf250,
         setBoomSelf,
-        setWobbleSelf
+        setWobbleSelf,
+        setThrowSound
       );
 
       hp - score <= 0 ? setHp(0) : setHp(hp - score);
@@ -130,7 +130,6 @@ export const cpuTurnAccurate = async ({
     1
   );
 
-  console.log("KARTU PERTAMA CPU");
 
   const newBoard = flipOpen(board, setBoard, firstRandomCard[0].index);
 
@@ -171,7 +170,6 @@ export const cpuTurnAccurate = async ({
 
   await pause();
 
-  console.log("KARTU KEDUA CPU");
 
   if (clonedAiMemory[firstRandomCard[0].value].length >= 2) {
     const secondCard = board?.find(
@@ -207,7 +205,8 @@ export const cpuTurnAccurate = async ({
       setThrowBombSelf220,
       setThrowBombSelf250,
       setBoomSelf,
-      setWobbleSelf
+      setWobbleSelf,
+      setThrowSound
     );
 
     hp - damageDealtToUser <= 0 ? setHp(0) : setHp(hp - damageDealtToUser);
@@ -294,7 +293,8 @@ export const cpuTurnAccurate = async ({
         setThrowBombSelf220,
         setThrowBombSelf250,
         setBoomSelf,
-        setWobbleSelf
+        setWobbleSelf,
+        setThrowSound
       );
 
       hp - damageDealtToUser <= 0 ? setHp(0) : setHp(hp - damageDealtToUser);

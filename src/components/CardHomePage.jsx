@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setGameMode } from "../actionCreators";
+import { useState } from "react";
+import MiniPopup from "./MiniPopup";
 
 export default function CardHomePage({
   urlCard,
@@ -11,6 +13,12 @@ export default function CardHomePage({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [play, setPlay] = useState(false);
+
+  const handleChange = (stats) => {
+    setPlay(stats);
+  };
+
   const handleClick = () => {
     dispatch(setGameMode(gameMode));
 
@@ -19,11 +27,16 @@ export default function CardHomePage({
 
   return (
     <>
-      <div className="relative flex justify-center" onClick={handleClick}>
+      <div
+        className="relative flex justify-center"
+        onClick={handleClick}
+        onMouseOver={() => handleChange(true)}
+        onMouseOut={() => handleChange(false)}
+      >
         <img src={urlCard} alt="card" className="w-[15rem]" />
         <img
           src={urlChar}
-          alt=""
+          alt="logo"
           className="absolute w-[170px] top-[90px] m-auto"
         />
       </div>
@@ -33,6 +46,11 @@ export default function CardHomePage({
       >
         {gameMode}
       </div>
+      {play && (
+        <audio autoPlay src="/assets/audio/coin-1.mp3">
+          <source src="/assets/audio/coin-1.mp3" type="audio/mp3" />
+        </audio>
+      )}
     </>
   );
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CardShop from "../components/CardShop";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSuccesPayment } from "../actionCreators/payment";
-import { fetchShopData } from "../actionCreators";
+import { fetchShopData, setResponseMessage } from "../actionCreators";
 import { actionFilterShopData } from "../actionCreators/fetchShop";
 import { NavLink } from "react-router-dom";
 
@@ -36,27 +36,22 @@ export default function ShopPage() {
     };
     dispatch(fetchSuccesPayment(payloadDispatch));
   };
+
   const { datas, filter } = useSelector((state) => state.fetchShopReducer);
 
   const handlePay = (tokenMidtrans) => {
     snap.pay(tokenMidtrans, {
       onSuccess: function (result) {
         handleOnSucces(result);
-        console.log('aaaaaa');
       },
       onPending: function (result) {
-        // pending handle
-        console.log("pending");
-        console.log(result);
+        handleOnSucces(result);
       },
       onError: function (result) {
-        // error handle
-        console.log("error");
-        console.log(result);
+        handleOnSucces(result);
       },
       onClose: function () {
-        // close handle
-        console.log("customer closed the popup without finishing the payment");
+        dispatch(setResponseMessage('Payment cancel'))
       },
     });
   };
@@ -65,13 +60,10 @@ export default function ShopPage() {
     if (token) {
       handlePay(token);
     }
-    // console.log(token);
   }, [token]);
 
   useEffect(() => {
     dispatch(fetchShopData());
-    // console.log(datas);
-    // console.log(token);
   }, []);
 
   function handleCharacter() {
@@ -190,21 +182,21 @@ export default function ShopPage() {
             itemName="16 Points"
             itemCategory="VOUCHER"
             itemPrice="IDR 16.000"
-            type={'balance'}
+            type={"balance"}
           />
           <CardShop
             imgUrl="/assets/voucher/32.png"
             itemName="32 Points"
             itemCategory="VOUCHER"
             itemPrice="IDR 31.000"
-            type={'balance'}
+            type={"balance"}
           />
           <CardShop
             imgUrl="/assets/voucher/64.png"
             itemName="64 Points"
             itemCategory="VOUCHER"
             itemPrice="IDR 61.000"
-            type={'balance'}
+            type={"balance"}
           />
           {filter.length
             ? filter?.map((item) => {
@@ -216,7 +208,7 @@ export default function ShopPage() {
                     itemName={item.name}
                     itemCategory={item.type}
                     itemPrice={`${item.price}`}
-                    type={'item'}
+                    type={"item"}
                   />
                 );
               })
@@ -229,7 +221,7 @@ export default function ShopPage() {
                     itemName={item.name}
                     itemCategory={item.type}
                     itemPrice={`${item.price}`}
-                    type={'item'}
+                    type={"item"}
                   />
                 ) : (
                   ""

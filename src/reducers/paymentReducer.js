@@ -9,7 +9,6 @@ const initialState = {
 const paymentReducer = (state = initialState, action) => {
     switch (action.type) {
         case MIDTRANSSETOKEN:
-            // console.log(action.payload);
             return {
                 ...state,
                 token: action.payload

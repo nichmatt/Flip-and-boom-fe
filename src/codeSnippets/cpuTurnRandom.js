@@ -33,6 +33,7 @@ export const cpuTurnRandom = async ({
   setThrowBombSelf210,
   setThrowBombSelf220,
   setThrowBombSelf250,
+  setThrowSound
 }) => {
   if (skipTurn) {
     setTurn("user");
@@ -42,9 +43,6 @@ export const cpuTurnRandom = async ({
     return;
   }
 
-  console.log("aibodoh");
-
-  console.log(board);
 
   const enemyCards = [];
 
@@ -148,7 +146,8 @@ export const cpuTurnRandom = async ({
       setThrowBombSelf220,
       setThrowBombSelf250,
       setBoomSelf,
-      setWobbleSelf
+      setWobbleSelf,
+      setThrowSound
     );
 
     const damageDealtToUser = +enemyCards[0][0];

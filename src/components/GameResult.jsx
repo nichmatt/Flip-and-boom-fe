@@ -8,7 +8,7 @@ import { pause } from "../helpers";
 
 import Card1 from "/assets/card/amethyst.png";
 import Card2 from "/assets/card/citrus.png";
-// import { fetchUserScoreExp } from "../actionCreators/updateUser";
+import { fetchUserScoreExp } from "../actionCreators/updateUser";
 
 export default function GameResult({ hp, totalTurn }) {
   const { gameMode } = useSelector((state) => state.gameModeReducer);
@@ -81,13 +81,17 @@ export default function GameResult({ hp, totalTurn }) {
 
   const handleAfterMatch = (choice) => {
     if (hp !== 0) {
+      let difficulty = gameMode.toLowerCase();
+
+      if(difficulty === 'eazy') {
+        difficulty = 'easy'
+      }
       const payload = {
-        difficulty: gameMode.toLowerCase(),
+        difficulty,
         score,
         experience: exp,
       };
       dispatch(fetchUserScoreExp(payload));
-      console.log(payload, "<<<< ini payload");
     }
     if (choice === "leaderboard") {
       navigate("/leaderboard");
@@ -125,29 +129,29 @@ export default function GameResult({ hp, totalTurn }) {
               </div>
               {hp > 0 ? (
                 <>
-                  <h1>
-                    {/* SCORE : <NumberTween number={score} /> */}
-                    SCORE : <animated.div className="number">
-                      {props.val.interpolate(val => Math.floor(val) )}
+                  <div className="flex">
+                    SCORE : &nbsp;
+                    <animated.div className="number">
+                      {props.val.interpolate((val) => Math.floor(val))}
                     </animated.div>
-                  </h1>
-                  <h1>
-                    {/* EXPERIENCE : <NumberTween2 number={exp} /> */}
-                    EXPERIENCE : <animated.div className="number">
-                      {props2.val.interpolate(val => Math.floor(val) )}
+                  </div>
+                  <div className="flex">
+                    EXPERIENCE : &nbsp;
+                    <animated.div className="number">
+                      {props2.val.interpolate((val) => Math.floor(val))}
                     </animated.div>
-                  </h1>
+                  </div>
                 </>
               ) : (
                 <>
-                  <h1>You Lose</h1>
+                  <h1 className="uppercase underline tracking-wider animate__animated animate__backInDown animate__delay-2s	">You Lose</h1>
                 </>
               )}
             </div>
             {showCard ? (
               <div
                 name="grid tengah"
-                className="tengah m-[20px]  w-[90%] h-[92%]  flex justify-center items-center rounded-md cursor-pointer"
+                className="tengah m-[20px]  w-[90%] h-[92%]  flex justify-center items-center rounded-md cursor-pointer animate__animated animate__fadeInRight "
               >
                 <div
                   className="relative"
@@ -158,7 +162,7 @@ export default function GameResult({ hp, totalTurn }) {
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#F98800]"
                     style={{ textShadow: "0.5px 0.1px 5px" }}
                   >
-                    <i className="fa-solid fa-play text-center w-full text-[5rem]"></i>
+                    <i className="fa-solid fa-list-ul text-center w-full text-[5rem]" />
                     <p className="my-[10px] uppercase">leaderboard</p>
                   </div>
                 </div>
@@ -169,7 +173,7 @@ export default function GameResult({ hp, totalTurn }) {
             {showCard ? (
               <div
                 name="grid kanan"
-                className="tengah m-[20px]  w-[90%] h-[92%]  flex justify-center items-center rounded-md cursor-pointer"
+                className="tengah m-[20px]  w-[90%] h-[92%]  flex justify-center items-center rounded-md cursor-pointer animate__animated animate__fadeInRight animate__delay"
               >
                 <div
                   className="relative"
@@ -191,9 +195,15 @@ export default function GameResult({ hp, totalTurn }) {
           </div>
         </div>
       </div>
-      <audio autoPlay src="/assets/audio/hore.mp3">
-        <source src="/assets/audio/hore.mp3" />
-      </audio>
+      {hp > 0 ? (
+        <audio autoPlay src="/assets/audio/hore.mp3">
+          <source src="/assets/audio/hore.mp3" />
+        </audio>
+      ) : (
+        <audio autoPlay src="">
+          <source src="" />
+        </audio>
+      )}
     </>
   );
 }

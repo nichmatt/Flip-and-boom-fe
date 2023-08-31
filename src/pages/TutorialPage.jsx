@@ -10,11 +10,6 @@ const tutorialMessage = [
 
 export default function TutorialPage() {
   const [message, setMessage] = useState(0);
-  // const [test, setTest] = useState(0);
-
-  // useEffect(() => {
-  //   console.log(message, "watcher");
-  // }, [message]);
   return (
     <section
       className="max-h-[100vh] w-[100vw] "

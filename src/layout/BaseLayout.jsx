@@ -4,9 +4,10 @@ import SIdeBar from "../components/SideBar";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile, setMusicSetting } from "../actionCreators";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ErrorModal from "../components/ErrorModal";
 import MessageModal from "../components/MessageModal";
+import CompatibleScreen from "../components/CompatibleScreen";
 
 export default function BaseLayout() {
   const dispatch = useDispatch();
@@ -14,13 +15,27 @@ export default function BaseLayout() {
   const { music } = useSelector((state) => state.settingReducer);
   const { error, message } = useSelector((state) => state.messageReducer);
 
+  const [winWidth, setWinWidth] = useState(0);
+  const [canPlay, setCanPlay] = useState(true);
   useEffect(() => {
     dispatch(fetchUserProfile());
     dispatch(setMusicSetting(true));
   }, []);
 
+  window.onresize = function () {
+    setWinWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    if (winWidth < 1000) {
+      setCanPlay(false);
+    } else {
+      setCanPlay(true);
+    }
+  }, [winWidth]);
   return (
     <>
+      {!canPlay && <CompatibleScreen />}
+
       <NavigationBar />
       <div
         className="flex min-h-screen"

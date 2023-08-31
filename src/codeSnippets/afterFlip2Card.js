@@ -19,7 +19,8 @@ export const afterFlip2Card = async (
 	setThrowBomb210,
 	setThrowBomb220,
 	setThrowBomb250,
-	setWobbleCpu
+	setWobbleCpu,
+	setThrowSound
 ) => {
 	setTurn("wait");
 
@@ -51,7 +52,9 @@ export const afterFlip2Card = async (
 				break;
 		}
 
+		setThrowSound(true)
 		await pause(2789);
+		
 
 		switch (+chosenCard[0][0]) {
 			case 100:
@@ -88,6 +91,7 @@ export const afterFlip2Card = async (
 
 		await pause(100);
 
+		setThrowSound(false)
 		setBoom(false);
 
 		const damageDealtToEnemy = +chosenCard[0][0];

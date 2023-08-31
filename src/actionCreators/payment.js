@@ -24,10 +24,8 @@ export function fetchGetTokenMidtrans(amount) {
           },
         }
       );
-      console.log(data.token, "ini response axios");
       dispatch(getTokenMidtrans(data.token));
     } catch (error) {
-      console.log(error);
       dispatch(setErrorMessage(error.response.data.message));
     } finally {
       dispatch(setLoading(false));
