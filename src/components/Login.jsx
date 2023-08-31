@@ -20,7 +20,6 @@ export default function Login({ statusSetter }) {
       ...form,
       [name]: value,
     });
-    // console.log(form, "ini form nya");
   };
   // end of handle input form
 
@@ -34,7 +33,6 @@ export default function Login({ statusSetter }) {
       navigate("/home");
     } catch (error) {
       dispatch(setErrorMessage(error.message));
-      // console.log(error);
     }
   };
 

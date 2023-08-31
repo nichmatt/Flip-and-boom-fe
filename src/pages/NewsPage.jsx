@@ -42,7 +42,7 @@ export default function NewsPage() {
         </div>
       </div>
       {news?.map((n) => (
-        <NewsCard title={n?.title} newsId={n?.id} key={n?.id} />
+        <NewsCard title={n?.title} newsId={n?.id} key={n?.id} text={n?.text} />
       ))}
     </section>
   );

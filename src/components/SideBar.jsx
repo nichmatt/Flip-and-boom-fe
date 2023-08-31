@@ -12,7 +12,6 @@ export default function SIdeBar() {
   };
 
   const handleMusicSet = () => {
-    // console.log('a');
     const payload = !music;
     dispatch(setMusicSetting(payload));
   };

@@ -16,16 +16,7 @@ export function fetchNews() {
   return async (dispatch) => {
     try {
       dispatch(setLoading(true));
-      const token = localStorage.getItem("access_token");
-      //   if (!token) {
-      //     redirect("/");
-      //     throw { message: "Invalid session" };
-      //   }
-      const { data } = await axios.get(API_URL + "/news", {
-        headers: {
-          access_token: token,
-        },
-      });
+      const { data } = await axios.get(API_URL + "/news");
       dispatch(setNewsData(data));
     } catch (error) {
       let messageError = error.message;

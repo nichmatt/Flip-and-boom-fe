@@ -21,7 +21,6 @@ export default function Register({ statusSetter }) {
       ...form,
       [name]: value,
     });
-    console.log(form, "ini form nya");
   };
 
   // end of handle input form

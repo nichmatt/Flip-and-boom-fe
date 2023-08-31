@@ -10,8 +10,10 @@ export const cpuDamageUser = async (
 	setThrowBombSelf210,
 	setThrowBombSelf220,
 	setThrowBombSelf250,
-  setBoomSelf,
-  setWobbleSelf
+	setBoomSelf,
+	setWobbleSelf,
+	setThrowSound,
+
 ) => {
 	switch (casee) {
 		case 100:
@@ -39,7 +41,8 @@ export const cpuDamageUser = async (
 			setThrowBombSelf250(true);
 			break;
 	}
-
+	
+	setThrowSound(true)
 	await pause(2789);
 
 	switch (casee) {
@@ -77,5 +80,6 @@ export const cpuDamageUser = async (
 
 	await pause(100);
 
+	setThrowSound(false)
 	setBoomSelf(false);
 };

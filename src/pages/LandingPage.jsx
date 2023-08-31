@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import Login from "../components/Login";
 import NewsCard from "../components/NewsCard";
 import Register from "../components/Register";
@@ -26,9 +25,6 @@ export default function LandingPage() {
     dispatch(fetchNews());
   }, []);
 
-  useEffect(() => {
-    console.log(news);
-  }, [news]);
   return (
     <section
       id="LandingPage-section"

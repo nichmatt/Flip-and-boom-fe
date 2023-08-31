@@ -11,7 +11,6 @@ export const fetchUserScoreExp = (payload) => {
                     'access_token': localStorage.getItem('access_token')
                 }
             })
-            console.log(data, 'response update score');
         } catch (error) {
             dispatch(setErrorMessage(error.response.data.message))
         } finally {

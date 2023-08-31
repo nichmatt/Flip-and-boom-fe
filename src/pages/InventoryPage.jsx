@@ -38,13 +38,7 @@ export default function ShopPage() {
     };
     dispatch(setUserSelectedItem(payload));
     navigate("/profile");
-    // console.log(payload);
   };
-  // for defelop
-
-  // useEffect(() => {
-  //   console.log(selectedChar, selectedSkin);
-  // }, [selectedChar, selectedSkin]);
   return (
     <>
       <section

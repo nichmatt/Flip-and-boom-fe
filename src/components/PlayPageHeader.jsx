@@ -25,9 +25,6 @@ import bomb220 from "/assets/bomb/bomb-09.png";
 import bomb250 from "/assets/bomb/bomb-03.png";
 import explosion from "/explosion/explosion.png";
 
-// import NumberTween from "./NumberTween";
-import NumberTween3 from "./NumberTween3";
-import NumberTween4 from "./NumberTween4";
 
 export default function PlayPageHeader({
   hp,
@@ -80,7 +77,7 @@ export default function PlayPageHeader({
   const abc = hp + 100;
 
   useEffect(() => {
-    setHp(1000), setEnemyHp(0);
+    setHp(1000), setEnemyHp(1000);
   }, []);
 
   return (
@@ -249,7 +246,7 @@ export default function PlayPageHeader({
 			</div>
 			<div className="flex flex-col justify-end pb-7">
 				<div className="text-2xl flex justify-between px-4 mb-1">
-					<div>
+					<div className="flex">
 						HP : <animated.div className="number">
                       {props.val.interpolate(val => Math.floor(val) )}
                     </animated.div>
@@ -272,7 +269,7 @@ export default function PlayPageHeader({
 			<div className="flex flex-col justify-end pb-7">
 				<div className="text-2xl flex justify-between px-4 mb-1">
 					<div>{gameMode}</div>
-					<div>
+					<div className="flex">
 						HP : <animated.div className="number">
                       {props2.val.interpolate(val => Math.floor(val) )}
                     </animated.div>
@@ -311,5 +308,6 @@ export default function PlayPageHeader({
 				/>
 			</div>
 		</div>
+		
 	);
 }

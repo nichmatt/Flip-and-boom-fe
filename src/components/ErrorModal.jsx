@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setErrorMessage } from "../actionCreators";
 export default function ErrorModal({ message }) {
@@ -6,6 +6,13 @@ export default function ErrorModal({ message }) {
   const handleClose = () => {
     dispatch(setErrorMessage(""));
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      handleClose();
+    }, 5000);
+  });
+
   return (
     <>
       <div

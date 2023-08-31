@@ -33,13 +33,10 @@ export function actionRegister(payload) {
   return async (dispatch, getState) => {
     try {
       dispatch(setLoading(true))
-      const { data } = await axios({
-        method: "post",
-        url: API_URL + "/register",
-        data: payload,
-      });
-      if (data.statusCode >= 400) {
-        throw { message: data.message };
+      const { data } = await axios.post(API_URL + '/register', payload)
+      
+      if (data?.statusCode >= 400) {
+        throw { message: data?.message };
       }
       // message succes
       dispatch(setLoading(false))
