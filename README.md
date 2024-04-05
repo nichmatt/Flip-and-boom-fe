@@ -8,4 +8,4 @@ Frontend Repo
 npm run dev
 npm run css
 ```
-- kedua nya harus beda terminal dan biarkan berjalan di latar belakang
+- kedua nya harus beda terminal dan biarkan berjalan di latar belakang# Flip-and-boom-fe
