@@ -25,13 +25,13 @@ export default function BaseLayout() {
   window.onresize = function () {
     setWinWidth(window.innerWidth);
   };
-  useEffect(() => {
-    if (winWidth < 1000) {
-      setCanPlay(false);
-    } else {
-      setCanPlay(true);
-    }
-  }, [winWidth]);
+  // useEffect(() => {
+  //   if (winWidth > 1000) {
+  //     setCanPlay(false);
+  //   } else {
+  //     setCanPlay(true);
+  //   }
+  // }, [winWidth]);
   return (
     <>
       {!canPlay && <CompatibleScreen />}

@@ -1,21 +1,22 @@
 import { boardBeforeRandomized, randomNumber } from "../helpers";
 
 const boardAfterRandomized = [];
+console.log(boardAfterRandomized);
 
 export function createdLifecycle(setBoard) {
   let index = 0;
 
-	while (boardBeforeRandomized?.length) {
-		const randomNum = randomNumber(boardBeforeRandomized);
+  while (boardBeforeRandomized?.length) {
+    const randomNum = randomNumber(boardBeforeRandomized);
 
-		const getOneRandomCard = boardBeforeRandomized?.splice(randomNum, 1);
+    const getOneRandomCard = boardBeforeRandomized?.splice(randomNum, 1);
 
     getOneRandomCard[0].index = index;
 
-		boardAfterRandomized.push(getOneRandomCard[0]);
+    boardAfterRandomized.push(getOneRandomCard[0]);
 
-    index++
-	}
+    index++;
+  }
 
-	setBoard(boardAfterRandomized);
+  setBoard(boardAfterRandomized);
 }

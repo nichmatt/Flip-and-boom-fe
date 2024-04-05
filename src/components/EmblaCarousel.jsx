@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 

@@ -33,7 +33,7 @@ export const cpuTurnAccurate = async ({
   setThrowBombSelf210,
   setThrowBombSelf220,
   setThrowBombSelf250,
-  setThrowSound
+  setThrowSound,
 }) => {
   if (skipTurn) {
     setTurn("user");
@@ -130,7 +130,6 @@ export const cpuTurnAccurate = async ({
     1
   );
 
-
   const newBoard = flipOpen(board, setBoard, firstRandomCard[0].index);
 
   clonedAiMemory[firstRandomCard[0]?.value]?.push(firstRandomCard[0]?.index);
@@ -169,7 +168,6 @@ export const cpuTurnAccurate = async ({
   enemyCards.push([firstRandomCard[0].value, firstRandomCard[0].index]);
 
   await pause();
-
 
   if (clonedAiMemory[firstRandomCard[0].value].length >= 2) {
     const secondCard = board?.find(

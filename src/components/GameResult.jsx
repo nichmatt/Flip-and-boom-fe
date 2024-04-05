@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 // import { setMusicSetting } from "../actionCreators";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -83,8 +85,8 @@ export default function GameResult({ hp, totalTurn }) {
     if (hp !== 0) {
       let difficulty = gameMode.toLowerCase();
 
-      if(difficulty === 'eazy') {
-        difficulty = 'easy'
+      if (difficulty === "eazy") {
+        difficulty = "easy";
       }
       const payload = {
         difficulty,
@@ -144,7 +146,9 @@ export default function GameResult({ hp, totalTurn }) {
                 </>
               ) : (
                 <>
-                  <h1 className="uppercase underline tracking-wider animate__animated animate__backInDown animate__delay-2s	">You Lose</h1>
+                  <h1 className="uppercase underline tracking-wider animate__animated animate__backInDown animate__delay-2s	">
+                    You Lose
+                  </h1>
                 </>
               )}
             </div>

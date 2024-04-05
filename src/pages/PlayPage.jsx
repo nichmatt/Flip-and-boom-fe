@@ -132,7 +132,7 @@ export default function PlayPage() {
     setThrowBombSelf210,
     setThrowBombSelf220,
     setThrowBombSelf250,
-	setThrowSound
+    setThrowSound,
   };
 
   // created lifecycle
@@ -220,7 +220,7 @@ export default function PlayPage() {
   return (
     <>
       <div
-        className="min-h-screen h-full w-full flex flex-col cursor-default"
+        className="max-h-screen max-w-screen h-screen w-screen flex flex-col cursor-default"
         style={{
           background:
             "linear-gradient(180deg, #251D3A 0%, #323569 99.99%, rgba(37, 29, 58, 0.00) 100%)",
